@@ -11,72 +11,96 @@
   <meta name="description" content="" />
   <meta name="shailja shukla" content="sen" />
 
+<link href="/static/css/homestyle.css" rel="stylesheet" type="text/css">
+<link href="/static/css/leaveformstyle.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-  <div>
-  	<header>
-      <h1>National Institute of Fashion Technology</h1>
+  <div id="wrapper">
+  <div id="toptitles"></div>
+  <div id="navbar"><div id="page-wrap">
+    <div id="logoutbutton" align = right> Logout </a></div>
+    <div id="example-one"><a href="#home" class="navigationtitles">Home</a><a href="#attendance" class="navigationtitles"> Attendance </a><a href="#leave" class="navigationtitles">Leave </a><a href="#feedback" class="navigationtitles">Feedback</a> </div>
+    
+<div id="maincontent">
+    <header>
+      <h1>&nbsp;</h1>
+      <h1 class="nifttitletext">National Institute of Fashion Technology</h1>
+  </header>
+  <p class="addresstext">(Ministry of Textiles,Govt. Of India)<span class="addresstext"><br/>
+    </span>    </p>
+    <p class="addresstext">NIFT Campus, GH-0 Road, B/h, Infocity, Gandhinagar</p>
+    <p class="addresstext">&nbsp; </p>
+    
+    <header>
+      <h2 class="secondheading">Application For Leave Or Extension of leave</h2>
     </header>
-    <br/>
-    <p>(Ministry of Textiles,Govt. Of India)</p>
-    <br/>
-    <p>NIFT Campus, GH-0 Road, B/h, Infocity, Gandhinagar </p>
-	<header>
-      <h2>Application for leave or Extension of leave</h2>
-    </header>
-    <form action="/extend_leave/" method="post">
-	<br />
-	<p><label>Name of Applicant :<label/> <input name="Name" type="text"/></p>
+    <div id="formoptions">
+    <form>
+    <p>Employee code no. :  
+      <label/>           
+  <input name="Text1" type="number"/>
+  </p>
+  <br>
+    <p>Name of Applicant :
+  <label/>   
+  <input name="Text1" type="text"/>
+  <br />
+    </p>
+    <br>
+  <p><label>Post Held :<label/> <input name="Text1" type="text"/></p>
     <br />
-	<p><label>Post Held :<label/><select name="Designation"><option value="1">Professor<option value="2">Assistant Professor<option value="3">Associate Professor<option value="4">Senior Professor<option value="5">Director<option value="6">Assistant<option value="7">Centre Coordinator<option value="8">Director General</select></p>
+	<p><label>Section/Division :<label/> <input name="Text1" type="text"/></p>
     <br />
-	<p><label>Section/Division :<label/><select name="Department"><option value="1">Fashion Design<option value="2">Leather Design<option value="3">Accessory Design<option value="4">Textile Design<option value="5">Knitwear Design<option value="6">Fashion Communication<option value="7">Apparel Production<option value="8">Design Space<option value="9">Fashion Management<option value="10">Fashion Technology</select></p>
+	<p><label>Intercom/Telephone No. :<label/> <input name="Text1" type="tel"/></p>
     <br />
-	<p><label>Intercom/Telephone No. :<label/> <input name="Phone" type="tel"/></p>
+	<p><label>Basic Pay :<label/> <input name="Text1" type="number"/></p>
     <br />
-	<p><label>Basic Pay :<label/> <input name="BasicPay" type="number"/></p>
+	<p><label>House Rent and Other Compensatory <br/> Allowance drawn in the present post :<label/> <input name="Text1" type="number"/></p>
     <br />
-	<p><label>House Rent and Other Compensatory <br/> Allowance drawn in the present post :<label/> <input name="Allowance" type="number"/></p>
-    <br />
-	<p><label>Nature of leave :<label/> <input name="Reason" type="text"/></p>
+	<p><label>Nature of leave :<label/> <input name="Text1" type="text"/></p>
     <br/>
     <p>Period of Leave Applied</p> 
     <br />
-	<p><label>from :<label/> <input name="StartDate" type="date"/> <label>to :<label/> <input name="EndDate" type="date"/></p>
+	<p><label>from :<label/> <input name="Text1" type="date"/> <label>to :<label/> <input name="Text1" type="date"/></p>
     <br/>
-    <p><label>Saturday,Sunday and Holiday, <br/> If any proposed to be Prefixed/Suffixed to Leave :<label/> <input name="PrefixSuffix" type="text"/><p/>
+    <p><label>Saturday,Sunday and Holiday, <br/> If any proposed to be Prefixed/Suffixed to Leave :<label/> <input name="Text1" type="text"/><p/>
    	<br />
-	<p><label>Ground on which Leave is applied for :<label/> <input name="LeaveGround" type="text"/></p>
+	<p><label>Ground on which Leave is applied for :<label/> <input name="Text1" type="text"/></p>
 	<br />
 	<p><label>Duration of last leave (date) :<label/></p>
 	<br/> 
-	<p><label>from:</label><input name="LStart" type="date"/></p>
+	<p><label>from:</label><input name="Text1" type="date"/></p>
 	<br/> 
-	<p><label>to:<label/><input name="LEnd" type="date"/></p>
+	<p><label>to:<label/><input name="Text1" type="date"/></p>
     <br />
-	<p><label>Nature of last leave :<label/> <input name="LeaveNature" type="text"/></p>
+	<p><label>Nature of last leave :<label/> <input name="Text1" type="text"/></p>
     <br />
-	I propose to avail L.T.C. for the Block Year for myself :<label/> <input name="LTCBlockCheck" type="checkbox" />
+	I propose to avail L.T.C. for the Block Year for myself :<label/> <input name="Checkbox1" type="checkbox"/>
 	<br />
-	<p><label>address during Leave period :<label/> <input name="LTCBlock" type="text"/></p>
+	<p><label>address during Leave period :<label/> <input name="Text1" type="text"/></p>
 	<br />
-	Wether the faculty/staff has prior <br/> Commitments in NIFT during the period of leave :<label/> <input name="Commitments" type="checkbox"/>
+	Wether the faculty/staff has prior <br/> Commitments in NIFT during the period of leave :<label/> <input name="Checkbox1" type="checkbox"/>
 	<br />
-	<p><label>If yes give details :<label/> <input name="CommitmentsDescription" type="text"/></p>
+	<p><label>If yes give details :<label/> <input name="Text1" type="text"/></p>
 	<br />
+	<p><label>Nature of last leave :<label/> <input name="Text1" type="text"/></p>
 	<br/>
 	<p>I certify that during the leave period I have not been assigned any exam duty/ Institue duty <br/> and I have also completed all the tasks assigned to me and<br/> handed over and explained the tasks to be completed in my absence to my link official</p>
 	<br/>
 	<p>I also hereby give undertaking that I will resume my duty immediately, <br/> if I am informed about cancellation of my sanctioned leave.</p>
 	<br/>
-    I agree to the above declaration :<label/> <input name="Iagree" type="checkbox" required/>
+    I agree to the above declaration :<label> <input name="Checkbox1" type="checkbox" required/></label>
     <br/>
-    <p>Date:<input name="ApplicationDate" type="date"/></p>
+    <p>Date:
+      <input name="Text1" type="date"/></p>
     <br/>
 		<input name="submit" type="submit" value="submit" /></a></p> 
 
     <form/>
+    </div>
+    
+    <div id="footer"></div>
 
     
   </div>

@@ -12,7 +12,7 @@ div {
 	margin-left: auto;
 }
 form {
-	background-color: #000000;
+	background-color: #FFFFFF;
 	margin: 0px;
 	padding: 5px;
 	height: auto;
@@ -48,7 +48,7 @@ input {
 }
 header {
 	background-color: #FFF;
-	background-image: url(logo.gif);
+	background-image: url(../image/logo.gif);
 	height: 200px;
 	width: 400px;
 	background-repeat: no-repeat;
