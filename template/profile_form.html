@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>profile_page</title>
+  <meta name="description" content="" />
+  <meta name="Shailja Shukla" content="sen" />
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+  
+</head>
+
+<body>
+  <div>
+    <header>
+      <h1>Profile Form</h1>
+    </header>
+    <form action="/edit_profile/" method="post">
+{% if error %} 
+<p style="color: red;"> Check your values. </br> please, try again</p>
+    {% endif %} 
+    	<header>
+      <h2>INSTITUTIONAL DETAILS</h2>
+    </header>
+<p><label>Designation:</label><input name="designation" type="text" autocomplete = "on" autofocus value = '{{p.get_designation_display}}' /></p>
+<br />
+	<p><label>DEPARTMENT:</label><input name="department" type="text" autocomplete = "on" valus = '{{p.get_department_display}}' /></p>
+<br />
+<header>
+      <h2>PERSONAL DETAILS</h2>
+</header>
+<br/> 
+<label>Marital Status: </label>
+
+<input type="radio" name="marital_status" value="M" {%ifequal t.marital_status 'M' %} checked {% endifequal %}  /> Married 
+<input type="radio" name="marital_status" value="U" {%ifequal t.marital_status 'U' %} checked {% endifequal %} /> Unmarried</p>
+	
+<p><label>DATE OF BIRTH: &lsaquo;yyyy&rsaquo;-&lsaquo;mm&rsaquo;-&lsaquo;dd&rsaquo;</label>
+<input name="dob" type="date" value="{{t.dob.year}}-{{t.dob.month}}-{{t.dob.day}}"></p> 
+<p><label>Sex:</label>
+
+<input type="radio" name="sex" value="M" {%ifequal t.sex 'M' %} checked {% endifequal %}  /> Male 
+<input type="radio" name="sex" value="F" {%ifequal t.sex 'F' %} checked {% endifequal %} /> Female</p>
+	
+<br/>
+<header>
+      <h2>CONTACT DETAILS</h2>
+</header>
+<br />
+	<p><label>Email Address:</label><input name="email" type="email" autocomplete = "on" value = '{{u.email}}' /></p>
+<br/>
+	<p><label>Phone no.:</label><input name="phone_no" type="tel" autocomplete = "on" value = '{{t.phone_no}}' /></p>
+<br/>
+<header>
+      <h3>ADDRESS</h3>
+</header>
+<br/>
+	<p><label>STREET ADDRESS :</label><input name="perm_street" type="text" value = '{{t.perm_street}}' /></p>    
+<br/>
+	<p><label>CITY:</label><input name="perm_city" type="text" value = '{{t.perm_city}}' /> <label>ZIP CODE:</label><input name="perm_zip" type="zip" value = '{{t.perm_zip}}' /></p>    
+<br/>	
+	<p><label>STATE:</label><input name="perm_state" type="text" value = '{{t.perm_state}}' /><label>COUNTRY:</label><input name="perm_country" type="text" value = '{{t.perm_country}}'/></p>    
+<br/> 
+
+
+		<input name="Save" type="submit" value="save" /></a></p> 
+
+  </form>
+
+    
+  </div>
+</body>
+</html>
