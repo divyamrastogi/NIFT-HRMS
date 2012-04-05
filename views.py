@@ -43,18 +43,29 @@ def leave_extend(request):
 def submit_csleave(request):
     if (request.POST):
         u = models.User.objects.get(username = request.session.get('user'))
-        LeaveType = request.POST.get('leave')
-        Reason = request.POST.get('Reason')
+        LeaveType = request.POST.get('leave_type')
+        Reason = request.POST.get('reason')
         Permission = request.POST.get('permission')
-        Address = request.POST.get('Address')
-	StartDate = request.POST.get('StartDate')
-	EndDate = request.POST.get('EndDate')
-	End = datetime.datetime.strptime(EndDate,'%Y-%m-%d') 
+        #Address = request.POST.get('address')
+	StartDate = request.POST.get('start_date')
+	EndDate = request.POST.get('end_date')
+	Today = datetime.datetime.now().strftime('%Y-%m-%d') 
 	Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
+	End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
 	Diff = End - Start
-	No_of_days = Diff.days
+	No_of_days = Diff.days+1
+	if(No_of_days < 0):
+	    return HttpResponse("<html> You have entered an invalid end date.<br> Please try again by clicking the back button</html>")
+	elif(No_of_days > 7):
+	    Extra = No_ofdays % 7
+	    No_of_days = No_of_days - Extra
+	#elif(No_of_days > 2):
+	    #if(End.Weekday() = 0):
+	        #No_of_days = No_of_days - 2
+        	#print 'The number of days is: ', No_of_days
+	    
 	#Days_Left=	
-	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, no_of_days=No_of_days, days_left=2, approved='false', user_id_id=u.id, leave_id=1)
+	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, no_of_days=No_of_days, approved='false', user_id_id=u.id, applied_date=Today)
         l.save()
 	return HttpResponseRedirect('/')
     else:
