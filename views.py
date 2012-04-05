@@ -15,7 +15,7 @@ def casual_leave(request):
         u = models.User.objects.get(username = request.session.get('user'))
         t = User.objects.get(user_id = u.id)
         p = Profile.objects.get(user_id = u.id)
-        return render_to_response('casual_leave.html', locals())
+        return render_to_response('leave_application_form.html', locals())
     except Exception:
         return render_to_response('error.html',)
 
@@ -35,7 +35,7 @@ def leave_extend(request):
         u = models.User.objects.get(username = request.session.get('user'))
         t = User.objects.get(user_id = u.id)
         p = Profile.objects.get(user_id = u.id)
-        return render_to_response('extension_of_leave.html', locals())
+        return render_to_response('leave_extension_form.html', locals())
     except Exception:
         return render_to_response('error.html',)
 
@@ -57,7 +57,7 @@ def submit_csleave(request):
 	if(No_of_days < 0):
 	    return HttpResponse("<html> You have entered an invalid end date.<br> Please try again by clicking the back button</html>")
 	elif(No_of_days > 7):
-	    Extra = No_ofdays % 7
+	    Extra = No_of_days % 7
 	    No_of_days = No_of_days - Extra
 	#elif(No_of_days > 2):
 	    #if(End.Weekday() = 0):
@@ -65,7 +65,7 @@ def submit_csleave(request):
         	#print 'The number of days is: ', No_of_days
 	    
 	#Days_Left=	
-	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, no_of_days=No_of_days, approved='false', user_id_id=u.id, applied_date=Today)
+	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, status = '9', no_of_days=No_of_days, user_id_id=u.id, applied_date=Today)
         l.save()
 	return HttpResponseRedirect('/')
     else:
@@ -99,6 +99,10 @@ def edit_profile(request):
             p = Profile.objects.get(user_id = u.id)
             p.designation = request.POST.get('designation')
             p.department = request.POST.get('department')
+            try:
+                p.image = request.FILES['image']
+            except Exception:
+                p.image
             t.email = request.POST.get('email')
             t.sex = request.POST.get('sex')
             t.dob = request.POST.get('dob')
@@ -125,24 +129,28 @@ def logout(request):
 
 def home(request):
     todays_attendance = True
-
     if (request.POST):
         user = authenticate(username = request.POST.get('username'), password = request.POST.get('password') )
         if user is not None:
             request.session['user'] = request.POST.get('username')
             request.session.set_expiry(0)
- 
-   #         try:
+#         try:
             u = models.User.objects.get(username = request.session.get('user'))
             t = User.objects.get(user_id = u.id)
             p = Profile.objects.get(user_id = u.id)
             ids = Profile.objects.filter(department = p.department)
-            try:
-                attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
+            if p.designation == '9': 
+                leaves = Leave_Info.objects.filter(status = '9')                
+                print leaves
+            else: 
+                print "kokel"
+            try:                
+                attendance = Attendance.objects.getlist(user_id = u.id , date=datetime.datetime.now().date())
                 if attendance is not None:
                     todays_attendance = False
             except Exception:                     
                 todays_attendance = True
+            
             return render_to_response('home.html', locals() )
  #           except Exception:
 #                return render_to_response('error.html',)
@@ -152,6 +160,12 @@ def home(request):
         u = models.User.objects.get(username = request.session.get('user'))
         t = User.objects.get(user_id = u.id)
         p = Profile.objects.get(user_id = u.id)
+        ids = Profile.objects.filter(department = p.department)
+        if p.designation == '9': 
+            leaves = Leave_Info.objects.filter(status = '9')                
+            print leaves
+        else: 
+            print "kokel"
         try:
             attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
             if attendance is not None:
@@ -199,7 +213,7 @@ def department_attendance(request):
         ids = Profile.objects.filter(department = dept)
         dates = []
         for i in ids:     
-             dates.append( Attendance.objects.filter( date__gte= start_date).filter( date__lte = end_date).filter(user_id = i.user_id))
+             dates.append( Attendance.objects.filter( date__lte = end_date).filter( date__gte= start_date).filter(user_id = i.user_id))
     return render_to_response('department_attendance.html', locals() )
 '''
         for i in ids:

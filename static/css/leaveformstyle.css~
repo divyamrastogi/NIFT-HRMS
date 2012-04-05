@@ -150,7 +150,7 @@ td {
 }
 #footer {
 	height: 180px;
-	background-image: url(FooterBorder.png);
+	background-image: url(../_images/Footer%20Border.png);
 	background-position: bottom;
 	background-color: #FFF;
 }

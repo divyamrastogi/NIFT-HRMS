@@ -37,6 +37,7 @@ class Profile(models.Model):
 		('6','Assistant'),
 		('7','Centre Coordinator'),
 		('8','Director General'),
+		('9','Registrar'),
 	)
 
 	CENTRE_CHOICES = (
@@ -83,9 +84,6 @@ class Profile(models.Model):
 
 	def __unicode__(self):
 		return self.user_id.user_id.username
-
-#        def __unicode__(self):
-#		return self.user_id
 
 class Attendance(models.Model):
 	date 		= models.DateField(auto_now=True)
@@ -197,7 +195,6 @@ class Feedback(models.Model):
 
 class Leave_Details(models.Model):
 
-	
         LEAVE_CHOICES = (
                  ('1','Earned'),
                  ('2','Casual'),
@@ -205,8 +202,6 @@ class Leave_Details(models.Model):
                  ('4','Hospital'),
                  ('5','Maternity'),
         )
-
-
 
         leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES,unique=True)
 	user_id 	= models.ForeignKey(User)
@@ -219,28 +214,50 @@ class Leave_Details(models.Model):
 
 class Leave_Info(models.Model):
 
-        leave_type      = models.ForeignKey(Leave_Details,to_field='leave_type')
+	LEAVE_CHOICES = (
+                 ('1','Earned'),
+                 ('2','Casual'),
+                 ('3','Restricted'),
+                 ('4','Hospital'),
+                 ('5','Maternity'),
+        )
+	STATUS = (
+                 ('1','Rejected'),
+                 ('2','Approved'),
+                 ('9','pending by registrar'),
+                 ('7','pending by cc'),
+        )
+
+        leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
         start_date      = models.DateField()
         reason          = models.CharField(max_length=1000)
         no_of_days      = models.IntegerField()
-        approved        = models.BooleanField()
+        status          = models.CharField(max_length=1, choices=STATUS)
 
         user_id         = models.ForeignKey(User)
         leave_id        = models.AutoField(primary_key=True)
-        applied_date    = models.DateField()
+        applied_date    = models.DateField(auto_now=True)
         def __unicode__(self):
-		return self.user_id.user_id.username
+                return self.user_id.username
 
 
 class Leave_Extension_Info(models.Model):
 
-        leave_type      = models.ForeignKey(Leave_Details,to_field='leave_type')
+	LEAVE_CHOICES = (
+                 ('1','Earned'),
+                 ('2','Casual'),
+                 ('3','Restricted'),
+                 ('4','Hospital'),
+                 ('5','Maternity'),
+        )
+
+        leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
         last_leave_id   = models.OneToOneField(Leave_Info, primary_key=True)
         reason          = models.CharField(max_length=1000)
         approved        = models.BooleanField()
         no_of_days      = models.IntegerField()
+        applied_date    = models.DateField(auto_now=True)
 
         def __unicode__(self):
                 return self.last_leave_id.user_id.user_id.username
-
 

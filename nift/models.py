@@ -221,18 +221,24 @@ class Leave_Info(models.Model):
                  ('4','Hospital'),
                  ('5','Maternity'),
         )
+	STATUS = (
+                 ('1','Rejected'),
+                 ('2','Approved'),
+                 ('9','pending by registrar'),
+                 ('7','pending by cc'),
+        )
 
         leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
         start_date      = models.DateField()
         reason          = models.CharField(max_length=1000)
         no_of_days      = models.IntegerField()
-        approved        = models.BooleanField()
+        status          = models.CharField(max_length=1, choices=STATUS)
 
         user_id         = models.ForeignKey(User)
         leave_id        = models.AutoField(primary_key=True)
         applied_date    = models.DateField(auto_now=True)
         def __unicode__(self):
-                return self.user_id.username
+                return self.user_id.user_id.username
 
 
 class Leave_Extension_Info(models.Model):
