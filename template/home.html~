@@ -519,7 +519,7 @@ function ds_onclick(d, m, y) {
  {{i}}
 </td>
 <td>
-<input type="checkbox" name= "Present" value= {{i.user_id}} required/> </td>
+<input type="checkbox" name= "Present" value= {{i.user_id}} /> </td>
 </tr>
 {% endfor %}
 </table>
@@ -536,15 +536,34 @@ function ds_onclick(d, m, y) {
        <h2>Leave Forms</h2>
     </header>
     
-      <A HREF="/casual_leave/">Leave Application </A> </br>
+    <A HREF="/casual_leave/">Leave Application </A> </br>
     <A HREF="/leave_extension/">Leave ExtensionForm </A>
     <br>
     
+<header><h2>Leave Status</h2>
+    </header>
+  <table border = "1">
+<tr>
+<td>type</td>
+<td>Start Date</td>
+<td>No of days</td>
+<td>status</td>
+</tr>
+{% for l in myLeaveApplications %}
+<tr>
+<td>{{l.get_leave_type_display}}</td>
+<td>{{l.start_date}}</td>
+<td>{{l.no_of_days}}</td>
+<td>{{l.get_status_display}}</td>
+</tr>
+{% endfor %}
+</table>
     
-  {%ifequal p.designation '9' %}
+{% if p.designation in "79"|make_list %}
 	 	<header>
        <h2>Leave Applications recieved</h2>
     </header>
+<form name="input" action="/leave_approval/" method="post">
   <table border = "1">
 <tr>
 <td>Name</td>
@@ -556,16 +575,17 @@ function ds_onclick(d, m, y) {
 {% for l in leaves %}
 <tr>
 <td>{{l.user_id.user_id.username}}</td>
-<td>{{l.leave_type}}</td>
+<td>{{l.get_leave_type_display}}</td>
 <td>{{l.start_date}}</td>
 <td>{{l.no_of_days}}</td>
-<td><input type="checkbox" name= "Present" value= {{l.user_id}} required/> </td>
+<td><input type="checkbox" name= "Approved" value= {{l.user_id}} /> </td>
 </tr>
 {% endfor %}
 </table>
 <input name="Submit" type="submit" value="submit" />
 </br>
-{% endifequal %}
+</form>
+{% endif %}
 	
 	<header>
       <h2>Leave Data and balance</h2>

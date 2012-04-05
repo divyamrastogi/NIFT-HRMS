@@ -238,7 +238,7 @@ class Leave_Info(models.Model):
         leave_id        = models.AutoField(primary_key=True)
         applied_date    = models.DateField(auto_now=True)
         def __unicode__(self):
-                return self.user_id.username
+                return self.user_id.user_id.username
 
 
 class Leave_Extension_Info(models.Model):

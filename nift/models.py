@@ -79,7 +79,7 @@ class Profile(models.Model):
 	past_positions 	= models.CharField(max_length=150, blank=True)
 	experience 	= models.IntegerField(null=True)
 	expertise 	= models.CharField(max_length=150, blank=True)
-	image 		= models.ImageField(upload_to='js/')
+	image 		= models.ImageField(upload_to='image/')
 	user_id 	= models.ForeignKey(User, primary_key=True)
 
 	def __unicode__(self):

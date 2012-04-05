@@ -134,17 +134,15 @@ def home(request):
         if user is not None:
             request.session['user'] = request.POST.get('username')
             request.session.set_expiry(0)
-#         try:
             u = models.User.objects.get(username = request.session.get('user'))
             t = User.objects.get(user_id = u.id)
             p = Profile.objects.get(user_id = u.id)
+            myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
             ids = Profile.objects.filter(department = p.department)
-            if p.designation == '9': 
-                leaves = Leave_Info.objects.filter(status = '9')                
-                print leaves
-            else: 
-                print "kokel"
+            leaves = Leave_Info.objects.filter(status = p.designation)                
             try:                
+                leaves = Leave_Info.objects.filter(status = p.designation)                
+                print leaves
                 attendance = Attendance.objects.getlist(user_id = u.id , date=datetime.datetime.now().date())
                 if attendance is not None:
                     todays_attendance = False
@@ -161,12 +159,11 @@ def home(request):
         t = User.objects.get(user_id = u.id)
         p = Profile.objects.get(user_id = u.id)
         ids = Profile.objects.filter(department = p.department)
-        if p.designation == '9': 
-            leaves = Leave_Info.objects.filter(status = '9')                
-            print leaves
-        else: 
-            print "kokel"
+        leaves = Leave_Info.objects.filter(status = p.designation)                
+        myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
         try:
+            leaves = Leave_Info.objects.filter(status = p.designation)                
+            print leaves
             attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
             if attendance is not None:
                 todays_attendance = False
@@ -185,9 +182,7 @@ def mark_attendance(request):
         present = request.POST.getlist('Present')    
         ids = Profile.objects.filter(department = p.department)
         for i in ids:
-            u = models.User.objects.get(id = i.user_id_id)
-            t = User.objects.get(user_id = u.id)
-            if u.username in present:
+            if i.user_id.user_id.username in present:
                 a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = u.id)        
             else:
                 a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = u.id)                      
@@ -201,15 +196,18 @@ def leave_approval(request):
     if (request.POST):
         approved = []
         approved = request.POST.getlist('Approved')    
+        print approved
         ids = Leave_Info.objects.filter(status = p.designation)
         for i in ids:
-            u = models.User.objects.get(id = i.user_id_id)
-            t = User.objects.get(user_id = u.id)
-            if u.username in present:
-                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = u.id)        
+            print i
+            if i.user_id.user_id.username in approved:
+                if p.designation == '7':
+                    i.status = 2
+                else: 
+                    i.status = '7'
             else:
-                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = u.id)                      
-            a.save()
+                i.status = '1'
+            i.save()
     return HttpResponseRedirect("/")
 
 def check_attendance(request):
