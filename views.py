@@ -53,27 +53,19 @@ def submit_csleave(request):
 	Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
 	End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
 	Diff = End - Start
-	No_of_days = Diff.days + 1
+	No_of_days = Diff.days+1
 	if(No_of_days < 0):
 	    return HttpResponse("<html> You have entered an invalid end date.<br> Please try again by clicking the back button</html>")
-<<<<<<< HEAD
 	elif(No_of_days > 7):
 	    Extra = No_of_days % 7
 	    No_of_days = No_of_days - Extra
-=======
->>>>>>> 3598258ee22b3de1441f0b59d5e3e42e77279d2a
 	#elif(No_of_days > 2):
 	    #if(End.Weekday() = 0):
 	        #No_of_days = No_of_days - 2
         	#print 'The number of days is: ', No_of_days
 	    
 	#Days_Left=	
-<<<<<<< HEAD
 	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, status = '9', no_of_days=No_of_days, user_id_id=u.id, applied_date=Today)
-=======
-	print No_of_days
-	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, no_of_days=No_of_days, approved='false', user_id_id=u.id, applied_date=Today)
->>>>>>> 3598258ee22b3de1441f0b59d5e3e42e77279d2a
         l.save()
 	return HttpResponseRedirect('/')
     else:
@@ -192,6 +184,24 @@ def mark_attendance(request):
         present = []
         present = request.POST.getlist('Present')    
         ids = Profile.objects.filter(department = p.department)
+        for i in ids:
+            u = models.User.objects.get(id = i.user_id_id)
+            t = User.objects.get(user_id = u.id)
+            if u.username in present:
+                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = u.id)        
+            else:
+                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = u.id)                      
+            a.save()
+    return HttpResponseRedirect("/")
+
+def leave_approval(request):
+    u = models.User.objects.get(username = request.session.get('user'))
+    t = User.objects.get(user_id = u.id)
+    p = Profile.objects.get(user_id = u.id)
+    if (request.POST):
+        approved = []
+        approved = request.POST.getlist('Approved')    
+        ids = Leave_Info.objects.filter(status = p.designation)
         for i in ids:
             u = models.User.objects.get(id = i.user_id_id)
             t = User.objects.get(user_id = u.id)
