@@ -28,31 +28,9 @@
     	<header>
       <h2>INSTITUTIONAL DETAILS</h2>
     </header>
-<p><label>DESIGNATION:</label>
-<select name="designation">
-     <option value="1" {%ifequal p.designation '1' %} selected {% endifequal %} >Professor
-     <option value="2" {%ifequal p.designation '2' %} selected {% endifequal %}>Assistant Professor
-     <option value="3" {%ifequal p.designation '3' %} selected {% endifequal %}>Associate Professor
-     <option value="4" {%ifequal p.designation '4' %} selected {% endifequal %}>Senior Professor
-     <option value="5" {%ifequal p.designation '5' %} selected {% endifequal %}>Director
-     <option value="6" {%ifequal p.designation '6' %} selected {% endifequal %}>Assistant
-     <option value="7" {%ifequal p.designation '7' %} selected {% endifequal %}>Centre Coordinator
-     <option value="8" {%ifequal p.designation '8' %} selected {% endifequal %}>Director General
-</select></p>
+<p><label>Designation:</label><input name="designation" type="text" autocomplete = "on" autofocus value = '{{p.designation}}' /></p>
 <br />
-	<p><label>DEPARTMENT:</label>
-<select name="department">
-	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
-        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
-        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
-        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
-        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
-        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
-        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
-        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
-        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
-        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
-</select></p>
+	<p><label>DEPARTMENT:</label><input name="department" type="text" autocomplete = "on" value = '{{p.department}}' /></p>
 <br />
 <header>
       <h2>PERSONAL DETAILS</h2>
@@ -89,16 +67,8 @@
 <br/>	
 	<p><label>STATE:</label><input name="state" type="text" value = '{{t.state}}' />
 <br/> </p>
-<header>
-	<h4>EMPLOYMENT and EXPERIENCE DETAILS</h4>
-</header>
-<br/>
-    <p><label>EXPERTISE</label><input name="expertise" type="text" value = '{{u.expertise}}' /></p>    
-<br/>
-	<p><label>EXPERIENCE</label><input name="experience" type="text" value = '{{u.experience}}' /></p>
-<br/>
-    <p><label>PAST POSITIONS</label><input name="past_positions" type="text" value = '{{u.past_positions}}' /></p>
-<br/>
+
+
 		<input name="Save" type="submit" value="save" /></a></p> 
 
   </form>

@@ -22,7 +22,7 @@
       <h1>&nbsp</h1>
     </header>
       
-  {% if error %} 
+  <p>{% if error %} </p>
 <p style="color: red;"> Username or password is incorrect. </br> please, try again</p>
     {% endif %}   
     

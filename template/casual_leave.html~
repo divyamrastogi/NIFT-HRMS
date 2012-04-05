@@ -9,7 +9,7 @@
 
   <title>CASUAL LEAVE</title>
   <meta name="description" content="" />
-  <meta name="Shailja Shukla" content="Leave Page" />
+  <meta name="shailja shukla" content="casual leave page" />
 
   
 </head>
@@ -21,19 +21,20 @@
     </header>
    
     
-    <form action="/extend_leave/" method="post">
+    <form action="" method="get">
+<p><label>Employee id</label><input name="Text1" type="text" autocomplete = "on" autofocus /></p>
 <br/>	
-<p><label>Nature of leave</label><select name="leave"><option value="1">Casual leave(CL)<option value="2">Restricted holiday(RH)<option value="3">EL</select></p>
+<p><label>Nature of leave</label><select name="leave"><option value="Option1">Casual leave(CL)<option value="Option2">Restricted holiday(RH)<option value="Option3">EL</select></p>
 <br/>	
 <p>Period of Leave Applied</p> 
     <br />
-	<p><label>Start Date :<label/> <input name="StartDate" type="calendar"/> <label>End Date :<label/> <input name="EndDate" type="calendar"/></p>
+	<p><label>Start Date :<label/> <input name="Start Date" type="calendar"/> <label>End Date :<label/> <input name="End Date" type="calendar"/></p>
    	<br />
-<p><label>Purpose(reason)</label><input name="Reason" type="text" /></p>
+<p><label>Purpose(reason)</label><input name="Text1" type="text" /></p>
 <br/>
 <p><label>Whether station leave permission is required</label><select name="permission"><option value="Option1">Yes<option value="Option2">No</select></p>
 <br/>
-<p><label>Address during the leave period</label><input name="Address" type="text" /></p>
+<p><label>Address during the leave period</label><input name="Text1" type="text" /></p>
 <br/>
 
 
@@ -45,9 +46,9 @@
 		cancellation of my sanctioned leave.</p>
 		 
 <br/>
- I Accept:<input name="Checkbox1" type="checkbox" required />
+ I Accept:<input name="Checkbox1" type="checkbox" />
 <br/>
-<p><input name="Submit" type="submit" class="submitbutton" value="submit"  /></p>
+<p><input name="submit" type="submit" value="submit" /></p>
  	
 </form>
 </div>

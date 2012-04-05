@@ -1,20 +1,14 @@
+from django.template.defaultfilters import register
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, models
-from nift.models import User, Profile, Leave_Info
+from nift.models import User, Profile, Leave_Info, Attendance
 from datetime import date
 import datetime
 import unicodedata
 
-def profile(request):
-    try:
-        u = models.User.objects.get(username = request.session.get('user'))
-        t = User.objects.get(user_id = u.id)
-        p = Profile.objects.get(user_id = u.id)
-        return render_to_response('profile.html', locals())
-    except Exception:
-        return render_to_response('error.html',)
+# divyam's methods..............
 
 def casual_leave(request):
     try:
@@ -26,37 +20,14 @@ def casual_leave(request):
         return render_to_response('error.html',)
 
 def submit_extension_leave(request):
-    if (request.POST):
+    try:
         u = models.User.objects.get(username = request.session.get('user'))
-	Name = request.POST.get('Name')
-	Designation = request.POST.get('Designation')
-	Department = request.POST.get('Department')
-	Phone = request.POST.get('Phone')
-	BasicPay = request.POST.get('BasicPay')
-	Allowance = request.POST.get('Allowance')
-        LeaveType = request.POST.get('LeaveType')
-	Reason = request.POST.get('Reason')	
-	StartDate = request.POST.get('StartDate')
-	EndDate = request.POST.get('EndDate')
-        PrefixSuffix = request.POST.get('PrefixSuffix')
-	LeaveGround = request.POST.get('LeaveGround')
-	LStart = request.POST.get('LStart')
-	LEnd = request.POST.get('LEnd')
-	LeaveNature = request.POST.get('LeaveNature')
-	LTCBlock = request.POST.get('LTCBlock')
-	CommitmentsDescription = request.POST.get('CommitmentsDescription')
-        ApplicationDate = request.POST.get('ApplicationDate')
-        Iagree = request.POST.get('Iagree')
-        Address = request.POST.get('Address')
-	End = datetime.datetime.strptime(EndDate,'%Y-%m-%d') 
-	Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
-	Diff = End - Start
-	No_of_days = Diff.days
-	
+        t = User.objects.get(user_id = u.id)
+        p = Profile.objects.get(user_id = u.id)
+        return render_to_response('casual_leave.html', locals())
+    except Exception:
+        return render_to_response('error.html',)
 
-	return HttpResponseRedirect('/')
-    else:
-        return render_to_response('error.html')
 
 
 def leave_extend(request):
@@ -67,6 +38,44 @@ def leave_extend(request):
         return render_to_response('extension_of_leave.html', locals())
     except Exception:
         return render_to_response('error.html',)
+
+
+def submit_csleave(request):
+    if (request.POST):
+        u = models.User.objects.get(username = request.session.get('user'))
+        LeaveType = request.POST.get('leave')
+        Reason = request.POST.get('Reason')
+        Permission = request.POST.get('permission')
+        Address = request.POST.get('Address')
+	StartDate = request.POST.get('StartDate')
+	EndDate = request.POST.get('EndDate')
+	End = datetime.datetime.strptime(EndDate,'%Y-%m-%d') 
+	Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
+	Diff = End - Start
+	No_of_days = Diff.days
+	#Days_Left=	
+	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, no_of_days=No_of_days, days_left=2, approved='false', user_id_id=u.id, leave_id=1)
+        l.save()
+	return HttpResponseRedirect('/')
+    else:
+        return render_to_response('error.html')
+
+
+#divyam's changes ......................
+
+
+
+
+#harsha's methods ...............................
+def profile(request):
+    try:
+        u = models.User.objects.get(username = request.session.get('user'))
+        t = User.objects.get(user_id = u.id)
+        p = Profile.objects.get(user_id = u.id)
+        return render_to_response('profile.html', locals())
+    except Exception:
+        return render_to_response('error.html',)
+
 
 def edit_profile(request):
     u = models.User.objects.get(username = request.session.get('user'))
@@ -94,32 +103,6 @@ def edit_profile(request):
     else:
         return render_to_response('profile_form.html',locals() )
 
-
-
-def home(request):
-    if (request.POST):
-        user = authenticate(username = request.POST.get('username'), password = request.POST.get('password') )
-        if user is not None:
-            request.session['user'] = request.POST.get('username')
-            request.session.set_expiry(0)
-            try:
-                u = models.User.objects.get(username = request.session.get('user'))
-                t = User.objects.get(user_id = u.id)
-                p = Profile.objects.get(user_id = u.id)
-                return render_to_response('home.html', locals() )
-            except Exception:
-                return render_to_response('error.html',)
-
-        
-        else:
-            return render_to_response('login.html', {'error': True})
-    elif (request.session.get('user') is not None):
-        u = models.User.objects.get(username = request.session.get('user'))
-        t = User.objects.get(user_id = u.id)
-        p = Profile.objects.get(user_id = u.id)
-        return render_to_response('home.html', locals() )
-    return render_to_response('login.html',)
-    
 def logout(request):
     try:
         del request.session['user']
@@ -127,42 +110,94 @@ def logout(request):
         pass
     return HttpResponseRedirect("/")
 
+# harsha's changes. ................................
 
+def home(request):
+    todays_attendance = True
 
-def hours_ahead(request, offset):
-    try:
-        offset = int(offset)
-    except ValueError:
-        raise Http404()
-    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
-    html = "<html><body>In %s hour(s), it will be %s.</body></html>" % (offset, dt)
-    return HttpResponse(html)
-
-def display_meta(request):
-    values = request.META.items()
-    values.sort()
-    html = []
-    for k, v in values:
-        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
-    return HttpResponse('<table>%s</table>' % '\n'.join(html))
-
-def submit_csleave(request):
     if (request.POST):
+        user = authenticate(username = request.POST.get('username'), password = request.POST.get('password') )
+        if user is not None:
+            request.session['user'] = request.POST.get('username')
+            request.session.set_expiry(0)
+ 
+   #         try:
+            u = models.User.objects.get(username = request.session.get('user'))
+            t = User.objects.get(user_id = u.id)
+            p = Profile.objects.get(user_id = u.id)
+            ids = Profile.objects.filter(department = p.department)
+            try:
+                attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
+                if attendance is not None:
+                    todays_attendance = False
+            except Exception:                     
+                todays_attendance = True
+            return render_to_response('home.html', locals() )
+ #           except Exception:
+#                return render_to_response('error.html',)
+        else:
+            return render_to_response('login.html', {'error': True})
+    elif (request.session.get('user') is not None):
         u = models.User.objects.get(username = request.session.get('user'))
-        LeaveType = request.POST.get('leave')
-        Reason = request.POST.get('Reason')
-        Permission = request.POST.get('permission')
-        Address = request.POST.get('Address')
-	StartDate = request.POST.get('StartDate')
-	EndDate = request.POST.get('EndDate')
-	End = datetime.datetime.strptime(EndDate,'%Y-%m-%d') 
-	Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
-	Diff = End - Start
-	No_of_days = Diff.days
-	#Days_Left=	
-	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, no_of_days=No_of_days, days_left=2, approved='false', user_id_id=u.id, leave_id=1)
-        l.save()
-	return HttpResponseRedirect('/')
-    else:
-        return render_to_response('error.html')
+        t = User.objects.get(user_id = u.id)
+        p = Profile.objects.get(user_id = u.id)
+        try:
+            attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
+            if attendance is not None:
+                todays_attendance = False
+        except Exception:
+            todays_attendance = True
+        ids = Profile.objects.filter(department = p.department)
+        return render_to_response('home.html', locals() )
+    return render_to_response('login.html',)
+
+def mark_attendance(request):
+    u = models.User.objects.get(username = request.session.get('user'))
+    t = User.objects.get(user_id = u.id)
+    p = Profile.objects.get(user_id = u.id)
+    if (request.POST):
+        present = []
+        present = request.POST.getlist('Present')    
+        ids = Profile.objects.filter(department = p.department)
+        for i in ids:
+            u = models.User.objects.get(id = i.user_id_id)
+            t = User.objects.get(user_id = u.id)
+            if u.username in present:
+                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = u.id)        
+            else:
+                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = u.id)                      
+            a.save()
+    return HttpResponseRedirect("/")
+
+def check_attendance(request):
+    u = models.User.objects.get(username = request.session.get('user'))
+    t = User.objects.get(user_id = u.id)
+    p = Profile.objects.get(user_id = u.id)
+    if (request.POST):
+        start_date = request.POST.get('start_date')    
+        end_date = request.POST.get('end_date')    
+        dates = Attendance.objects.filter( date__gte= start_date).filter( date__lte= end_date).filter(user_id = u.id)
+        check_attendance = True
+    return render_to_response('attendance.html', locals() )
+
+def department_attendance(request):
+    if (request.POST):
+        dept = request.POST.get('department')
+        start_date = request.POST.get('start_date')    
+        end_date = request.POST.get('end_date')    
+        ids = Profile.objects.filter(department = dept)
+        dates = []
+        for i in ids:     
+             dates.append( Attendance.objects.filter( date__gte= start_date).filter( date__lte = end_date).filter(user_id = i.user_id))
+    return render_to_response('department_attendance.html', locals() )
+'''
+        for i in ids:
+            u = models.User.objects.get(id = i.user_id_id)
+            t = User.objects.get(user_id = u.id)
+            if u.username in present:
+                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = u.id)        
+            else:
+                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = u.id)                      
+            a.save()
+'''
 

@@ -6,9 +6,11 @@
 	
 	<title>Professor</title>
 	
-    <link href="/static/css/homestyle.css" rel="stylesheet" type="text/css">
-    <script src="/static/js/jquery-1.7.1.min.js"></script>
+	<link rel="stylesheet" href="/static/css/style.css">
+	
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
     <script src="/static/js/tabs.jquery.js"></script>
+	</script>
     <script>
         $(function() {
     
@@ -18,131 +20,327 @@
     
         });
     </script>
-
 </head>
 
 <body>
-<div id="wrapper">
-  <div id="toptitles"></div>
-  <div id="navbar">
-    <div id="page-wrap">
-    <div id="logoutbutton" align = right> Logout </a></div>
-        	<ul>
-                <li><a href="#0.1_home">Home</a></li>
-                <li><a href="#0.1_attendance">Attendance</a></li>
-                <li><a href="#0.1_leave">Leave</a></li>
-                <li><a href="#0.1_feedback">Feedback</a></li>
-                </ul>
-      
-      <h1 class="welcometext">Welcome {{ u.username }}!</h1>
-      
-      <div id="maincontent">
-        <div class="list-wrap">
-          <ul id="home">
-          <br>
-          <div id="editbutton" align = right> edit </a></div>
-          <br>
-          <header>
-            <h2>PERSONAL DETAILS</h2>
-          </header>
-          <table border = "0">
-            <tr>
-              <td>First Name: </td>
-              <td>{{u.first_name}}</td>
-            </tr>
-            <tr>
-              <td>Last Name: </td>
-              <td>{{u.last_name}}</td>
-            </tr>
-          </table>
-          <table border = "0">
-            <tr>
-              <td>Date Of Birth: </td>
-              <td>{{t.dob}}</td>
-            </tr>
-            <tr>
-              <td>Sex: </td>
-              <td>{{t.get_sex_display}}</td>
-            </tr>
-            <tr>
-              <td>Marital_Status: </td>
-              <td>{{t.get_marital_status_display}}</td>
-            </tr>
-          </table>
-          
-          <header>
-            <h2>INSTITUTIONAL DETAILS</h2>
-          </header>
-          <table border = "0">
-            <tr>
-              <td>Designation: </td>
-              <td>{{p.get_designation_display}}</td>
-            </tr>
-            <tr>
-              <td>Department: </td>
-              <td>{{p.get_department_display}}</td>
-            </tr>
-          </table>
+
+	<div id="page-wrap">
+
+		<h1>Welcome {{ u.username }}!</h1>
+	<br>
+        <br>	
+        <div align = right> <a ALIGN = LEFT href="/logout/">Logout</a> </div> 
+		
+        <div id="example-one">
+        			
+        	<ul class="nav">
+                <li class="nav-one"><a href="#home" class="current">Home</a></li>
+                <li class="nav-two"><a href="#attendance">Attendance</a></li>
+                <li class="nav-three"><a href="#leave">Leave</a></li>
+                <li class="nav-four last"><a href="#feedback">Feedback</a></li>
+            </ul>
+        	
+        	<div class="list-wrap">
+        	
+        		<ul id="home">
+<! HARSHA STARTS ______________________________________________________________________________________________________ -->
+<br>    
+<div align = right><a href="/edit_profile/">edit</a> </div
+<br>
+      		<table border = "0">
+<tr>
+<td>First Name: </td>
+<td>{{u.first_name}}</td>
+</tr>
+<tr>
+<td>Last Name: </td>
+<td>{{u.last_name}}</td>
+</tr>
+</table>
+
+    
+    <header>
+      <h2>INSTITUTIONAL DETAILS</h2>
+    </header>
+<table border = "0">
+<tr>
+<td>Designation: </td>
+<td>{{p.get_designation_display}}</td>
+</tr>
+<tr>
+<td>Department: </td>
+<td>{{p.get_department_display}}</td>
+</tr>
+</table>
+
+    <header>
+      <h2>PERSONAL DETAILS</h2>
+    </header>
+<table border = "0">
+<tr>
+<td>Marital_Status: </td>
+<td>{{t.get_marital_status_display}}</td>
+</tr>
+<tr>
+<td>Date Of Birth: </td>
+<td>{{t.dob}}</td>
+</tr>
+<tr>
+<td>Sex: </td>
+<td>{{t.get_sex_display}}</td>
+</tr>
+</table>
+
+    <header>
+      <h2>CONTACT DETAILS</h2>
+    </header>
+<table border = "0">
+<tr>
+<td>Email Address: </td>
+<td>{{u.email}}</td>
+</tr>
+<tr>
+<td>Phone No: </td>
+<td>{{t.phone_no}}</td>
+</tr>
+</table>
+
+<header>
+      <h3>ADDRESS</h3>
+</header>
+
+
+<table border = "0">
+<tr>
+<td>Street Address: </td>
+<td>{{t.street}}</td>
+</tr>
+<tr>
+<td>Zip: </td>
+<td>{{t.zip_code}}</td>
+</tr>
+<tr>
+<td>City: </td>
+<td>{{t.city}}</td>
+</tr>
+<tr>
+<td>State: </td>
+<td>{{t.state}}</td>
+</tr>
+</table>
+
+<header>
+      <h3>EMPLOYMENT and EXPERIENCE DETAILS</h3>
+</header>
+
+<table border = "0">
+<tr>
+<td>Expertise: </td>
+<td>{{p.expertise}}</td>
+</tr>
+<tr>
+<td>Experience:  </td>
+<td>{{p.experience}}</td>
+</tr>
+<tr>
+<td>Past Positions: </td>
+<td>{{p.past_positions}}</td>
+</tr>
+
+</table>
+
+
+        		</ul>
+        		 
+        		 <ul id="attendance" class="hide">
+                     <p> 
+ Check your attendance!
+<form name="input" action="/check_attendance/" method="post">
+<p><label>Start date</label><input name="start_date" type="text" autocomplete = "on" autofocus required/></p>
+    <p><label>End date</label><input name="end_date" type="text" required/></p>
+    <input name="submit" type="submit" value="submit" />
+</form>
+
+
+{% ifequal p.designation '7' %}
+
+     </header>
+<form name="input" action="/department_attendance/" method="post">
+     <p><label>DEPARTMENT:</label>
+<select name="department">
+	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
+        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
+        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
+        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
+        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
+        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
+        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
+        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
+        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
+        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
+</select></p>    
+     <p><label>Start date</label><input name="start_date" type="text" autocomplete = "on" autofocus required/></p>
+    <p><label>End date</label><input name="end_date" type="text" required/></p>
+    <input name="submit" type="submit" value="submit" />
+</form>
+</p>   
+{% endifequal %}
+{% ifequal p.designation '6' %}
+{% if todays_attendance %}
+
+<form name="input" action="/mark_attendance/" method="post">
+<table border = '1'>
+<tr>
+<td> Id </td>
+<td> NAME </td>
+<td> Attendance </td>
+</tr>
+{% for i in ids %}
+<tr>
+  <td> {{i.user_id_id}}</td> 
+  <td> 
+ {{i}}
+</td>
+<td>
+<input type="checkbox" name= "Present" value= {{i.user_id}} /> </td>
+</tr>
+{% endfor %}
+</table>
+<input type="submit" value="Submit" />
+</form>
+{% endif %}
+{% endifequal %}
+</ul>
+       
+    <! HARSHA ENDS................................................................................-->    		 
+<! Divyam Starts ____________________________________________________________________ -->
+        		 <ul id="leave" class="hide">
+        		    	<header>
+       <h2>Leave Forms</h2>
+    </header>
+    
+      <A HREF="/casual_leave/">Leave Application </A> </br>
+    <A HREF="/leave_extension/">Leave ExtensionForm </A>
+    <br>
+    
+    
+  {%ifequal p.designation 'registrar' %}
+	 	<header>
+       <h2>Leave Applications recieved</h2>
+    </header>
+  <table border = "1">
+<tr>
+<td>Name</td>
+<td>type</td>
+<td>Start Date</td>
+<td>No of days</td>
+<td>Approve</td>
+</tr>
+<td><script type="text/javascript">
+
+var str1={{u.first_name}};
+var str2={{u.last_name}};
+document.write(str1.concat(str2));
+
+</script></td>
+<td>{{u.leave_type}}</td>
+<td>{{u.start_date}}</td>
+<td>{{u.no_of_days}}</td>
+<td><input name="approved" type="checkbox"/></td>
+
+</table>
+<input name="Submit" type="submit" value="submit" />
+</br>
+<A HREF="/leave form/"> Leave form </A>
+	
+	<header>
+      <h2>Leave Data and balance</h2>
+    </header>
+    
+    <header>
+      <h3>Leave Balance</h3>
+    </header>
+    
+    <table border = "1">
+<tr>
+<td>Leave_Type</td>
+<td>No_of_days_left = balance</td>
+</tr>
+
+<td>{{u.leave_type}}</td>
+<td>{{u.days_left}}</td>
+</tr>
+</table>
+	
+	
+	<header>
+      <h2>Leave Data</h2>
+    </header>
+	 <p>Enter the type of leave you want to get data for : </p>
+  	</br>
+  	<p><label>Nature of leave</label><select name="leave"><option value="Option1">Casual leave(CL)<option value="Option2">Restricted holiday(RH)<option value="Option3">EL</select></p>
+  	</br>
+  	 <p>Enter the date starting from which you want the leave data : </p>
+  	</br>
+  	<p><label>Date of interest :<label/> <input name="input_date" type="date" required/>
+      <input name="submit" type="submit" value="submit" />
+   </br>
+  <table border = "1">
+<tr>
+<td>Start_date</td>
+<td>No_Of_Days</td>
+</tr>
+
+<td>   <script type="text/javascript">
+   switch({{u.leave_type}})
+{
+case 'CL':
+  if(input_date <= {{u.start_date}}){
+  document.write({{u.start_date}});
+}
+  break;
+case 'EL':
+    if(input_date <= {{u.start_date}}){
+  document.write({{u.start_date}});
+}
+  break;
+case 'RH':
+      if(input_date <= {{u.start_date}}){
+  document.write({{u.start_date}});
+}
+  break;
+}
+   </script></td>
+<td>{{u.no_of_days}}</td>
+</tr>
+</table>
+        		   </p>
+        		 </ul>
+ {% endifequal %}
+        		 </ul>
+        		 
+        		 <ul id="feedback" class="hide">
+                 <p>   <p><label>Department</label><input name ="department" type="text"</p>  
+    <p> Enter the start date and end date of the week you want</p>
+    <p><label>Start date</label><input name="start_date" type="text" autocomplete = "on" autofocus required/></p>
+    <p><label>End date</label><input name="end_date" type="text" required/></p>
+    <input name="submit" type="submit" value="submit" />
+    <table border = "1">
+<tr>
+<td>{{u.user_id}}</td>
+<td>{{u.avg_content_rat}}</td>
+<td>{{u.avg_present_rat}}</td>
+</tr>
+</table>
+</p> 
+</ul>
+        	 </div> <!-- END List Wrap -->
          
-          
-          <header>
-            <h2>CONTACT DETAILS</h2>
-          </header>
-          <table border = "0">
-            <tr>
-              <td>Email Address: </td>
-              <td>{{u.email}}</td>
-            </tr>
-            <tr>
-              <td>Phone No: </td>
-              <td>{{t.phone_no}}</td>
-            </tr>
-          </table>
-          <header>
-            <h2>ADDRESS</h2>
-          </header>
-          <table border = "0">
-            <tr>
-              <td>Street Address: </td>
-              <td>{{t.perm_street}}</td>
-            </tr>
-            <tr>
-              <td>Zip: </td>
-              <td>{{t.perm_zip}}</td>
-            </tr>
-            <tr>
-              <td>City: </td>
-              <td>{{t.perm_city}}</td>
-            </tr>
-            <tr>
-              <td>State: </td>
-              <td>{{t.perm_state}}</td>
-            </tr>
-            <tr>
-              <td>Country: </td>
-              <td>{{t.perm_country}}</td>
-            </tr>
-          </table>
-        </ul>
-        <ul id="attendance" class="hide">
-          <p> Welcome to attendance page</p>
-        </ul>
-        <ul id="leave" class="hide">
-          <p><A HREF="/casual_leave/"> Casual Leave </A></p>
-        </ul>
-        <ul id="feedback" class="hide">
-          <p> Welcome to feedback page</p>
-        </ul>
-    </div>
-      <!-- END List Wrap -->
-    </div>
-    <!-- END Organic Tabs (Example One) -->
-</div>
-  </div>
-  
-  
-  <div id="footer"></div>
-</div>
+         </div> <!-- END Organic Tabs (Example One) -->
+		 
+		 
+	</div>
+	
 </body>
 
 </html>
