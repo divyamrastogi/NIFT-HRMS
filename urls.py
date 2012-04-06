@@ -1,7 +1,7 @@
 from django.views.static import *
 from django.views.generic.simple import redirect_to
 from django.conf import settings
-from views import profile, home, casual_leave, logout, edit_profile, submit_csleave, leave_extend, submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval
+from views import profile, home, casual_leave, logout, edit_profile, submit_csleave, leave_extend, submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval,  leave_details
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
@@ -19,6 +19,7 @@ urlpatterns = patterns('views',
 #harsha's changes ..............
      (r'^mark_attendance/$',mark_attendance),
      (r'^leave_approval/$',leave_approval),
+     (r'^leave_details/$',leave_details),
      (r'^check_attendance/$',check_attendance),
      (r'^department_attendance/$',department_attendance),
 #divyam's url....

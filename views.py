@@ -44,6 +44,16 @@ def submit_extension_leave(request):
     else:
         return render_to_response('error.html',)
 
+def leave_details(request):
+    u = models.User.objects.get(username = request.session.get('user'))
+    t = User.objects.get(user_id = u.id)
+    p = Profile.objects.get(user_id = u.id)
+    if (request.POST):
+        leave_type = request.POST.get('leave_type')    
+        start_date = request.POST.get('start_date')    
+        print start_date
+        details = Leave_Info.objects.filter(user_id = u.id).filter( start_date__gte= start_date).filter( leave_type= leave_type)
+    return render_to_response('leave_details.html', locals() )
 
 
 def leave_extend(request):
