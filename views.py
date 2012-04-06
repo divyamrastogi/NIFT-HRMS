@@ -34,7 +34,7 @@ def submit_extension_leave(request):
         End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
         Diff = End - Start
 	lid = Leave_Info.objects.all()
-	print lid
+	print lid.leave_id
 	#print last_leave_id.leave_id
         No_of_days = Diff.days+1
 	if(No_of_days < 1):
