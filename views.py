@@ -3,7 +3,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, models
-from nift.models import User, Profile, Leave_Info, Attendance
+from nift.models import User, Profile, Leave_Info, Attendance, Leave_Details
 from datetime import date
 import datetime
 import unicodedata
@@ -134,43 +134,50 @@ def home(request):
         if user is not None:
             request.session['user'] = request.POST.get('username')
             request.session.set_expiry(0)
-            u = models.User.objects.get(username = request.session.get('user'))
-            t = User.objects.get(user_id = u.id)
-            p = Profile.objects.get(user_id = u.id)
-            myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
-            ids = Profile.objects.filter(department = p.department)
-            leaves = Leave_Info.objects.filter(status = p.designation)                
-            try:                
+            try:
+                u = models.User.objects.get(username = request.session.get('user'))
+                t = User.objects.get(user_id = u.id)
+                p = Profile.objects.get(user_id = u.id)
+                myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
+                ids = Profile.objects.filter(department = p.department)
                 leaves = Leave_Info.objects.filter(status = p.designation)                
-                print leaves
-                attendance = Attendance.objects.getlist(user_id = u.id , date=datetime.datetime.now().date())
-                if attendance is not None:
-                    todays_attendance = False
-            except Exception:                     
-                todays_attendance = True
-            
-            return render_to_response('home.html', locals() )
- #           except Exception:
-#                return render_to_response('error.html',)
+                leave_data = Leave_Details.objects.filter(user_id = u.id)
+                try:                
+                    leaves = Leave_Info.objects.filter(status = p.designation)                
+                    print leaves
+                    attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())                    
+                    if attendance is not None:
+                        todays_attendance = False
+                except Exception:                     
+                    todays_attendance = True
+                print "__!!!!!!!!!__", todays_attendance
+                return render_to_response('home.html', locals() )
+            except Exception:
+                return render_to_response('error.html',)
         else:
             return render_to_response('login.html', {'error': True})
     elif (request.session.get('user') is not None):
-        u = models.User.objects.get(username = request.session.get('user'))
-        t = User.objects.get(user_id = u.id)
-        p = Profile.objects.get(user_id = u.id)
-        ids = Profile.objects.filter(department = p.department)
-        leaves = Leave_Info.objects.filter(status = p.designation)                
-        myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
-        try:
-            leaves = Leave_Info.objects.filter(status = p.designation)                
-            print leaves
-            attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
-            if attendance is not None:
-                todays_attendance = False
-        except Exception:
-            todays_attendance = True
-        ids = Profile.objects.filter(department = p.department)
-        return render_to_response('home.html', locals() )
+#       try:
+       u = models.User.objects.get(username = request.session.get('user'))
+       t = User.objects.get(user_id = u.id)
+       p = Profile.objects.get(user_id = u.id)
+       myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
+       ids = Profile.objects.filter(department = p.department)
+       leaves = Leave_Info.objects.filter(status = p.designation)                
+       leave_data = Leave_Details.objects.filter(user_id = u.id)
+    
+       try:                
+           leaves = Leave_Info.objects.filter(status = p.designation)                
+           attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
+           print attendance
+           if attendance is not None:
+               todays_attendance = False
+       except Exception:                     
+           todays_attendance = True
+       print "_______", todays_attendance
+       return render_to_response('home.html', locals() )
+#       except Exception:
+        #   return render_to_response('error.html',)
     return render_to_response('login.html',)
 
 def mark_attendance(request):
@@ -183,9 +190,9 @@ def mark_attendance(request):
         ids = Profile.objects.filter(department = p.department)
         for i in ids:
             if i.user_id.user_id.username in present:
-                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = u.id)        
+                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = i.user_id.user_id.id)        
             else:
-                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = u.id)                      
+                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id)                      
             a.save()
     return HttpResponseRedirect("/")
 
