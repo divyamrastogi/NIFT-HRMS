@@ -539,7 +539,9 @@ function ds_onclick(d, m, y) {
     <A HREF="/casual_leave/">Leave Application </A> </br>
     <A HREF="/leave_extension/">Leave ExtensionForm </A>
     <br>
-    
+<br>
+<br>
+<br>    
 <header><h2>Leave Status</h2>
     </header>
   <table border = "1">
@@ -558,7 +560,9 @@ function ds_onclick(d, m, y) {
 </tr>
 {% endfor %}
 </table>
-    
+<br>    
+<br>
+<br>
 {% if p.designation in "79"|make_list %}
 	 	<header>
        <h2>Leave Applications recieved</h2>
@@ -586,11 +590,9 @@ function ds_onclick(d, m, y) {
 </br>
 </form>
 {% endif %}
-	
-	<header>
-      <h2>Leave Data and balance</h2>
-    </header>
-    
+<br>
+<br>
+<br>	
     <header>
       <h3>Leave Balance</h3>
     </header>
@@ -654,7 +656,7 @@ case 'RH':
         		 </ul>
         		 
         		 <ul id="feedback" class="hide">
-                 <p>   <p><label>Department</label><select name="department">
+        <p>   <p><label>Department</label><select name="department">
 	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
         <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
         <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design

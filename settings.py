@@ -15,8 +15,13 @@ DATABASES = {
         'NAME': 'NIFT_DB',                      # Or path to database file if using sqlite3.
         'USER': 'divyam',                      # Not used with sqlite3.
         'PASSWORD': '1',                  # Not used with sqlite3.
+#<<<<<<< HEAD
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+#=======
+        'HOST': '10.100.54.81',  #90.28 , 54.81 to empty string for localhost. Not used with sqlite3.
+#>>>>>>> c30ade5e72de71170154cbeb02624d94064cd817
+ 
+       'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
