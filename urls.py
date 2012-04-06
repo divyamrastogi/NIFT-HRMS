@@ -24,7 +24,7 @@ urlpatterns = patterns('views',
 #divyam's url....
      (r'^csleave/$', submit_csleave),
      (r'^leave_extension/$', leave_extend),
-     (r'^extend_leave/$', submit_extension_leave),
+     (r'^leave_extend/$', submit_extension_leave),
 #divyam's changes .....................
 
      

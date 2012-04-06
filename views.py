@@ -20,12 +20,28 @@ def casual_leave(request):
         return render_to_response('error.html',)
 
 def submit_extension_leave(request):
-    try:
-        u = models.User.objects.get(username = request.session.get('user'))
-        t = User.objects.get(user_id = u.id)
-        p = Profile.objects.get(user_id = u.id)
-        return render_to_response('casual_leave.html', locals())
-    except Exception:
+    if (request.POST):
+	u = models.User.objects.get(username = request.session.get('user'))
+        LeaveType = request.POST.get('leave_type')
+        Reason = request.POST.get('reason')
+        #Permission = request.POST.get('permission')
+        #Address = request.POST.get('address')
+        StartDate = request.POST.get('start_date')
+        EndDate = request.POST.get('end_date')
+	last_leave_type = request.POST.get('last_leave_type')
+        Today = datetime.datetime.now().strftime('%Y-%m-%d') 
+        Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
+        End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
+        Diff = End - Start
+	lid = Leave_Info.objects.all()
+	print lid
+	#print last_leave_id.leave_id
+        No_of_days = Diff.days+1
+	if(No_of_days < 1):
+	    return HttpResponse("<html>You have entered invalid end date. <br>The end date cannot be before the start date.<br> You can go back by clicking the back button on your browser. </html>")
+	print 'Extending the leave by ', No_of_days, 'days.'
+	return render_to_response('home.html')
+    else:
         return render_to_response('error.html',)
 
 
@@ -57,8 +73,8 @@ def submit_csleave(request):
 	if(No_of_days < 0):
 	    return HttpResponse("<html> You have entered an invalid end date.<br> Please try again by clicking the back button</html>")
 	elif(No_of_days > 7):
-	    Extra = No_of_days % 7
-	    No_of_days = No_of_days - Extra
+	    Extra = floor(No_of_days/7)
+	    No_of_days = No_of_days - 2*Extra
 	#elif(No_of_days > 2):
 	    #if(End.Weekday() = 0):
 	        #No_of_days = No_of_days - 2
@@ -183,9 +199,9 @@ def mark_attendance(request):
         ids = Profile.objects.filter(department = p.department)
         for i in ids:
             if i.user_id.user_id.username in present:
-                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = u.id)        
+                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = i.user_id.user_id.id)        
             else:
-                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = u.id)                      
+                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id)                      
             a.save()
     return HttpResponseRedirect("/")
 

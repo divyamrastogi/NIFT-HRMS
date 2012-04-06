@@ -203,7 +203,7 @@ class Leave_Details(models.Model):
                  ('5','Maternity'),
         )
 
-        leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES,unique=True)
+        leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
 	user_id 	= models.ForeignKey(User)
 	leave_d_id 	= models.AutoField(primary_key=True)
 	days_left 	= models.IntegerField()
@@ -238,8 +238,7 @@ class Leave_Info(models.Model):
         leave_id        = models.AutoField(primary_key=True)
         applied_date    = models.DateField(auto_now=True)
         def __unicode__(self):
-                return self.user_id.user_id.username
-
+	    return u'%s %s' % (self.user_id.user_id.username, self.leave_id)
 
 class Leave_Extension_Info(models.Model):
 

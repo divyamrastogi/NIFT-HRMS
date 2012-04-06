@@ -355,9 +355,9 @@ function ds_onclick(d, m, y) {
       <h2 class="secondheading">Application For Leave Or Extension of leave</h2>
     </header>
     <div id="formoptions">
-    <form action="" method="post">
+    <form action="/leave_extend/" method="post">
     <br />
-	<p><label>Nature of leave :<label/> <select name="leave_type" required /><option value="Option1">CL<option value="Option2">EL<option value="Option3">RH</select></p>
+	<p><label>Nature of leave :<label/> <select name="leave_type" required /><option value="1">EL<option value="2">CL<option value="3">RH</select></p>
     <br/>
     <p>Period of Leave Applied</p> 
     <br />
@@ -380,11 +380,11 @@ function ds_onclick(d, m, y) {
 		<p><label>Country</label><input name="country" type="text" required=""/>
 		</p>
 	<br />
-	<p><label>Wether the faculty/staff has prior <br/> Commitments in NIFT during the period of leave :<label/> <select name="Yes/No"><option value="Yes">Yes<option value="No">No</select></p>
+	<p><label>Whether the faculty/staff has prior <br/> Commitments in NIFT during the period of leave :<label/> <select name="Yes/No"><option value="1">Yes<option value="2">No</select></p>
 	<br />
-	<p><label>If yes give details :<label/> <input name="Text1" type="text"/ ></p>
+	<p><label>If yes give details :<label/> <input name="commitment_details" type="text"/ ></p>
 	<br />
-	<p><label>Nature of last leave :<label/> <select name="leave_type" required /><option value="Option1">CL<option value="Option2">EL<option value="Option3">RH</select></p>
+	<p><label>Nature of last leave :<label/> <select name="last_leave_type" required /><option value="1">EL<option value="2">CL<option value="3">RH</select></p>
 	<br/>
 	<p>I certify that during the leave period I have not been assigned any exam duty/ Institue duty <br/> and I have also completed all the tasks assigned to me and<br/> handed over and explained the tasks to be completed in my absence to my link official</p>
 	<br/>
@@ -404,3 +404,4 @@ function ds_onclick(d, m, y) {
   </div>
 </body>
 </html>
+
