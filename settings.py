@@ -15,11 +15,8 @@ DATABASES = {
         'NAME': 'NIFT_DB',                      # Or path to database file if using sqlite3.
         'USER': 'divyam',                      # Not used with sqlite3.
         'PASSWORD': '1',                  # Not used with sqlite3.
-#<<<<<<< HEAD
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-#=======
         'HOST': '',  #90.28 , 54.81 to empty string for localhost. Not used with sqlite3.
-#>>>>>>> c30ade5e72de71170154cbeb02624d94064cd817
  
        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -52,7 +49,7 @@ DATE_FORMAT='d-m-Y'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/harsha/django_projects/NIFT-HRMS/media'
+MEDIA_ROOT = '/home/divyam/django_projects/NIFT-HRMS/media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -63,7 +60,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = "/home/harsha/django_projects/NIFT-HRMS/sitestatic"
+STATIC_ROOT = "/home/divyam/django_projects/NIFT-HRMS/sitestatic"
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -79,7 +76,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/harsha/django_projects/NIFT-HRMS/static/',
+    '/home/divyam/django_projects/NIFT-HRMS/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -111,7 +108,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'NIFT-HRMS.urls'
 
 TEMPLATE_DIRS = (
-    '/home/harsha/django_projects/NIFT-HRMS/template',
+    '/home/divyam/django_projects/NIFT-HRMS/template',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
