@@ -90,9 +90,15 @@ def submit_leave(request):
 	leave = Leave_Info.objects.filter(user_id=u.id, start_date=StartDate)
 	Buffer= Start - Today
 	Buffer_days = Buffer.days
+<<<<<<< HEAD
+	if Buffer_days < 15 and LeaveType == '1':
+	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
+	if Buffer_days < 0 and LeaveType == '2':
+=======
 	if (Buffer_days < 15 and LeaveType == 1):
 	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
 	if (Buffer_days < 0 and LeaveType == 2):
+>>>>>>> ab727147ef937a023dfff52daeeaa51c35b6ff8c
 	    return HttpResponse("<html>Sorry, your start date has already passed. <br>Enter a date which is either today or after.</html>")
 	if leave:
 	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")
