@@ -40,7 +40,7 @@ class Profile(models.Model):
 		(9,'Registrar'),
 	)
 	
-	        CENTRE_CHOICES = (
+	CENTRE_CHOICES = (
                 (1,'Bhopal'),
                 (2,'Bhubaneshwar'),
                 (3,'Bengaluru'),
