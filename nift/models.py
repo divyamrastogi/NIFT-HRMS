@@ -70,17 +70,17 @@ class Profile(models.Model):
 		('9','Fashion Management'),
 		('10','Fashion Technology'),
 	)
-
+	
+	user_id         = models.ForeignKey(User, primary_key=True)
 	join_date 	= models.DateField()
-	designation 	= models.CharField(max_length=1, choices=DESIGNATION_CHOICES)
-	department 	= models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
-	centre 		= models.CharField(max_length=2, choices=CENTRE_CHOICES)
+	designation 	= models.IntegerField(max_length = 1, choices=DESIGNATION_CHOICES)
+	department 	= models.IntegerField(max_length= 2, choices=DEPARTMENT_CHOICES)
+	centre 		= models.IntegerField(max_length= 2, choices=CENTRE_CHOICES)
 	room_no 	= models.CharField(max_length=10)
 	past_positions 	= models.CharField(max_length=150, blank=True)
 	experience 	= models.IntegerField(null=True)
 	expertise 	= models.CharField(max_length=150, blank=True)
-	image 		= models.ImageField(upload_to='image/')
-	user_id 	= models.ForeignKey(User, primary_key=True)
+	image 		= models.ImageField(upload_to='image/', null=True)
 
 	def __unicode__(self):
 		return self.user_id.user_id.username
@@ -100,23 +100,55 @@ class Sem_Info(models.Model):
 		('2','Autumn'),
         )
 
-	term 		= models.CharField(max_length=1, choices=TERM_CHOICES)
-	year 		= models.CharField(max_length=4)
+	term 		= models.IntegerField(max_length=1, choices=TERM_CHOICES)
+	year 		= models.IntegerField(max_length=4)
 	sem_id 		= models.AutoField(primary_key=True)
 	
 	def __unicode__(self):
 	        return self.term, self.year
 
 class Course(models.Model):
-	course_name 	= models.CharField(max_length=50)
+	
 	course_id 	= models.CharField(max_length=20, primary_key=True)
-
+	course_name     = models.CharField(max_length=50)
+	
 	def __unicode__(self):
 		return self.course_name
 
 class Cen_Dep_Info(models.Model):
-	centre_name 	= models.CharField(max_length=50)
-	department_name = models.CharField(max_length=50)
+	CENTRE_CHOICES = (
+		('1','Bhopal'),
+		('2','Bhubaneshwar'),
+		('3','Bengaluru'),
+		('4','Delhi'),
+		('5','Kangra'),
+		('6','Chennai'),
+		('7','Kolkatta'),
+		('8','Mumbai'),
+		('9','Gandhinagar'),
+		('10','Raebareli'),
+		('11','Jodhpur'),
+		('12','Patna'),
+		('13','Hyderabad'),
+		('14','Shillong'),
+		('15','Kannur'),
+	)
+
+	DEPARTMENT_CHOICES = (
+	        ('1','Fashion Design'),
+	        ('2','Leather Design'),
+	        ('3','Accessory Design'),
+	        ('4','Textile Design'),
+	        ('5','Knitwear Design'),
+	        ('6','Fashion Communication'),
+	        ('7','Apparel Production'),
+	        ('8','Design Space'),
+	        ('9','Fashion Management'),
+		('10','Fashion Technology'),
+	)
+	
+	centre_name 	= models.IntegerField(max_length=2)
+	department_name = models.IntegerField(max_length=2)
 	cen_dep_id 	= models.AutoField(primary_key=True)
 
 	def __unicode__(self):
@@ -126,8 +158,8 @@ class Offered(models.Model):
 	sem_id 		= models.ForeignKey(Sem_Info)
 	course_id 	= models.ForeignKey(Course)
 	cen_dep_id 	= models.ForeignKey(Cen_Dep_Info)
-	every_id 	= models.AutoField(primary_key=True)
 	user_id         = models.ForeignKey(User)
+ 	every_id        = models.AutoField(primary_key=True)
 
 	def __unicode__(self):
 		return self.user_id.user_id.username
@@ -151,44 +183,23 @@ class Teaching(models.Model):
 	)
 
 	study_type 	= models.CharField(max_length=1, choices=STUDY_CHOICES)
-	detail_type 	= models.CharField(max_length=1, choices=TYPE_CHOICES, blank=True)
-	teaching_id 	= models.AutoField(primary_key=True)
+	detail_type 	= models.IntegerField(max_length=1, choices=TYPE_CHOICES, null=True)	
 	hours 		= models.DecimalField(max_digits=5,decimal_places=2)
 	every_id 	= models.ForeignKey(Offered)
 	user_id 	= models.ForeignKey(User)
+	teaching_id     = models.AutoField(primary_key=True)
 
 	def __unicode__(self):
 		return self.user_id.user_id.username
 
 class Feedback(models.Model):
-	WEEK_CHOICES = (
-		('1','First'),
-		('2','Second'),
-		('3','Third'),
-		('4','Forth'),
-	)
-
-	MONTH_CHOICES = (
-		('1','January'),
-		('2','February'),
-		('3','March'),
-		('4','April'),
-		('5','May'),
-		('6','June'),
-		('7','July'),
-		('8','August'),
-		('9','September'),
-		('10','October'),
-		('11','November'),
-		('12','December'),
-	)
-
-	week_no 	= models.CharField(max_length=1, choices=WEEK_CHOICES)
-	month 		= models.CharField(max_length=1, choices=MONTH_CHOICES)
+	
+	start_date	= models.DateField()
+	end_date   	= models.DateField()
 	avg_content_rat = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	avg_present_rat = models.DecimalField(max_digits=5,decimal_places=2,null=True)
-	feedback_id 	= models.AutoField(primary_key=True)
 	every_id        = models.ForeignKey(Offered)
+	feedback_id     = models.AutoField(primary_key=True)
 	
 	def __unicode__(self):
 		return self.week_no, self.month
@@ -203,11 +214,11 @@ class Leave_Details(models.Model):
                  ('5','Maternity'),
         )
 
-        leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
+        leave_type      = models.IntegerField(max_length=1, choices=LEAVE_CHOICES)
 	user_id 	= models.ForeignKey(User)
-	leave_d_id 	= models.AutoField(primary_key=True)
 	days_left 	= models.IntegerField()
-	
+	leave_d_id      = models.AutoField(primary_key=True)
+
 	def __unicode__(self):
 		return self.user_id.user_id.username
 
@@ -228,17 +239,18 @@ class Leave_Info(models.Model):
                  ('7','pending by cc'),
         )
 
-        leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
+        leave_type      = models.IntegerField(max_length=1, choices=LEAVE_CHOICES)
         start_date      = models.DateField()
         reason          = models.CharField(max_length=1000)
         no_of_days      = models.IntegerField()
-        status          = models.CharField(max_length=1, choices=STATUS)
-
+        status          = models.IntegerField(max_length=1, choices=STATUS)
         user_id         = models.ForeignKey(User)
-        leave_id        = models.AutoField(primary_key=True)
         applied_date    = models.DateField(auto_now=True)
-        def __unicode__(self):
-	    return u'%s %s' % (self.user_id.user_id.username, self.leave_id)
+        leave_id        = models.AutoField(primary_key=True)
+
+	def __unicode__(self):
+                return self.user_id.user_id.username
+
 
 class Leave_Extension_Info(models.Model):
 
@@ -249,23 +261,19 @@ class Leave_Extension_Info(models.Model):
                  ('4','Hospital'),
                  ('5','Maternity'),
         )
-
-	STATUS = (
+        STATUS = (
                  ('1','Rejected'),
                  ('2','Approved'),
                  ('9','pending by registrar'),
                  ('7','pending by cc'),
         )
 
-
-        leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
-        last_leave_id  	= models.OneToOneField(Leave_Info, primary_key=True)
+	last_leave_id   = models.OneToOneField(Leave_Info, primary_key=True)
+        leave_type      = models.IntegerField(max_length=1, choices=LEAVE_CHOICES)
         reason          = models.CharField(max_length=1000)
-        status        	= models.CharField(max_length=1, choices=STATUS)
+        status          = models.IntegerField(max_length=1, choices=STATUS)
         no_of_days      = models.IntegerField()
-	start_date	= models.DateField()
         applied_date    = models.DateField(auto_now=True)
 
         def __unicode__(self):
                 return self.last_leave_id.user_id.user_id.username
-
