@@ -29,47 +29,48 @@ class User(models.Model):
 
 class Profile(models.Model):
 	DESIGNATION_CHOICES = (
-		('1','Professor'),
-		('2','Assistant Professor'),
-		('3','Associate Professor'),
-		('4','Senior Professor'),
-		('5','Director'),
-		('6','Assistant'),
-		('7','Centre Coordinator'),
-		('8','Director General'),
-		('9','Registrar'),
+		(1,'Professor'),
+		(2,'Assistant Professor'),
+		(3,'Associate Professor'),
+		(4,'Senior Professor'),
+		(5,'Director'),
+		(6,'Assistant'),
+		(7,'Centre Coordinator'),
+		(8,'Director General'),
+		(9,'Registrar'),
 	)
+	
+	        CENTRE_CHOICES = (
+                (1,'Bhopal'),
+                (2,'Bhubaneshwar'),
+                (3,'Bengaluru'),
+                (4,'Delhi'),
+                (5,'Kangra'),
+                (6,'Chennai'),
+                (7,'Kolkatta'),
+                (8,'Mumbai'),
+                (9,'Gandhinagar'),
+                (10,'Raebareli'),
+                (11,'Jodhpur'),
+                (12,'Patna'),
+                (13,'Hyderabad'),
+                (14,'Shillong'),
+                (15,'Kannur'),
+        )
 
-	CENTRE_CHOICES = (
-		('1','Bhopal'),
-		('2','Bhubaneshwar'),
-		('3','Bengaluru'),
-		('4','Delhi'),
-		('5','Kangra'),
-		('6','Chennai'),
-		('7','Kolkatta'),
-		('8','Mumbai'),
-		('9','Gandhinagar'),
-		('10','Raebareli'),
-		('11','Jodhpur'),
-		('12','Patna'),
-		('13','Hyderabad'),
-		('14','Shillong'),
-		('15','Kannur'),
-	)
-
-	DEPARTMENT_CHOICES = (
-		('1','Fashion Design'),
-		('2','Leather Design'),
-		('3','Accessory Design'),
-		('4','Textile Design'),
-		('5','Knitwear Design'),
-		('6','Fashion Communication'),
-		('7','Apparel Production'),
-		('8','Design Space'),
-		('9','Fashion Management'),
-		('10','Fashion Technology'),
-	)
+        DEPARTMENT_CHOICES = (
+                (1,'Fashion Design'),
+                (2,'Leather Design'),
+                (3,'Accessory Design'),
+                (4,'Textile Design'),
+                (5,'Knitwear Design'),
+                (6,'Fashion Communication'),
+                (7,'Apparel Production'),
+                (8,'Design Space'),
+                (9,'Fashion Management'),
+                (10,'Fashion Technology'),
+        )
+                      
 	
 	user_id         = models.ForeignKey(User, primary_key=True)
 	join_date 	= models.DateField()
@@ -117,34 +118,34 @@ class Course(models.Model):
 
 class Cen_Dep_Info(models.Model):
 	CENTRE_CHOICES = (
-		('1','Bhopal'),
-		('2','Bhubaneshwar'),
-		('3','Bengaluru'),
-		('4','Delhi'),
-		('5','Kangra'),
-		('6','Chennai'),
-		('7','Kolkatta'),
-		('8','Mumbai'),
-		('9','Gandhinagar'),
-		('10','Raebareli'),
-		('11','Jodhpur'),
-		('12','Patna'),
-		('13','Hyderabad'),
-		('14','Shillong'),
-		('15','Kannur'),
+		(1,'Bhopal'),
+		(2,'Bhubaneshwar'),
+		(3,'Bengaluru'),
+		(4,'Delhi'),
+		(5,'Kangra'),
+		(6,'Chennai'),
+		(7,'Kolkatta'),
+		(8,'Mumbai'),
+		(9,'Gandhinagar'),
+		(10,'Raebareli'),
+		(11,'Jodhpur'),
+		(12,'Patna'),
+		(13,'Hyderabad'),
+		(14,'Shillong'),
+		(15,'Kannur'),
 	)
 
 	DEPARTMENT_CHOICES = (
-	        ('1','Fashion Design'),
-	        ('2','Leather Design'),
-	        ('3','Accessory Design'),
-	        ('4','Textile Design'),
-	        ('5','Knitwear Design'),
-	        ('6','Fashion Communication'),
-	        ('7','Apparel Production'),
-	        ('8','Design Space'),
-	        ('9','Fashion Management'),
-		('10','Fashion Technology'),
+	        (1,'Fashion Design'),
+	        (2,'Leather Design'),
+	        (3,'Accessory Design'),
+	        (4,'Textile Design'),
+	        (5,'Knitwear Design'),
+	        (6,'Fashion Communication'),
+	        (7,'Apparel Production'),
+	        (8,'Design Space'),
+	        (9,'Fashion Management'),
+		(10,'Fashion Technology'),
 	)
 	
 	centre_name 	= models.IntegerField(max_length=2)
@@ -172,14 +173,14 @@ class Teaching(models.Model):
         )
 
 	TYPE_CHOICES = (
-		('1','CoTeaching'),
-		('2','IndividualTeaching'),
-		('3','OtherCentre'),
-		('4','GP'),
-		('5','DC'),
-		('6','ResearchPaper'),
-		('7','ITP'),
-		('8','CraftCluster'),
+		(1,'CoTeaching'),
+		(2,'IndividualTeaching'),
+		(3,'OtherCentre'),
+		(4,'GP'),
+		(5,'DC'),
+		(6,'ResearchPaper'),
+		(7,'ITP'),
+		(8,'CraftCluster'),
 	)
 
 	study_type 	= models.CharField(max_length=1, choices=STUDY_CHOICES)
@@ -207,11 +208,11 @@ class Feedback(models.Model):
 class Leave_Details(models.Model):
 
         LEAVE_CHOICES = (
-                 ('1','Earned'),
-                 ('2','Casual'),
-                 ('3','Restricted'),
-                 ('4','Hospital'),
-                 ('5','Maternity'),
+                 (1,'Earned'),
+                 (2,'Casual'),
+                 (3,'Restricted'),
+                 (4,'Hospital'),
+                 (5,'Maternity'),
         )
 
         leave_type      = models.IntegerField(max_length=1, choices=LEAVE_CHOICES)
@@ -226,17 +227,17 @@ class Leave_Details(models.Model):
 class Leave_Info(models.Model):
 
 	LEAVE_CHOICES = (
-                 ('1','Earned'),
-                 ('2','Casual'),
-                 ('3','Restricted'),
-                 ('4','Hospital'),
-                 ('5','Maternity'),
+                 (1,'Earned'),
+                 (2,'Casual'),
+                 (3,'Restricted'),
+                 (4,'Hospital'),
+                 (5,'Maternity'),
         )
 	STATUS = (
-                 ('1','Rejected'),
-                 ('2','Approved'),
-                 ('9','pending by registrar'),
-                 ('7','pending by cc'),
+                 (1,'Rejected'),
+                 (2,'Approved'),
+                 (9,'pending by registrar'),
+                 (7,'pending by cc'),
         )
 
         leave_type      = models.IntegerField(max_length=1, choices=LEAVE_CHOICES)
@@ -255,17 +256,17 @@ class Leave_Info(models.Model):
 class Leave_Extension_Info(models.Model):
 
 	LEAVE_CHOICES = (
-                 ('1','Earned'),
-                 ('2','Casual'),
-                 ('3','Restricted'),
-                 ('4','Hospital'),
-                 ('5','Maternity'),
+                 (1,'Earned'),
+                 (2,'Casual'),
+                 (3,'Restricted'),
+                 (4,'Hospital'),
+                 (5,'Maternity'),
         )
         STATUS = (
-                 ('1','Rejected'),
-                 ('2','Approved'),
-                 ('9','pending by registrar'),
-                 ('7','pending by cc'),
+                 (1,'Rejected'),
+                 (2,'Approved'),
+                 (9,'pending by registrar'),
+                 (7,'pending by cc'),
         )
 
 	last_leave_id   = models.OneToOneField(Leave_Info, primary_key=True)
