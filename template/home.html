@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 
 <head>
@@ -480,37 +480,31 @@ function ds_onclick(d, m, y) {
 
 {% if p.designation  >= 6%}
 
-<<<<<<< HEAD
-=======
-{% if p.designation in "5798"|make_list %}
->>>>>>> ab22fbfd07ce483f922f9eb33ac37206398dd90e
+
 
      </header>
 <form name="input" action="/department_attendance/" method="post">
-     <p><label>DEPARTMENT:</label>
-<select name="department">
-	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
-        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
-        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
-        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
-        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
-        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
-        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
-        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
-        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
-        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
-</select></p>    
+     <p>   <p><label>Department</label><select name="department">
+	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
+        <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
+        <option value=3 {%ifequal p.department 3 %} selected {% endifequal %}>Accessory Design
+        <option value=4 {%ifequal p.department 4 %} selected {% endifequal %}>Textile Design
+        <option value=5 {%ifequal p.department 5 %} selected {% endifequal %}>Knitwear Design
+        <option value=6 {%ifequal p.department 6 %} selected {% endifequal %}>Fashion Communication
+        <option value=7 {%ifequal p.department 7 %} selected {% endifequal %}>Apparel Production
+        <option value=8 {%ifequal p.department 8 %} selected {% endifequal %}>Design Space
+        <option value=9 {%ifequal p.department 9 %} selected {% endifequal %}>Fashion Management
+        <option value=10 {%ifequal p.department 10 %} selected {% endifequal %}>Fashion Technology
+</select></p>     
      <p><label>Start date</label><input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/></p>
     <p><label>End date</label><input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/></p>
     <input name="submit" type="submit" value="submit" />
 </form>
 </p>   
 {% endif %}
-<<<<<<< HEAD
+
 {% ifequal p.designation 5 %}
-=======
-{% ifequal p.designation '6' %}
->>>>>>> ab22fbfd07ce483f922f9eb33ac37206398dd90e
+
 {% if todays_attendance %}
 
 <form name="input" action="/mark_attendance/" method="post">
@@ -571,11 +565,9 @@ function ds_onclick(d, m, y) {
 <br>    
 <br>
 <br>
-<<<<<<< HEAD
+
 {% if p.designation >= 6 and p.designation <= 7 %}
-=======
-{% if p.designation in "79"|make_list %}
->>>>>>> ab22fbfd07ce483f922f9eb33ac37206398dd90e
+
 	 	<header>
        <h2>Leave Applications recieved</h2>
     </header>
@@ -624,8 +616,6 @@ function ds_onclick(d, m, y) {
 	<br>
 	<br>
 	<br>
-<<<<<<< HEAD
-=======
 	
 	<header>
       <h2>Get Leave Data</h2>
@@ -647,161 +637,12 @@ function ds_onclick(d, m, y) {
         		 </ul>
         		 
         		 <ul id="feedback" class="hide">
-        <p>   <p><label>Department</label><select name="department">
-	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
-        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
-        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
-        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
-        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
-        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
-        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
-        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
-        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
-        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
-</select></p>     
-    <p> Enter the start date and end date of the week you want</p>
-    <p><label>Start date</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required="required"/></p>
-    <p><label>End date</label><input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/></p>
-    <input name="submit" type="submit" value="submit" />
-    <table border = "1">
-<tr>
-<td>{{u.user_id}}</td>
-<td>{{u.avg_content_rat}}</td>
-<td>{{u.avg_present_rat}}</td>
-</tr>
-</table>
-</p> 
-</ul>
-        	 </div> <!-- END List Wrap -->
-         
-         </div> <!-- END Organic Tabs (Example One) -->
-		 
-		 
-	</div>
-	
-</body>
-
-</html>	 <ul id="leave" class="hide">
-        		    	<header>
-       <h2>Leave Forms</h2>
-    </header>
-    
-      <A HREF="/casual_leave/">Leave Application </A> </br>
-    <A HREF="/leave_extension/">Leave ExtensionForm </A>
-    <br>
-    
-    
-  {%ifequal p.designation '9' %}
-	 	<header>
-       <h2>Leave Applications recieved</h2>
-    </header>
-  <table border = "1">
-<tr>
-<td>Name</td>
-<td>type</td>
-<td>Start Date</td>
-<td>No of days</td>
-<td>Approve</td>
-</tr>
-<td><script type="text/javascript">
-
-var str1={{u.first_name}};
-var str2={{u.last_name}};
-document.write(str1.concat(str2));
-
-</script></td>
-<td>{{u.leave_type}}</td>
-<td>{{u.start_date}}</td>
-<td>{{u.no_of_days}}</td>
-<td><input name="approved" type="checkbox" required=""/></td>
-
-</table>
-<input name="Submit" type="submit" value="submit" />
-</br>
-<A HREF="/leave form/"> Leave form </A>
-	
-	<header>
-      <h2>Leave Data and balance</h2>
-    </header>
-    
-    <header>
-      <h3>Leave </h3>
-    </header>
-    
-    <table border = "1">
-<tr>
-<td>Leave_Type</td>
-<td>No_of_days_left = balance</td>
-</tr>
-
-<td>{{u.leave_type}}</td>
-<td>{{u.days_left}}</td>
-</tr>
-</table>
-	
->>>>>>> ab22fbfd07ce483f922f9eb33ac37206398dd90e
-	
-	<header>
-      <h2>Leave Data</h2>
-    </header>
-	 <p>Enter the type of leave you want to get data for : </p>
-  	</br>
-<<<<<<< HEAD
-  	<p><label>Nature of leave</label><select name="leave">
-              <option value=1>EL
-              <option value=2>Casual leave(CL)
-              <option value=3>Restricted holiday(RH)
-            </select></p>
-=======
-  	<p><label>Nature of leave</label><select name="leave"><option value="Option1">Casual leave(CL)<option value="Option2">Restricted holiday(RH)<option value="Option3">EL</select></p>
->>>>>>> ab22fbfd07ce483f922f9eb33ac37206398dd90e
-  	</br>
-  	 <p>Enter the date starting from which you want the leave data : </p>
-  	</br>
-  	<p><label>Date of interest :<label/> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/>
-      <input name="submit" type="submit" value="submit" />
-   </br>
-  <table border = "1">
-<tr>
-<td>Start_date</td>
-<td>No_Of_Days</td>
-</tr>
-
-<td>   <script type="text/javascript">
-   switch({{u.leave_type}})
-{
-case 'CL':
-  if(input_date <= {{u.start_date}}){
-  document.write({{u.start_date}});
-}
-  break;
-case 'EL':
-    if(input_date <= {{u.start_date}}){
-  document.write({{u.start_date}});
-}
-  break;
-case 'RH':
-      if(input_date <= {{u.start_date}}){
-  document.write({{u.start_date}});
-}
-  break;
-}
-   </script></td>
-<td>{{u.no_of_days}}</td>
-</tr>
-</table>
-        		   </p>
-        		 </ul>
- {% endifequal %}
-        		 </ul>
-        		 
-        		 <ul id="feedback" class="hide">
-<<<<<<< HEAD
 {% ifequal p.designation 5%}
  <br>
    <A HREF="/weekly_feedback/">fill weekly feedback </A> </br>
 
 {% endifequal %}
+
         <p>   <p><label>Department</label><select name="department">
 	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
         <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
@@ -813,19 +654,6 @@ case 'RH':
         <option value=8 {%ifequal p.department 8 %} selected {% endifequal %}>Design Space
         <option value=9 {%ifequal p.department 9 %} selected {% endifequal %}>Fashion Management
         <option value=10 {%ifequal p.department 10 %} selected {% endifequal %}>Fashion Technology
-=======
-                 <p>   <p><label>Department</label><select name="department">
-	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
-        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
-        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
-        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
-        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
-        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
-        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
-        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
-        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
-        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
->>>>>>> ab22fbfd07ce483f922f9eb33ac37206398dd90e
 </select></p>     
     <p> Enter the start date and end date of the week you want</p>
     <p><label>Start date</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required="required"/></p>
