@@ -561,6 +561,14 @@ function ds_onclick(d, m, y) {
 <td>{{l.get_status_display}}</td>
 </tr>
 {% endfor %}
+{% for l in extendedLeaveApps %}
+<tr>
+<td>{{l.get_leave_type_display}}-Ext</td>
+<td>{{l.start_date}}</td>
+<td>{{l.no_of_days}}</td>
+<td>{{l.get_status_display}}</td>
+</tr>
+{% endfor %}
 </table>
 <br>    
 <br>
@@ -589,6 +597,17 @@ function ds_onclick(d, m, y) {
 <td><input type="checkbox" name= "Approved" value= {{l.user_id}} /> </td>
 </tr>
 {% endfor %}
+</tr>
+{% for l in extended_leaves %}
+<tr>
+<td>{{l.user_id.user_id.username}}</td>
+<td>{{l.get_leave_type_display}}-Ext</td>
+<td>{{l.start_date}}</td>
+<td>{{l.no_of_days}}</td>
+<td><input type="checkbox" name= "Approved" value= {{l.user_id}} /> </td>
+</tr>
+{% endfor %}
+
 </table>
 <input name="Submit" type="submit" value="submit" />
 </br>
@@ -623,7 +642,9 @@ function ds_onclick(d, m, y) {
 <form name="input" action="/leave_details/" method="post">
 	 <p>Enter the type of leave you want to get data for : </p>
   	</br>
-  	<p><label>Nature of leave</label><select name="leave"><option value="Option1">Casual leave(CL)<option value="Option2">Restricted holiday(RH)<option value="Option3">EL</select></p>
+  	<p><label>Nature of leave</label><select name="leave">
+	<option value=1>Earned Leave(EL)<option value=2>Casual leave(CL)
+	<option value=3>Restricted holiday(RH)</select></p>
   	</br>
   	 <p>Enter the date starting from which you want the leave data : </p>
   	</br>
@@ -644,7 +665,7 @@ function ds_onclick(d, m, y) {
 {% endifequal %}
 
         <p>   <p><label>Department</label><select name="department">
-	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
+	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}>Fashion Design
         <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
         <option value=3 {%ifequal p.department 3 %} selected {% endifequal %}>Accessory Design
         <option value=4 {%ifequal p.department 4 %} selected {% endifequal %}>Textile Design

@@ -70,11 +70,7 @@ def submit_extension_leave(request):
 	    Extra = math.floor(No_of_days/7)
 	    No_of_days -= 2*Extra
 	print 'Extending the leave by ', No_of_days, 'days.'
-<<<<<<< HEAD
-        l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status='6', applied_date=Today)
-=======
-        l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status=9, applied_date=Today)
->>>>>>> ab22fbfd07ce483f922f9eb33ac37206398dd90e
+        l=Leave_Extension_Info(leave_type=LeaveType, user_id_id=u.id, start_date=StartDate, end_date=EndDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status=6, applied_date=Today)
         l.save()
 	#m=Leave_Info.objects.get(leave_id=lid[0].leave_id)
 	#m.no_of_days=No_of_days
@@ -217,13 +213,15 @@ def home(request):
                 t = User.objects.get(user_id = u.id)
                 p = Profile.objects.get(user_id = u.id)
                 myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
+		extendedLeaveApps = Leave_Extension_Info.objects.filter(user_id = u.id)#.filter(end_date__lte = datetime.datetime.now().date)
                 ids = Profile.objects.filter(department = p.department)
-                leaves = Leave_Info.objects.filter(status = p.designation)                
                 leave_data = Leave_Details.objects.filter(user_id = u.id)
                 try:                
-                    leaves = Leave_Info.objects.filter(status = p.designation)                
+                    leaves = Leave_Info.objects.filter(status = p.designation)               
+                    extended_leaves = Leave_Extension_Info.objects.filter(status = p.designation)
+ 
                 except Exception:                     
-                    print leaves
+                    print leaves, extended_leaves
                 try:                
                     attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())                    
                     if attendance is not None:
@@ -242,24 +240,25 @@ def home(request):
        t = User.objects.get(user_id = u.id)
        p = Profile.objects.get(user_id = u.id)
        myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
+       extendedLeaveApps = Leave_Extension_Info.objects.filter(user_id= u.id)#.filter(end_date__lte = datetime.datetime.now().date)
        ids = Profile.objects.filter(department = p.department)
        leaves = Leave_Info.objects.filter(status = p.designation)                
+       extended_leaves = Leave_Extension_Info.objects.filter(status = p.designation)
        leave_data = Leave_Details.objects.filter(user_id = u.id)
        try: 
-           leaves = Leave_Info.objects.filter(status = p.designation)                    
+           leaves = Leave_Info.objects.filter(status = p.designation)              
+	   extended_leaves = Leave_Extension_Info.objects.filter(status = p.designation)      
        except Exception:                     
            print "no leaves", leaves
        try:                
            attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
            print attendance
            if attendance is not None:
-               todays_attendance = False
-       except Exception:                     
-           todays_attendance = True
-       print "_______", todays_attendance
-       return render_to_response('home.html', locals() )
-#       except Exception:
-        #   return render_to_response('error.html',)
+               todays_attendance = True
+       	       print "_______", todays_attendance
+               return render_to_response('home.html', locals() )
+       except Exception:
+           return render_to_response('error.html',)
     return render_to_response('login.html',)
 
 def mark_attendance(request):
@@ -297,6 +296,18 @@ def leave_approval(request):
             else:
                 i.status = 1
             i.save()
+	eids = Leave_Extension_Info.objects.filter(status = p.designation)
+	for e in eids:
+	    print e
+            if e.user_id.user_id.username in approved:
+                if p.designation == 7:
+                    e.status = 2
+                else:
+                    e.status = 7
+            else:
+                e.status = 1
+            e.save()
+
     return HttpResponseRedirect("/")
 
 def check_attendance(request):

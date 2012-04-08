@@ -71,7 +71,6 @@ class Profile(models.Model):
                 (10,'Fashion Technology'),
         )
                       
-	
 	user_id         = models.ForeignKey(User, primary_key=True)
 	join_date 	= models.DateField()
 	designation 	= models.IntegerField(max_length = 1, choices=DESIGNATION_CHOICES)
@@ -95,10 +94,13 @@ class Attendance(models.Model):
         def __unicode__(self):
 		return u'%s %s' % (self.user_id.user_id.username, self.date)
 
+	class Meta:
+		unique_together = ('date','user_id')
+
 class Sem_Info(models.Model):
 	TERM_CHOICES = (
-		('1','Winter'),
-		('2','Autumn'),
+		(1,'Winter'),
+		(2,'Autumn'),
         )
 
 	term 		= models.IntegerField(max_length=1, choices=TERM_CHOICES)
@@ -108,6 +110,10 @@ class Sem_Info(models.Model):
 	def __unicode__(self):
 	        return self.term, self.year
 
+	class Meta:
+		unique_together = ('term','year')
+
+
 class Course(models.Model):
 	
 	course_id 	= models.CharField(max_length=20, primary_key=True)
@@ -115,6 +121,9 @@ class Course(models.Model):
 	
 	def __unicode__(self):
 		return self.course_name
+
+	class Meta:
+		unique_together = ('course_id','course_name')
 
 class Cen_Dep_Info(models.Model):
 	CENTRE_CHOICES = (
@@ -155,6 +164,9 @@ class Cen_Dep_Info(models.Model):
 	def __unicode__(self):
 	        return self.centre_name, self.department_name
 
+	class Meta:
+		unique_together = ('centre_name','department_name')
+
 class Offered(models.Model):
 	sem_id 		= models.ForeignKey(Sem_Info)
 	course_id 	= models.ForeignKey(Course)
@@ -164,6 +176,9 @@ class Offered(models.Model):
 
 	def __unicode__(self):
 		return self.user_id.user_id.username
+
+	class Meta:
+		unique_together = ('sem_id','course_id','cen_dep_id')
 
 class Teaching(models.Model):
 	STUDY_CHOICES = (
@@ -193,6 +208,9 @@ class Teaching(models.Model):
 	def __unicode__(self):
 		return self.user_id.user_id.username
 
+	class Meta:
+		unique_together = ('study_type','detail_type','every_id','user_id')
+
 class Feedback(models.Model):
 	
 	start_date	= models.DateField()
@@ -204,6 +222,9 @@ class Feedback(models.Model):
 	
 	def __unicode__(self):
 		return self.week_no, self.month
+
+	class Meta:
+		unique_together = ('start_date','end_date','every_id')
 
 class Leave_Details(models.Model):
 
@@ -223,6 +244,8 @@ class Leave_Details(models.Model):
 	def __unicode__(self):
 		return self.user_id.user_id.username
 
+	class Meta:
+		unique_together = ('leave_type','user_id')
 
 class Leave_Info(models.Model):
 
@@ -252,6 +275,8 @@ class Leave_Info(models.Model):
 	def __unicode__(self):
                 return self.user_id.user_id.username
 
+	class Meta:
+		unique_together = ('start_date','leave_type','reason','user_id','applied_date')
 
 class Leave_Extension_Info(models.Model):
 
@@ -275,6 +300,9 @@ class Leave_Extension_Info(models.Model):
         status          = models.IntegerField(max_length=1, choices=STATUS)
         no_of_days      = models.IntegerField()
         applied_date    = models.DateField(auto_now=True)
+	user_id 	= models.ForeignKey(User)
+	end_date	= models.DateField()
+	start_date	= models.DateField()
 
         def __unicode__(self):
                 return self.last_leave_id.user_id.user_id.username
