@@ -11,7 +11,7 @@ import unicodedata
 
 # divyam's methods..............
 
-def casual_leave(request):
+def leave_application(request):
     try:
         u = models.User.objects.get(username = request.session.get('user'))
         t = User.objects.get(user_id = u.id)
@@ -73,7 +73,7 @@ def leave_extend(request):
         return render_to_response('error.html',)
 
 
-def submit_csleave(request):
+def submit_leave(request):
     if (request.POST):
         u = models.User.objects.get(username = request.session.get('user'))
         LeaveType = request.POST.get('leave_type')

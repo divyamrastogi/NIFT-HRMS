@@ -11,7 +11,7 @@ import unicodedata
 
 # divyam's methods..............
 
-def casual_leave(request):
+def leave_application(request):
     try:
         u = models.User.objects.get(username = request.session.get('user'))
         t = User.objects.get(user_id = u.id)
@@ -193,7 +193,7 @@ def home(request):
                     print leaves
                 try:                
                     attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())                    
-                    if len(attendance) != 0:
+                    if attendance is not None:
                         todays_attendance = False
                 except Exception:                     
                     todays_attendance = True
@@ -219,7 +219,7 @@ def home(request):
        try:                
            attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
            print attendance
-           if len(attendance) != 0:
+           if attendance is not None:
                todays_attendance = False
        except Exception:                     
            todays_attendance = True

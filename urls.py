@@ -1,7 +1,7 @@
 from django.views.static import *
 from django.views.generic.simple import redirect_to
 from django.conf import settings
-from views import profile, home, casual_leave, logout, edit_profile, submit_csleave, leave_extend, submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval,  leave_details
+from views import profile, home, leave_application, logout, edit_profile, submit_leave, leave_extend, submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval,  leave_details
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
@@ -12,7 +12,7 @@ urlpatterns = patterns('views',
      (r'^$',home),
      (r'^edit_profile/$', edit_profile),
      (r'^edit_profile/saved/$', redirect_to, {'url': ''}),
-     (r'^casual_leave/$',casual_leave),
+     (r'^leave_application/$',leave_application),
      (r'^logout/$',logout),
      url(r'^admin/', include(admin.site.urls)),
      (r'^([A-Za-z])/$',home),
@@ -23,7 +23,7 @@ urlpatterns = patterns('views',
      (r'^check_attendance/$',check_attendance),
      (r'^department_attendance/$',department_attendance),
 #divyam's url....
-     (r'^csleave/$', submit_csleave),
+     (r'^submit_leave/$', submit_leave),
      (r'^leave_extension/$', leave_extend),
      (r'^leave_extend/$', submit_extension_leave),
 #divyam's changes .....................

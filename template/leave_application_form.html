@@ -338,8 +338,11 @@ function ds_onclick(d, m, y) {
     </header>
    
     
-    <form action="/csleave/" method="post">
-<p><label>Nature of leave</label><select name="leave_type" required /><option value="1">EL<option value="2">CL<option value="3">RH</select></p>
+    <form action="/submit_leave/" method="post">
+<p><label>Nature of leave</label><select name="leave_type" required />
+       <option value=1>EL
+       <option value=2>CL
+       <option value=3>RH</select></p>
 <br/>	
 <p>Period of Leave Applied:</p> 
 <p><label>Start Date :</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required=""/></p> 
