@@ -35,6 +35,11 @@ def submit_extension_leave(request):
 	lid = Leave_Info.objects.filter(user_id=u.id, start_date=Start, leave_type=last_leave_type)
         No_of_days = Diff.days + 1
         Extend_by = No_of_days - lid[0].no_of_days
+	Buffer= Start - Today
+        Buffer_days = Buffer.days
+	if not lid:
+	    return HttpResponse("<html>Sorry. A leave with a start date that you have entered does not already exist. <br>Enter the date from which your leave starts to extend your leave.</html>")
+	    
 	if(No_of_days < 1):
 	    return HttpResponse("<html>You have entered invalid end date. <br>The end date cannot be before the start date.<br> You can go back by clicking the back button on your browser. </html>")
 	elif No_of_days > 6:
@@ -82,7 +87,7 @@ def submit_leave(request):
         #Address = request.POST.get('address')
 	StartDate = request.POST.get('start_date')
 	EndDate = request.POST.get('end_date')
-	Today = datetime.datetime.now().strftime('%Y-%m-%d') 
+	Today=datetime.datetime.strptime(datetime.datetime.now().strftime('%Y-%m-%d'), '%Y-%m-%d') 
 	Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
 	End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
 	Diff = End - Start
@@ -90,16 +95,10 @@ def submit_leave(request):
 	leave = Leave_Info.objects.filter(user_id=u.id, start_date=StartDate)
 	Buffer= Start - Today
 	Buffer_days = Buffer.days
-<<<<<<< HEAD
 	if Buffer_days < 15 and LeaveType == '1':
 	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
 	if Buffer_days < 0 and LeaveType == '2':
-=======
-	if (Buffer_days < 15 and LeaveType == 1):
-	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
-	if (Buffer_days < 0 and LeaveType == 2):
->>>>>>> ab727147ef937a023dfff52daeeaa51c35b6ff8c
-	    return HttpResponse("<html>Sorry, your start date has already passed. <br>Enter a date which is either today or after.</html>")
+	    return HttpResponse("<html>You have entered invalid start date. <br>Try a date after today's date as start date.</html>")
 	if leave:
 	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")
 	if(No_of_days < 1):
