@@ -479,22 +479,22 @@ function ds_onclick(d, m, y) {
 </form>
 
 
-{% if p.designation in "5798"|make_list %}
+{% if p.designation in 5798|make_list %}
 
      </header>
 <form name="input" action="/department_attendance/" method="post">
      <p><label>DEPARTMENT:</label>
 <select name="department">
-	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
-        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
-        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
-        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
-        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
-        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
-        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
-        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
-        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
-        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
+	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
+        <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
+        <option value=3 {%ifequal p.department 3 %} selected {% endifequal %}>Accessory Design
+        <option value=4 {%ifequal p.department 4 %} selected {% endifequal %}>Textile Design
+        <option value=5 {%ifequal p.department 5 %} selected {% endifequal %}>Knitwear Design
+        <option value=6 {%ifequal p.department 6 %} selected {% endifequal %}>Fashion Communication
+        <option value=7 {%ifequal p.department 7 %} selected {% endifequal %}>Apparel Production
+        <option value=8 {%ifequal p.department 8 %} selected {% endifequal %}>Design Space
+        <option value=9 {%ifequal p.department 9 %} selected {% endifequal %}>Fashion Management
+        <option value=10 {%ifequal p.department 10 %} selected {% endifequal %}>Fashion Technology
 </select></p>    
      <p><label>Start date</label><input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/></p>
     <p><label>End date</label><input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/></p>
@@ -502,7 +502,7 @@ function ds_onclick(d, m, y) {
 </form>
 </p>   
 {% endif %}
-{% ifequal p.designation '6' %}
+{% ifequal p.designation 6 %}
 {% if todays_attendance %}
 
 <form name="input" action="/mark_attendance/" method="post">
@@ -563,7 +563,7 @@ function ds_onclick(d, m, y) {
 <br>    
 <br>
 <br>
-{% if p.designation in "79"|make_list %}
+{% if p.designation in 79|make_list %}
 	 	<header>
        <h2>Leave Applications recieved</h2>
     </header>
@@ -621,9 +621,9 @@ function ds_onclick(d, m, y) {
 <form name="input" action="/leave_details/" method="post">    
 	 <p>Enter the type of leave you want to get data for : 
   	  	<label>Nature of leave</label><select name="leave_type">
-                <option value="1">Earned leave(EL)
-                <option value="2">Casual Leave(CL)
-                <option value="3">Restricted holiday(RH)
+                <option value=1>Earned leave(EL)
+                <option value=2>Casual Leave(CL)
+                <option value=3>Restricted holiday(RH)
             </select>
   	</br>
   	 Enter the date starting from which you want the leave data : 
@@ -633,20 +633,19 @@ function ds_onclick(d, m, y) {
    </br>
    </form>
     </p>
-          		 </ul>
         		 
         		 <ul id="feedback" class="hide">
         <p>   <p><label>Department</label><select name="department">
-	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
-        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
-        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
-        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
-        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
-        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
-        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
-        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
-        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
-        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
+	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
+        <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
+        <option value=3 {%ifequal p.department 3 %} selected {% endifequal %}>Accessory Design
+        <option value=4 {%ifequal p.department 4 %} selected {% endifequal %}>Textile Design
+        <option value=5 {%ifequal p.department 5 %} selected {% endifequal %}>Knitwear Design
+        <option value=6 {%ifequal p.department 6 %} selected {% endifequal %}>Fashion Communication
+        <option value=7 {%ifequal p.department 7 %} selected {% endifequal %}>Apparel Production
+        <option value=8 {%ifequal p.department 8 %} selected {% endifequal %}>Design Space
+        <option value=9 {%ifequal p.department 9 %} selected {% endifequal %}>Fashion Management
+        <option value=10 {%ifequal p.department 10 %} selected {% endifequal %}>Fashion Technology
 </select></p>     
     <p> Enter the start date and end date of the week you want</p>
     <p><label>Start date</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required="required"/></p>
@@ -702,7 +701,7 @@ function ds_onclick(d, m, y) {
 <br>    
 <br>
 <br>
-{% if p.designation in "79"|make_list %}
+{% if p.designation in 79|make_list %}
 	 	<header>
        <h2>Leave Applications recieved</h2>
     </header>
@@ -758,7 +757,11 @@ function ds_onclick(d, m, y) {
 <form name="input" action="/leave_details/" method="post">
 	 <p>Enter the type of leave you want to get data for : </p>
   	</br>
-  	<p><label>Nature of leave</label><select name="leave"><option value="Option1">Casual leave(CL)<option value="Option2">Restricted holiday(RH)<option value="Option3">EL</select></p>
+  	<p><label>Nature of leave</label><select name="leave">
+          <option value=1>EL
+          <option value=2>Casual leave(CL)
+         <option value=3>Restricted holiday(RH)
+         </select></p>
   	</br>
   	 <p>Enter the date starting from which you want the leave data : </p>
   	</br>
@@ -773,16 +776,16 @@ function ds_onclick(d, m, y) {
         		 
         		 <ul id="feedback" class="hide">
                  <p>   <p><label>Department</label><select name="department">
-	<option value="1" {%ifequal p.department '1' %} selected {% endifequal %}> Fashion Design
-        <option value="2" {%ifequal p.department '2' %} selected {% endifequal %}>Leather Design
-        <option value="3" {%ifequal p.department '3' %} selected {% endifequal %}>Accessory Design
-        <option value="4" {%ifequal p.department '4' %} selected {% endifequal %}>Textile Design
-        <option value="5" {%ifequal p.department '5' %} selected {% endifequal %}>Knitwear Design
-        <option value="6" {%ifequal p.department '6' %} selected {% endifequal %}>Fashion Communication
-        <option value="7" {%ifequal p.department '7' %} selected {% endifequal %}>Apparel Production
-        <option value="8" {%ifequal p.department '8' %} selected {% endifequal %}>Design Space
-        <option value="9" {%ifequal p.department '9' %} selected {% endifequal %}>Fashion Management
-        <option value="10" {%ifequal p.department '10' %} selected {% endifequal %}>Fashion Technology
+	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
+        <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
+        <option value=3 {%ifequal p.department 3 %} selected {% endifequal %}>Accessory Design
+        <option value=4 {%ifequal p.department 4 %} selected {% endifequal %}>Textile Design
+        <option value=5 {%ifequal p.department 5 %} selected {% endifequal %}>Knitwear Design
+        <option value=6 {%ifequal p.department 6 %} selected {% endifequal %}>Fashion Communication
+        <option value=7 {%ifequal p.department 7 %} selected {% endifequal %}>Apparel Production
+        <option value=8 {%ifequal p.department 8 %} selected {% endifequal %}>Design Space
+        <option value=9 {%ifequal p.department 9 %} selected {% endifequal %}>Fashion Management
+        <option value=10 {%ifequal p.department 10 %} selected {% endifequal %}>Fashion Technology
 </select></p>     
     <p> Enter the start date and end date of the week you want</p>
     <p><label>Start date</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required="required"/></p>
