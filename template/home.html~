@@ -357,12 +357,12 @@ function ds_onclick(d, m, y) {
         	<div class="list-wrap">
         	
         		<ul id="home">
-<! HARSHA STARTS ______________________________________________________________________________________________________ -->
+<! HARSHA STARTS->
 <br>    
 <div align = right><a href="/edit_profile/">edit</a> </div
 <br>
 
-<img src="/media/{{p.image}}" width = "50%" height = "50%">
+<img src="/media/{{p.image}}" width = "150 px" height = "150px">
 
       		<table border = "0">
 <tr>
@@ -478,8 +478,8 @@ function ds_onclick(d, m, y) {
     <input name="submit" type="submit" value="submit" />
 </form>
 
+{% if p.designation  >= 6%}
 
-{% if p.designation in 5798|make_list %}
 
      </header>
 <form name="input" action="/department_attendance/" method="post">
@@ -502,7 +502,7 @@ function ds_onclick(d, m, y) {
 </form>
 </p>   
 {% endif %}
-{% ifequal p.designation 6 %}
+{% ifequal p.designation 5 %}
 {% if todays_attendance %}
 
 <form name="input" action="/mark_attendance/" method="post">
@@ -536,7 +536,7 @@ function ds_onclick(d, m, y) {
        <h2>Leave Forms</h2>
     </header>
     
-    <A HREF="/casual_leave/">Leave Application </A> </br>
+    <A HREF="/leave_application/">Leave Application </A> </br>
     <A HREF="/leave_extension/">Leave ExtensionForm </A>
     <br>
 <br>
@@ -563,7 +563,7 @@ function ds_onclick(d, m, y) {
 <br>    
 <br>
 <br>
-{% if p.designation in 79|make_list %}
+{% if p.designation >= 6 %}
 	 	<header>
        <h2>Leave Applications recieved</h2>
     </header>
@@ -594,9 +594,7 @@ function ds_onclick(d, m, y) {
 <br>
 <br>	
     <header>
-< HEAD >
-      <h3>My latest Leave Balance</h3>
-      <h3>My Leave Balance</h3>
+      <h3>Leave Balance</h3>
     </header>
     
     <table border = "1">
@@ -611,30 +609,39 @@ function ds_onclick(d, m, y) {
 </tr>
 {% endfor %}
 </table>
-	
 	<br>
-    <br>
-    
+	<br>
+	<br>
+	
 	<header>
-      <h2> Leave Data</h2>
+      <h2>Get Leave Data</h2>
     </header>
-<form name="input" action="/leave_details/" method="post">    
-	 <p>Enter the type of leave you want to get data for : 
-  	  	<label>Nature of leave</label><select name="leave_type">
-                <option value=1>Earned leave(EL)
-                <option value=2>Casual Leave(CL)
-                <option value=3>Restricted holiday(RH)
-            </select>
+<form name="input" action="/leave_details/" method="post">
+	 <p>Enter the type of leave you want to get data for : </p>
   	</br>
-  	 Enter the date starting from which you want the leave data : 
-     <label/> <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required="required"/>
-     </br>
+  	<p><label>Nature of leave</label><select name="leave">
+              <option value=1>EL
+              <option value=2>Casual leave(CL)
+              <option value=3>Restricted holiday(RH)
+            </select></p>
+  	</br>
+  	 <p>Enter the date starting from which you want the leave data : </p>
+  	</br>
+  	<p><label>Date of interest :<label/> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/>
       <input name="submit" type="submit" value="submit" />
    </br>
-   </form>
-    </p>
+
+        		   </p>
+        		 </ul>
+
+        		 </ul>
         		 
         		 <ul id="feedback" class="hide">
+{% ifequal p.designation 5%}
+ <br>
+   <A HREF="/weekly_feedback/">fill weekly feedback </A> </br>
+
+{% endifequal %}
         <p>   <p><label>Department</label><select name="department">
 	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
         <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
@@ -669,144 +676,4 @@ function ds_onclick(d, m, y) {
 	
 </body>
 
-</html>	 <ul id="leave" class="hide">
-        		    	<header>
-       <h2>Leave Forms</h2>
-    </header>
-    
-    <A HREF="/leave_application/">Leave Application </A> </br>
-    <A HREF="/leave_extension/">Leave ExtensionForm </A>
-    <br>
-<br>
-<br>
-<br>    
-<header><h2>Leave Status</h2>
-    </header>
-  <table border = "1">
-<tr>
-<td>type</td>
-<td>Start Date</td>
-<td>No of days</td>
-<td>status</td>
-</tr>
-{% for l in myLeaveApplications %}
-<tr>
-<td>{{l.get_leave_type_display}}</td>
-<td>{{l.start_date}}</td>
-<td>{{l.no_of_days}}</td>
-<td>{{l.get_status_display}}</td>
-</tr>
-{% endfor %}
-</table>
-<br>    
-<br>
-<br>
-{% if p.designation in 79|make_list %}
-	 	<header>
-       <h2>Leave Applications recieved</h2>
-    </header>
-<form name="input" action="/leave_approval/" method="post">
-  <table border = "1">
-<tr>
-<td>Name</td>
-<td>type</td>
-<td>Start Date</td>
-<td>No of days</td>
-<td>Approve</td>
-</tr>
-{% for l in leaves %}
-<tr>
-<td>{{l.user_id.user_id.username}}</td>
-<td>{{l.get_leave_type_display}}</td>
-<td>{{l.start_date}}</td>
-<td>{{l.no_of_days}}</td>
-<td><input type="checkbox" name= "Approved" value= {{l.user_id}} /> </td>
-</tr>
-{% endfor %}
-</table>
-<input name="Submit" type="submit" value="submit" />
-</br>
-</form>
-{% endif %}
-<br>
-<br>
-<br>	
-    <header>
-      <h3>MY Leave</h3>
-    </header>
-    
-    <table border = "1">
-<tr>
-<td>Leave_Type</td>
-<td>No_of_days_left = balance</td>
-</tr>
-{% for l in leave_data%}
-<tr>
-<td>{{l.get_leave_type_display}}</td>
-<td>{{l.days_left}}</td>
-</tr>
-{% endfor %}
-</table>
-	<br>
-	<br>
-	<br>
-	
-	<header>
-      <h2>Get Leave Data</h2>
-    </header>
-<form name="input" action="/leave_details/" method="post">
-	 <p>Enter the type of leave you want to get data for : </p>
-  	</br>
-  	<p><label>Nature of leave</label><select name="leave">
-          <option value=1>EL
-          <option value=2>Casual leave(CL)
-         <option value=3>Restricted holiday(RH)
-         </select></p>
-  	</br>
-  	 <p>Enter the date starting from which you want the leave data : </p>
-  	</br>
-  	<p><label>Date of interest :<label/> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/>
-      <input name="submit" type="submit" value="submit" />
-   </br>
-
-        		   </p>
-        		 </ul>
-
-        		 </ul>
-        		 
-        		 <ul id="feedback" class="hide">
-                 <p>   <p><label>Department</label><select name="department">
-	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}> Fashion Design
-        <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
-        <option value=3 {%ifequal p.department 3 %} selected {% endifequal %}>Accessory Design
-        <option value=4 {%ifequal p.department 4 %} selected {% endifequal %}>Textile Design
-        <option value=5 {%ifequal p.department 5 %} selected {% endifequal %}>Knitwear Design
-        <option value=6 {%ifequal p.department 6 %} selected {% endifequal %}>Fashion Communication
-        <option value=7 {%ifequal p.department 7 %} selected {% endifequal %}>Apparel Production
-        <option value=8 {%ifequal p.department 8 %} selected {% endifequal %}>Design Space
-        <option value=9 {%ifequal p.department 9 %} selected {% endifequal %}>Fashion Management
-        <option value=10 {%ifequal p.department 10 %} selected {% endifequal %}>Fashion Technology
-</select></p>     
-    <p> Enter the start date and end date of the week you want</p>
-    <p><label>Start date</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required="required"/></p>
-    <p><label>End date</label><input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/></p>
-    <input name="submit" type="submit" value="submit" />
-    <table border = "1">
-<tr>
-<td>{{u.user_id}}</td>
-<td>{{u.avg_content_rat}}</td>
-<td>{{u.avg_present_rat}}</td>
-</tr>
-</table>
-</p> 
-</ul>
-        	 </div> <!-- END List Wrap -->
-         
-         </div> <!-- END Organic Tabs (Example One) -->
-		 
-		 
-	</div>
-	
-</body>
-
-</html>
+</html>	

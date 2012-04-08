@@ -20,6 +20,22 @@ def leave_application(request):
     except Exception:
         return render_to_response('error.html',)
 
+def weekly_feedback(request):
+    try:
+        u = models.User.objects.get(username = request.session.get('user'))
+        t = User.objects.get(user_id = u.id)
+        p = Profile.objects.get(user_id = u.id)
+        return render_to_response('weekly_feedback.html', locals())
+    except Exception:
+        return render_to_response('error.html',)
+        
+def submit_feedback(request):
+    if (request.POST):
+        username = request.POST.get('username')
+        print username, "kokel"
+    return HttpResponseRedirect('/')
+    
+
 def submit_extension_leave(request):
     if (request.POST):
 	u = models.User.objects.get(username = request.session.get('user'))
@@ -46,13 +62,13 @@ def submit_extension_leave(request):
 	    Extra = math.floor(No_of_days/7)
 	    No_of_days -= 2*Extra
 	print 'Extending the leave by ', No_of_days, 'days.'
-        l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status='9', applied_date=Today)
+        l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status='6', applied_date=Today)
         l.save()
 	#m=Leave_Info.objects.get(leave_id=lid[0].leave_id)
 	#m.no_of_days=No_of_days
 	#m.status='9'
 	#m.save()
-	return render_to_response('home.html')
+	return HttpResponseRedirect('/')
     else:
         return render_to_response('error.html',)
 
@@ -112,7 +128,7 @@ def submit_leave(request):
         	#print 'The number of days is: ', No_of_days
 	    
 	#Days_Left=	
-	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, status = 9, no_of_days=No_of_days, user_id_id=u.id, applied_date=Today)
+	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, status = 6, no_of_days=No_of_days, user_id_id=u.id, applied_date=Today)
         l.save()
 	#ld=Leave_Details.objects.get(user_id=u.id, leave_type=LeaveType)
 	#ld.days_left = ld.days_left - No_of_days

@@ -33,11 +33,11 @@ class Profile(models.Model):
 		(2,'Assistant Professor'),
 		(3,'Associate Professor'),
 		(4,'Senior Professor'),
-		(5,'Director'),
-		(6,'Assistant'),
+		(5,'Assistant'),
+		(6,'Registrar'),
 		(7,'Centre Coordinator'),
 		(8,'Director General'),
-		(9,'Registrar'),
+		(9,'Director'),
 	)
 	
 	CENTRE_CHOICES = (
@@ -236,7 +236,7 @@ class Leave_Info(models.Model):
 	STATUS = (
                  (1,'Rejected'),
                  (2,'Approved'),
-                 (9,'pending by registrar'),
+                 (6,'pending by registrar'),
                  (7,'pending by cc'),
         )
 
@@ -265,7 +265,7 @@ class Leave_Extension_Info(models.Model):
         STATUS = (
                  (1,'Rejected'),
                  (2,'Approved'),
-                 (9,'pending by registrar'),
+                 (6,'pending by registrar'),
                  (7,'pending by cc'),
         )
 
