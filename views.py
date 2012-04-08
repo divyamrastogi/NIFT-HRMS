@@ -90,9 +90,15 @@ def submit_csleave(request):
 	leave = Leave_Info.objects.filter(user_id=u.id, start_date=StartDate)
 	Buffer= Start - Today
 	Buffer_days = Buffer.days
+<<<<<<< HEAD
 	if Buffer_days < 15 and LeaveType == '1':
 	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
 	if Buffer_days < 0 and LeaveType == '2':
+=======
+	if (Buffer_days < 15 and LeaveType == 1):
+	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
+	if (Buffer_days < 0 and LeaveType == 2):
+>>>>>>> ab727147ef937a023dfff52daeeaa51c35b6ff8c
 	    return HttpResponse("<html>Sorry, your start date has already passed. <br>Enter a date which is either today or after.</html>")
 	if leave:
 	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")
@@ -107,7 +113,7 @@ def submit_csleave(request):
         	#print 'The number of days is: ', No_of_days
 	    
 	#Days_Left=	
-	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, status = '9', no_of_days=No_of_days, user_id_id=u.id, applied_date=Today)
+	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, status = 9, no_of_days=No_of_days, user_id_id=u.id, applied_date=Today)
         l.save()
 	#ld=Leave_Details.objects.get(user_id=u.id, leave_type=LeaveType)
 	#ld.days_left = ld.days_left - No_of_days
@@ -189,7 +195,9 @@ def home(request):
                 leave_data = Leave_Details.objects.filter(user_id = u.id)
                 try:                
                     leaves = Leave_Info.objects.filter(status = p.designation)                
+                except Exception:                     
                     print leaves
+                try:                
                     attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())                    
                     if attendance is not None:
                         todays_attendance = False
@@ -210,9 +218,11 @@ def home(request):
        ids = Profile.objects.filter(department = p.department)
        leaves = Leave_Info.objects.filter(status = p.designation)                
        leave_data = Leave_Details.objects.filter(user_id = u.id)
-    
+       try: 
+           leaves = Leave_Info.objects.filter(status = p.designation)                    
+       except Exception:                     
+           print "no leaves", leaves
        try:                
-           leaves = Leave_Info.objects.filter(status = p.designation)                
            attendance = Attendance.objects.get(user_id = u.id , date=datetime.datetime.now().date())
            print attendance
            if attendance is not None:
@@ -253,12 +263,12 @@ def leave_approval(request):
         for i in ids:
             print i
             if i.user_id.user_id.username in approved:
-                if p.designation == '7':
+                if p.designation == 7:
                     i.status = 2
                 else: 
-                    i.status = '7'
+                    i.status = 7
             else:
-                i.status = '1'
+                i.status = 1
             i.save()
     return HttpResponseRedirect("/")
 
