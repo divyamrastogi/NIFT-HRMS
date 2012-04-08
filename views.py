@@ -3,9 +3,10 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, models
-from nift.models import User, Profile, Leave_Info, Attendance, Leave_Details
+from nift.models import User, Profile, Leave_Info, Attendance, Leave_Details, Leave_Extension_Info
 from datetime import date
 import datetime
+import math
 import unicodedata
 
 # divyam's methods..............
@@ -24,8 +25,6 @@ def submit_extension_leave(request):
 	u = models.User.objects.get(username = request.session.get('user'))
         LeaveType = request.POST.get('leave_type')
         Reason = request.POST.get('reason')
-        #Permission = request.POST.get('permission')
-        #Address = request.POST.get('address')
         StartDate = request.POST.get('start_date')
         EndDate = request.POST.get('end_date')
 	last_leave_type = request.POST.get('last_leave_type')
@@ -33,13 +32,21 @@ def submit_extension_leave(request):
         Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
         End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
         Diff = End - Start
-	lid = Leave_Info.objects.all()
-	print lid.leave_id
-	#print last_leave_id.leave_id
-        No_of_days = Diff.days+1
+	lid = Leave_Info.objects.filter(user_id=u.id, start_date=Start, leave_type=last_leave_type)
+        No_of_days = Diff.days + 1
+        Extend_by = No_of_days - lid[0].no_of_days
 	if(No_of_days < 1):
 	    return HttpResponse("<html>You have entered invalid end date. <br>The end date cannot be before the start date.<br> You can go back by clicking the back button on your browser. </html>")
+	elif No_of_days > 6:
+	    Extra = math.floor(No_of_days/7)
+	    No_of_days -= 2*Extra
 	print 'Extending the leave by ', No_of_days, 'days.'
+        l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status='9', applied_date=Today)
+        l.save()
+	#m=Leave_Info.objects.get(leave_id=lid[0].leave_id)
+	#m.no_of_days=No_of_days
+	#m.status='9'
+	#m.save()
 	return render_to_response('home.html')
     else:
         return render_to_response('error.html',)
@@ -70,10 +77,19 @@ def submit_csleave(request):
 	End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
 	Diff = End - Start
 	No_of_days = Diff.days+1
-	if(No_of_days < 0):
+	leave = Leave_Info.objects.filter(user_id=u.id, start_date=StartDate)
+	Buffer= Start - Today
+	Buffer_days = Buffer.days
+	if Buffer_days < 15, LeaveType = '1':
+	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
+	if Buffer_days < 0, LeaveType = '2':
+	    return HttpResponse("<html>Sorry, your start date has already passed. <br>Enter a date which is either today or after.</html>")
+	if leave:
+	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")
+	if(No_of_days < 1):
 	    return HttpResponse("<html> You have entered an invalid end date.<br> Please try again by clicking the back button</html>")
 	elif(No_of_days > 7):
-	    Extra = floor(No_of_days/7)
+	    Extra = math.floor(No_of_days/7)
 	    No_of_days = No_of_days - 2*Extra
 	#elif(No_of_days > 2):
 	    #if(End.Weekday() = 0):
@@ -83,6 +99,9 @@ def submit_csleave(request):
 	#Days_Left=	
 	l=Leave_Info(leave_type=1, start_date=StartDate, reason=Reason, status = '9', no_of_days=No_of_days, user_id_id=u.id, applied_date=Today)
         l.save()
+	#ld=Leave_Details.objects.get(user_id=u.id, leave_type=LeaveType)
+	#ld.days_left = ld.days_left - No_of_days
+	#ld.save()
 	return HttpResponseRedirect('/')
     else:
         return render_to_response('error.html')

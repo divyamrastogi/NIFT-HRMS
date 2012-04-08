@@ -250,11 +250,20 @@ class Leave_Extension_Info(models.Model):
                  ('5','Maternity'),
         )
 
+	STATUS = (
+                 ('1','Rejected'),
+                 ('2','Approved'),
+                 ('9','pending by registrar'),
+                 ('7','pending by cc'),
+        )
+
+
         leave_type      = models.CharField(max_length=1, choices=LEAVE_CHOICES)
-        last_leave_id   = models.OneToOneField(Leave_Info, primary_key=True)
+        last_leave_id  	= models.OneToOneField(Leave_Info, primary_key=True)
         reason          = models.CharField(max_length=1000)
-        approved        = models.BooleanField()
+        status        	= models.CharField(max_length=1, choices=STATUS)
         no_of_days      = models.IntegerField()
+	start_date	= models.DateField()
         applied_date    = models.DateField(auto_now=True)
 
         def __unicode__(self):
