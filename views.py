@@ -28,25 +28,33 @@ def submit_extension_leave(request):
         StartDate = request.POST.get('start_date')
         EndDate = request.POST.get('end_date')
 	last_leave_type = request.POST.get('last_leave_type')
-        Today = datetime.datetime.now().strftime('%Y-%m-%d') 
+	lid = Leave_Info.objects.filter(user_id=u.id, start_date=StartDate)
+        Today=datetime.datetime.strptime(datetime.datetime.now().strftime('%Y-%m-%d'), '%Y-%m-%d')
         Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
         End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
+	if not lid:
+            return HttpResponse("<html>Sorry. A leave with a start date that you have entered does not already exist. <br>Enter the date from which your leave starts to extend your leave.</html>")
         Diff = End - Start
-	lid = Leave_Info.objects.filter(user_id=u.id, start_date=Start, leave_type=last_leave_type)
+        No_of_days = Diff.days+1
+        Buffer= Start - Today
+        Buffer_days = Buffer.days
         No_of_days = Diff.days + 1
         Extend_by = No_of_days - lid[0].no_of_days
-	Buffer= Start - Today
-        Buffer_days = Buffer.days
-	if not lid:
-	    return HttpResponse("<html>Sorry. A leave with a start date that you have entered does not already exist. <br>Enter the date from which your leave starts to extend your leave.</html>")
-	    
+	To_end = End - Today
+	Days_to_end = To_end.days
+	if Days_to_end < 0:
+	    return HttpResponse("<html>Your End Date has already passed. You cannot extend any such leave.</html>")
+	if Extend_by < 1:
+	    return HttpResponse("<html>You have to enter a date which is after your previously sanctioned leave end date.</html>")
+	if Buffer_days < 0:
+	    return HttpResponse("<html>Your start date should be at least today's date.</html>")
 	if(No_of_days < 1):
 	    return HttpResponse("<html>You have entered invalid end date. <br>The end date cannot be before the start date.<br> You can go back by clicking the back button on your browser. </html>")
 	elif No_of_days > 6:
 	    Extra = math.floor(No_of_days/7)
 	    No_of_days -= 2*Extra
 	print 'Extending the leave by ', No_of_days, 'days.'
-        l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status='9', applied_date=Today)
+        l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status=9, applied_date=Today)
         l.save()
 	#m=Leave_Info.objects.get(leave_id=lid[0].leave_id)
 	#m.no_of_days=No_of_days
@@ -95,9 +103,9 @@ def submit_leave(request):
 	leave = Leave_Info.objects.filter(user_id=u.id, start_date=StartDate)
 	Buffer= Start - Today
 	Buffer_days = Buffer.days
-	if Buffer_days < 15 and LeaveType == '1':
+	if Buffer_days < 15 and LeaveType == 1:
 	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
-	if Buffer_days < 0 and LeaveType == '2':
+	if Buffer_days < 0 and LeaveType == 2:
 	    return HttpResponse("<html>You have entered invalid start date. <br>Try a date after today's date as start date.</html>")
 	if leave:
 	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")
