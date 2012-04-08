@@ -1,0 +1,16 @@
+<html>
+ <table border = "1">
+<tr>
+<td>Start_date</td>
+<td>No_Of_Days</td>
+</tr>
+{% for d in details %}
+<tr>
+<td>  {{d.get_leave_type_display}}</td>
+<td>{{d.no_of_days}}</td>
+</tr>
+{% endfor %}
+</table>
+</br>
+ <div align = left> <a href="/">back</a> </div> 
+</html>
