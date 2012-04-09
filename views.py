@@ -48,7 +48,7 @@ def weekly_feedback(request):
         
 def submit_feedback(request):
     if (request.POST):
-      for i in [1,2]:
+      for i in [1,2,3,4,5]:
         date = request.POST.get('date['+str(i)+']')
         faculty_id = request.POST.get('faculty['+str(i)+']')
         course_id  = request.POST.get('course_id['+str(i)+']')
