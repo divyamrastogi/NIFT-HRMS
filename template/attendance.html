@@ -8,7 +8,11 @@
   {% if d.present%}
     p
  {%else%}
-    a
+    {% if d.on_duty%}
+        on_duty
+    {%else%}
+         a
+     {% endif %}
 {% endif %}
 </td>
 </tr>

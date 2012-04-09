@@ -558,8 +558,9 @@ function checkForm1(thisform)
 <table border = '1'>
 <tr>
 <td> Id </td>
-<td> NAME </td>
-<td> Attendance </td>
+<td> Name </td>
+<td> Present </td>
+<td> On Duty </td>
 </tr>
 {% for i in ids %}
 <tr>
@@ -569,6 +570,8 @@ function checkForm1(thisform)
 </td>
 <td>
 <input type="checkbox" name= "Present" value= {{i.user_id}} /> </td>
+<td>
+<input type="checkbox" name= "on_duty" value= {{i.user_id}} /> </td>
 </tr>
 {% endfor %}
 </table>
@@ -733,8 +736,8 @@ function checkForm1(thisform)
 <br>
 <form name="feedback" action="/feedback_details/" method="post">
  Enter the start date and end date of the week you want</p>
-    <p><label>Start date</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required/></p>
-    <p><label>End date</label><input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required/></p>
+    <p><label>date: </label><input onclick="ds_sh(this);" name="date"  style="cursor: text" required/></p>
+    <p><label>Course Id: </label><input name="course_id"  type = "text" required/></p>
     <input name="submit" type="submit" value="submit" />
   <br>   </form>
 
