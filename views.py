@@ -14,6 +14,16 @@ import unicodedata
 
 # divyam's methods..............
 
+def edirectory_info:
+    try:
+        u = models.User.objects.get(username = request.session.get('user'))
+        t = User.objects.get(user_id = u.id)
+        p = Profile.objects.get(user_id = u.id)
+	if(request.POST):
+	    id = request.POST.get('user_id')
+    except:
+	return render_to_response('error.html')
+
 def edirectory_courses(request):
     try:
 	u = models.User.objects.get(username = request.session.get('user'))
