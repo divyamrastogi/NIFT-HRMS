@@ -350,10 +350,7 @@ function ds_onclick(d, m, y) {
   </div>
   <div id="navbar">
   <div id="page-wrap">	
-        <div id="logoutbutton" align = right>Logout</a> </div> 
-		
-      <div id="example-one"><a href="#home" class="navigationtitles"> Home </a><a href="#attendance" class="navigationtitles"> Attendance </a><a href="#leave" class="navigationtitles"> Leave </a><a href="#feedback" class="navigationtitles"> Feedback </a> </div>
-      </div>
+
   </div>
   <div id="maincontent">
   <div>
@@ -369,79 +366,33 @@ function ds_onclick(d, m, y) {
     <form action="/submit_feedback/" method="POST">
     
     <p class="subheadingtext">Period of Feedback Taken:</p> 
+<table border="0">
+<tr>
+<td> <label>Start Date</label> </td> 
+<td> <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" type="date" required/> </td>
+</tr>
+<tr>
+<td> <label>End Date</label> </td> 
+<td> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" type="date" required/> </td>
+</tr>
+</table>
 
 <table id="dataTable" border = "1">
-<tbody>
 <tr>
-<td>Date             </td>	
-<td>Name of the faculty   </td>
-<td>Subject               </td>
-<td>Content               
-	<br/>
-	<pre> 1 2 3 4 5</pre> </td>
-<td>Presentation         
-	<br/>
-	<pre> 1 2 3 4 5</pre> </td>
-
+<td>Course Id</td><td>Content</td><td>Presentation</td>
 </tr>
+{% for c in courses %}
 <tr>
-<td> <input onclick="ds_sh(this);" name="date[1]"  style="cursor: text" type="date" required/> </td>
-<td><input name="faculty[1]" type="text" required/></td>
-<td><input name="course_id[1]" type="text" required/></td>
-<td>
-<input type="radio" name="content_rate[1]"  value=1 required  />
-<input type="radio" name="content_rate[1]"  value=2 required/>
-<input type="radio" name="content_rate[1]"  value=3 required/>
-<input type="radio" name="content_rate[1]"  value=4 required/>
-<input type="radio" name="content_rate[1]"  value=5 required/>
-</td>
-<td>
-<input type="radio" name="present_rate[1]"  value=1 required/>
-<input type="radio" name="present_rate[1]"  value=2 required/>
-<input type="radio" name="present_rate[1]"  value=3 required/>
-<input type="radio" name="present_rate[1]"  value=4 required/>
-<input type="radio" name="present_rate[1]"  value=5 required/>
-</td>
+<td>{{c.course_id_id}}</td><td><input name=content_rate[{{c.every_id}}] type="number" required /></td><td><input name=presentation_rate[{{c.every_id}}] type="number" required /></td>
 </tr>
-<tr>
-<td> <input onclick="ds_sh(this);" name="date[2]"  style="cursor: text" type="date" required/> </td>
-<td><input name="faculty[2]" type="text" required/></td>
-<td><input name="course_id[2]" type="text" required/></td>
-<td>
-<input type="radio" name="content_rate[2]"  value=1 required />
-<input type="radio" name="content_rate[2]"  value=2 required/>
-<input type="radio" name="content_rate[2]"  value=3 required/>
-<input type="radio" name="content_rate[2]"  value=4 required/>
-<input type="radio" name="content_rate[2]"  value=5 required/>
-</td>
-<td>
-<input type="radio" name="present_rate[2]"  value=1 required/>
-<input type="radio" name="present_rate[2]"  value=2 required/>
-<input type="radio" name="present_rate[2]"  value=3 required/>
-<input type="radio" name="present_rate[2]"  value=4 required/>
-<input type="radio" name="present_rate[2]"  value=5 required/>
-</td>
-</tr>
-
-
-</tbody>
+{% endfor %}
 </table>
 
 
 </p>
 <p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
 
-	<p class="subheadingtext"> Instructions:<br/>
-	</p>
-	<p class="subheadingtext">
-	  1)Please circle the appropriate grade against each subject/faculty in the rating column individually
-	  for content and presentation column on a sliding scale of 1-5 where 5 is excellent and 1 is very poor.
-	  </p>
-	<p class="subheadingtext">
-		2)Please mention the name of the substitute faculty, if any, who actually conducted the classes in 
-		case of non-presence of the concerned faculty.</p>
-		 
- 	
+	
 </form>
 </div>
 </div>

@@ -558,9 +558,8 @@ function checkForm1(thisform)
 <table border = '1'>
 <tr>
 <td> Id </td>
-<td> Name </td>
-<td> Present </td>
-<td> On Duty </td>
+<td> NAME </td>
+<td> Attendance </td>
 </tr>
 {% for i in ids %}
 <tr>

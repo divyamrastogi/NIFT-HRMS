@@ -10,13 +10,12 @@
 </table>
 <br>
 <br>
-<header> <h2>Content Rate</h2> </header>
 <table border = "1">
-<td>#1</td>
-<td>#2</td>
-<td>#3</td>
-<td>#4</td>
-<td>#5</td>
+<td>content_rate = 1</td>
+<td>content_rate = 2</td>
+<td>content_rate = 3</td>
+<td>content_rate = 4</td>
+<td>content_rate = 5</td>
 </tr>
 <tr>
 <td>{{c1}}</td>
@@ -27,14 +26,13 @@
 </table>
 <br>
 <br>
-<header> <h2>Presentation Rate</h2> </header>
 <table border = "1">
 <tr>
-<td>#1</td>
-<td>#2</td>
-<td>#3</td>
-<td>#4</td>
-<td>#5</td>
+<td>presentation_rate = 1</td>
+<td>presentation_rate = 2</td>
+<td>presentation_rate = 3</td>
+<td>presentation_rate = 4</td>
+<td>presentation_rate = 5</td>
 </tr>
 <tr>
 <td>{{p1}}</td>

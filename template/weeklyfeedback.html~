@@ -366,7 +366,7 @@ function ds_onclick(d, m, y) {
     	<h2 class="subheadtext"> Fashion Technology</h2>
     </header>
    
-    <form action="/submit_feedback/" method="POST">
+    <form action="" method="get">
     
     <p class="subheadingtext">Period of Feedback Taken:</p> 
 
@@ -385,43 +385,25 @@ function ds_onclick(d, m, y) {
 
 </tr>
 <tr>
-<td> <input onclick="ds_sh(this);" name="date[1]"  style="cursor: text" type="date" required/> </td>
-<td><input name="faculty[1]" type="text" required/></td>
-<td><input name="course_id[1]" type="text" required/></td>
+<td> <input onclick="ds_sh(this);" name="date"  style="cursor: text" type="date" required/> </td>
+<td><input name="username" type="text" required/></td>
+<td><input name="course_id" type="text" required/></td>
 <td>
-<input type="radio" name="content_rate[1]"  value=1 required  />
-<input type="radio" name="content_rate[1]"  value=2 required/>
-<input type="radio" name="content_rate[1]"  value=3 required/>
-<input type="radio" name="content_rate[1]"  value=4 required/>
-<input type="radio" name="content_rate[1]"  value=5 required/>
+<input name="content_rate" type="radio" required class="checkbuttons"  id="1"/>
+<input type="radio" name="content_rate" id="2" required/>
+<input type="radio" name="content_rate"  id="3" required/>
+<input type="radio" name="content_rate"  id="4" required/>
+<input type="radio" name="content_rate"  id="5" required/>
 </td>
 <td>
-<input type="radio" name="present_rate[1]"  value=1 required/>
-<input type="radio" name="present_rate[1]"  value=2 required/>
-<input type="radio" name="present_rate[1]"  value=3 required/>
-<input type="radio" name="present_rate[1]"  value=4 required/>
-<input type="radio" name="present_rate[1]"  value=5 required/>
-</td>
-</tr>
-<tr>
-<td> <input onclick="ds_sh(this);" name="date[2]"  style="cursor: text" type="date" required/> </td>
-<td><input name="faculty[2]" type="text" required/></td>
-<td><input name="course_id[2]" type="text" required/></td>
-<td>
-<input type="radio" name="content_rate[2]"  value=1 required />
-<input type="radio" name="content_rate[2]"  value=2 required/>
-<input type="radio" name="content_rate[2]"  value=3 required/>
-<input type="radio" name="content_rate[2]"  value=4 required/>
-<input type="radio" name="content_rate[2]"  value=5 required/>
-</td>
-<td>
-<input type="radio" name="present_rate[2]"  value=1 required/>
-<input type="radio" name="present_rate[2]"  value=2 required/>
-<input type="radio" name="present_rate[2]"  value=3 required/>
-<input type="radio" name="present_rate[2]"  value=4 required/>
-<input type="radio" name="present_rate[2]"  value=5 required/>
+<input type="radio" name="present_rate"  id="1" required/>
+<input type="radio" name="present_rate" id="2" required/>
+<input type="radio" name="present_rate"  id="3" required/>
+<input type="radio" name="present_rate"  id="4" required/>
+<input type="radio" name="present_rate"  id="5" required/>
 </td>
 </tr>
+
 
 
 </tbody>

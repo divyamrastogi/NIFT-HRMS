@@ -297,16 +297,12 @@ def mark_attendance(request):
     if (request.POST):
         present = []
         present = request.POST.getlist('Present')    
-        on_duty = request.POST.getlist('on_duty')    
         ids = Profile.objects.filter(department = p.department)
         for i in ids:
             if i.user_id.user_id.username in present:
-                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = i.user_id.user_id.id, on_duty = False)        
+                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = i.user_id.user_id.id)        
             else:
-	        if i.user_id.user_id.username in on_duty:
-                    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = True)                      
-                else:
-		    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = False)                      
+                a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id)                      
             a.save()
     return HttpResponseRedirect("/")
 
