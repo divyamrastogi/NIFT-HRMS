@@ -742,49 +742,19 @@ function checkForm1(thisform)
     <input name="submit" type="submit" value="submit" />
   <br>   </form>
 
-{% if p.designation >= 6%}
-<form name="input" action="/leave_details/" method="post">
-        <p>   <p><label>Department</label><select name="department">
-	<option value=1 {%ifequal p.department 1 %} selected {% endifequal %}>Fashion Design
-        <option value=2 {%ifequal p.department 2 %} selected {% endifequal %}>Leather Design
-        <option value=3 {%ifequal p.department 3 %} selected {% endifequal %}>Accessory Design
-        <option value=4 {%ifequal p.department 4 %} selected {% endifequal %}>Textile Design
-        <option value=5 {%ifequal p.department 5 %} selected {% endifequal %}>Knitwear Design
-        <option value=6 {%ifequal p.department 6 %} selected {% endifequal %}>Fashion Communication
-        <option value=7 {%ifequal p.department 7 %} selected {% endifequal %}>Apparel Production
-        <option value=8 {%ifequal p.department 8 %} selected {% endifequal %}>Design Space
-        <option value=9 {%ifequal p.department 9 %} selected {% endifequal %}>Fashion Management
-        <option value=10 {%ifequal p.department 10 %} selected {% endifequal %}>Fashion Technology
-</select></p>     
-   
-   <p class="datatext"> Enter the start date and end date of the week you want</p>
-   <table border="0">
-   <tr>
-   <td>
-     <label>Start date</label>
-   </td>
-   <td>
-     <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required/>
-    </td>
-    </tr>
-   <tr>
-   <td>
-     <label>End date</label>
-   </td>
-   <td>
-     <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required/>
-   </td>
-   </tr>
-   </table>
-   <p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
-   </form>
-   
-  </p>
-{%endif%}
          </ul>
              <ul id="workload" class="hide">
    <br>
        <A HREF="/teaching_hours/">fill teaching hours form </A> </br>
+
+<br>
+<br>
+
+<form name="workload" action="/workload_details/" method="post">
+ Enter the start date and end date of the week you want</p>
+    <p><label>Course Id: </label><input name="course_id"  type = "text" required/></p>
+    <input name="submit" type="submit" value="submit" />
+  <br>   </form>
 
  	     </ul>       		 
         		 

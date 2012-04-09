@@ -2,7 +2,7 @@ from django.template.defaultfilters import register
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
-from django.db.models import Avg
+from django.db.models import Avg, Sum
 from django.contrib.auth import authenticate, models
 from nift.models import User, Profile, Teaching, Leave_Info, Feedback, Attendance, Leave_Details, Leave_Extension_Info, Cen_Dep_Info, Offered
 #from nift.models import *
@@ -106,11 +106,12 @@ def submit_feedback(request):
 
 def feedback_details(request):
     if (request.POST):
-        u = models.User.objects.get(username = request.session.get('user'))
+        t = models.User.objects.get(username = request.session.get('user'))
+        u = User.objects.get(user_id = t.id)
         course_id  = request.POST.get('course_id')
         date  = request.POST.get('date')
-        print u.id, course_id
-        e  = Offered.objects.get(user_id = u.id, course_id = course_id)
+        print u.user_id, course_id
+        e  = Offered.objects.get(user_id = u.user_id, course_id = course_id)
         print e.every_id
         t  = Feedback.objects.filter(every_id = e).filter(date = date).count()
         c1 = Feedback.objects.filter(every_id = e).filter(date = date).filter(content_rate = 1).count()
@@ -124,6 +125,20 @@ def feedback_details(request):
         p4 = Feedback.objects.filter(every_id = e).filter(date = date).filter(present_rate = 4).count()
         p5 = Feedback.objects.filter(every_id = e).filter(date = date).filter(present_rate = 5).count()
     return render_to_response('feedback_details.html',locals())
+
+def workload_details(request):
+    if (request.POST):
+        t = models.User.objects.get(username = request.session.get('user'))
+        u = User.objects.get(user_id = t.id)
+        course_id  = request.POST.get('course_id')
+        print u.user_id, course_id
+        e  = Offered.objects.get(user_id = u.user_id, course_id = course_id)
+        print e.every_id
+        direct = Teaching.objects.filter(every_id = e).filter(study_type = 'D').aggregate(Sum('hours'))
+        indirect = Teaching.objects.filter(every_id = e).filter(study_type = 'I').aggregate(Sum('hours'))
+        audit = Teaching.objects.filter(every_id = e).filter(study_type = 'A').aggregate(Sum('hours'))
+        print direct , indirect, audit
+    return render_to_response('workload_details.html',locals())
        
 
 def submit_extension_leave(request):
@@ -263,8 +278,6 @@ def edit_profile(request):
             u = models.User.objects.get(username = request.session.get('user'))
             t = User.objects.get(user_id = u.id)
             p = Profile.objects.get(user_id = u.id)
-            p.designation = request.POST.get('designation')
-            p.department = request.POST.get('department')
             try:
                 p.image = request.FILES['image']
             except Exception:
