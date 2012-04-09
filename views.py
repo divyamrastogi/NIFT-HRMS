@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.db.models import Avg
 from django.contrib.auth import authenticate, models
-from nift.models import User, Profile, Leave_Info, Feedback, Attendance, Leave_Details, Leave_Extension_Info, Cen_Dep_Info, Offered
+from nift.models import User, Profile, Teaching, Leave_Info, Feedback, Attendance, Leave_Details, Leave_Extension_Info, Cen_Dep_Info, Offered
 #from nift.models import *
 from datetime import date
 import datetime
@@ -62,15 +62,63 @@ def leave_application(request):
         return render_to_response('error.html',)
 
 def weekly_feedback(request):
+<<<<<<< HEAD
     u = models.User.objects.get(username = request.session.get('user'))
     t = User.objects.get(user_id = u.id)
     p = Profile.objects.get(user_id = u.id)
     d = Cen_Dep_Info.objects.get(centre_name = p.centre ,department_name = p.department)
     courses  = Offered.objects.filter(cen_dep_id = d.cen_dep_id)
     return render_to_response('weekly_feedback.html', locals())
+=======
+    return render_to_response('weekly_feedback.html',)
+    
+def teaching_hours(request):
+    return render_to_response('teaching_hours.html',)
+>>>>>>> 7c59557b82005625ed001d71b5aff526975dcd06
 #except Exception:
  #       return render_to_response('error.html',)
-        
+
+def submit_teaching_hours(request):
+    if (request.POST):
+      t = models.User.objects.get(username = request.session.get('user'))
+      u = User.objects.get(user_id = t.id)
+      for i in ['1','2','3','4','5','6']:
+        D_course_id = request.POST.get('d_course_id['+ i + ']')
+        every_id = Offered.objects.get(user_id = u.user_id , course_id = D_course_id )
+        D_sem = request.POST.get('d_sem_id['+ i + ']')
+        D_1 = request.POST.get('D_1['+ i + ']')
+        D_2 = request.POST.get('D_2['+ i + ']')
+        D_3 = request.POST.get('D_3['+ i + ']')
+        I_3 = request.POST.get('I_3['+ i + ']')
+        a = Teaching(study_type = 'D', detail_type = 1, hours = D_1, every_id = every_id, user_id = u)
+        b = Teaching(study_type = 'D', detail_type = 2, hours = D_2, every_id = every_id, user_id = u)
+        c = Teaching(study_type = 'D', detail_type = 3, hours = D_3, every_id = every_id, user_id = u)
+        d = Teaching(study_type = 'I', detail_type = 3, hours = I_3, every_id = every_id, user_id = u)
+        I_course_id = request.POST.get('i_course_id['+ i + ']')
+        every_id = Offered.objects.get(user_id = u.user_id , course_id = I_course_id )
+        I_sem = request.POST.get('i_sem_id['+ i + ']')
+        I_4 = request.POST.get('I_4['+ i + ']')
+        I_5 = request.POST.get('I_5['+ i + ']')
+        I_6 = request.POST.get('I_6['+ i + ']')
+        I_7 = request.POST.get('I_7['+ i + ']')
+        A = request.POST.get('A['+ i + ']')
+        e = Teaching(study_type = 'I', detail_type = 4, hours = I_4, every_id = every_id, user_id = u)       
+        f = Teaching(study_type = 'I', detail_type = 5, hours = I_5, every_id = every_id, user_id = u)       
+        g = Teaching(study_type = 'I', detail_type = 6, hours = I_4, every_id = every_id, user_id = u)       
+        h = Teaching(study_type = 'I', detail_type = 7, hours = I_4, every_id = every_id, user_id = u)       
+        i = Teaching(study_type = 'A', hours = A, every_id = every_id, user_id = u)       
+        a.save()
+        b.save()
+        c.save()
+        d.save()
+        e.save()
+        f.save()
+        g.save()
+        h.save()
+        i.save()
+    return HttpResponseRedirect('/')
+ 
+ 
 def submit_feedback(request):
     if (request.POST):
       for i in [1,2]:
@@ -344,9 +392,18 @@ def mark_attendance(request):
         ids = Profile.objects.filter(department = p.department)
         for i in ids:
             if i.user_id.user_id.username in present:
+<<<<<<< HEAD
                 a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = i.user_id.user_id.id)        
             else:
                 a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id)                      
+=======
+                a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = i.user_id.user_id.id, on_duty = False, status = 1)        
+            else:
+	        if i.user_id.user_id.username in on_duty:
+                    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = True, status = 1)                      
+                else:
+		    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = False, status = 1)                      
+>>>>>>> 7c59557b82005625ed001d71b5aff526975dcd06
             a.save()
     return HttpResponseRedirect("/")
 

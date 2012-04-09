@@ -90,7 +90,8 @@ class Attendance(models.Model):
 	present 	= models.BooleanField()
 	user_id 	= models.ForeignKey(User)
 	attendance_id 	= models.AutoField(primary_key=True)
-	on_duty	= models.BooleanField()
+	on_duty 	= models.BooleanField()
+	status  	= models.CharField(max_length=1)
 
         def __unicode__(self):
 		return u'%s %s' % (self.user_id.user_id.username, self.date)
@@ -189,14 +190,13 @@ class Teaching(models.Model):
         )
 
 	TYPE_CHOICES = (
-		(1,'CoTeaching'),
-		(2,'IndividualTeaching'),
+		(1,'IndividualTeaching'),
+		(2,'CoTeaching'),
 		(3,'OtherCentre'),
-		(4,'GP'),
-		(5,'DC'),
-		(6,'ResearchPaper'),
-		(7,'ITP'),
-		(8,'CraftCluster'),
+		(4,'ResearchPaper'),
+		(5,'ITP'),
+		(6,'CraftCluster'),
+		(7,'GP/DC'),
 	)
 
 	study_type 	= models.CharField(max_length=1, choices=STUDY_CHOICES)
