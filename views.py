@@ -101,12 +101,9 @@ def submit_extension_leave(request):
 	    Extra = math.floor(No_of_days/7)
 	    No_of_days -= 2*Extra
 	print 'Extending the leave by ', No_of_days, 'days.'
-<<<<<<< HEAD
         l=Leave_Extension_Info(leave_type=LeaveType, start_date=StartDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status='6', applied_date=Today)
 
-=======
         l=Leave_Extension_Info(leave_type=LeaveType, user_id_id=u.id, start_date=StartDate, end_date=EndDate, last_leave_id=lid[0], reason=Reason, no_of_days=Extend_by, status=6, applied_date=Today)
->>>>>>> 0bbabb4fb8969c6827d6727ed1e1c2cd69b828e1
         l.save()
 	#m=Leave_Info.objects.get(leave_id=lid[0].leave_id)
 	#m.no_of_days=No_of_days
@@ -276,7 +273,7 @@ def home(request):
        t = User.objects.get(user_id = u.id)
        p = Profile.objects.get(user_id = u.id)
        myLeaveApplications = Leave_Info.objects.filter(user_id = u.id).filter(start_date__gte = datetime.datetime.now().date)
-       extendedLeaveApps = Leave_Extension_Info.objects.filter(user_id= u.id)#.filter(end_date__lte = datetime.datetime.now().date)
+       extendedLeaveApps = Leave_Extension_Info.objects.filter(user_id = u.id)#.filter(end_date__lte = datetime.datetime.now().date)
        ids = Profile.objects.filter(department = p.department)
        leaves = Leave_Info.objects.filter(status = p.designation)                
        extended_leaves = Leave_Extension_Info.objects.filter(status = p.designation)
