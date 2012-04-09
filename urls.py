@@ -1,7 +1,7 @@
 from django.views.static import *
 from django.views.generic.simple import redirect_to
 from django.conf import settings
-from views import profile, home, leave_application, logout, edit_profile, feedback_details, submit_leave, leave_extend, submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval,  leave_details, weekly_feedback, submit_feedback, edirectory_courses, edirectory_faculty
+from views import profile, home, leave_application, logout, edit_profile, teaching_hours, submit_teaching_hours, feedback_details, submit_leave, leave_extend, submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval,  leave_details, weekly_feedback, submit_feedback, edirectory_courses, edirectory_faculty
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
@@ -21,6 +21,8 @@ urlpatterns = patterns('views',
      (r'^leave_approval/$',leave_approval),
      (r'^leave_details/$',leave_details),
      (r'^weekly_feedback/$',weekly_feedback),
+     (r'^teaching_hours/$',teaching_hours),
+     (r'^submit_teaching_hours/$',submit_teaching_hours),
      (r'^feedback_details/$',feedback_details),
      (r'^submit_feedback/$',submit_feedback),
      (r'^check_attendance/$',check_attendance),
