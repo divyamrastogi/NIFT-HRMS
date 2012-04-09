@@ -1,0 +1,18 @@
+<html>
+<body>
+<table border = "1">
+<tr>
+<td>course</td>
+<td>content_rate</td>
+<td>presentation_rate</td>
+</tr>
+{% for t in tot %}
+<tr>
+<td>{{t.0}}</td>
+<td>{{t.1}}</td>
+<td>{{t.2}}</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
