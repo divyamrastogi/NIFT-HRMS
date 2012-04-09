@@ -213,18 +213,15 @@ class Teaching(models.Model):
 
 class Feedback(models.Model):
 	
-	start_date	= models.DateField()
-	end_date   	= models.DateField()
-	avg_content_rat = models.DecimalField(max_digits=5,decimal_places=2,null=True)
-	avg_present_rat = models.DecimalField(max_digits=5,decimal_places=2,null=True)
+	date            = models.DateField()
+	content_rate    = models.IntegerField(max_length=1,null=True)
+        present_rate    = models.IntegerField(max_length=1,null=True)
 	every_id        = models.ForeignKey(Offered)
 	feedback_id     = models.AutoField(primary_key=True)
 	
 	def __unicode__(self):
 		return self.week_no, self.month
 
-	class Meta:
-		unique_together = ('start_date','end_date','every_id')
 
 class Leave_Details(models.Model):
 

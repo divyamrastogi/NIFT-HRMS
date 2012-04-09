@@ -5,12 +5,32 @@ from django.core.context_processors import csrf
 from django.db.models import Avg
 from django.contrib.auth import authenticate, models
 from nift.models import User, Profile, Leave_Info, Feedback, Attendance, Leave_Details, Leave_Extension_Info, Cen_Dep_Info, Offered
+#from nift.models import *
 from datetime import date
 import datetime
 import math
 import unicodedata
 
+
 # divyam's methods..............
+
+def edirectory_courses(request):
+    try:
+	u = models.User.objects.get(username = request.session.get('user'))
+	t = User.objects.get(user_id = u.id)
+	p = Profile.objects.get(user_id = u.id)
+	return render_to_response('edirectory_faculty.html')
+    except:
+	return render_to_response('error.html')
+
+def edirectory_faculty(request):
+    try:
+        u = models.User.objects.get(username = request.session.get('user'))
+        t = User.objects.get(user_id = u.id)
+        p = Profile.objects.get(user_id = u.id)
+        return render_to_response('edirectory_faculty.html')
+    except:
+        return render_to_response('error.html')
 
 def leave_application(request):
     try:
@@ -33,18 +53,16 @@ def weekly_feedback(request):
         
 def submit_feedback(request):
     if (request.POST):
-        u = models.User.objects.get(username = request.session.get('user'))
-        t = User.objects.get(user_id = u.id)
-        p = Profile.objects.get(user_id = u.id)
-        d = Cen_Dep_Info.objects.get(centre_name = p.centre , department_name = p.department)
-        courses  = Offered.objects.filter(cen_dep_id = d.cen_dep_id)
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
-        for c in courses:
-            avg_content_rat = request.POST.get('content_rate['+str(c.every_id)+']')
-            avg_present_rat = request.POST.get('presentation_rate['+str(c.every_id)+']')
-            q = Feedback(start_date = start_date, end_date = end_date , avg_content_rat = avg_content_rat, avg_present_rat = avg_present_rat, every_id = c)
-            q.save()
+      for i in [1,2]:
+        date = request.POST.get('date['+str(i)+']')
+        faculty_id = request.POST.get('faculty['+str(i)+']')
+        course_id  = request.POST.get('course_id['+str(i)+']')
+        every_id = Offered.objects.get(user_id = faculty_id , course_id = course_id )
+        content_rate = request.POST.get('content_rate['+str(i)+']')
+        present_rate = request.POST.get('content_rate['+str(i)+']')
+        print date, faculty_id, course_id, every_id, content_rate, present_rate, "_________"
+        f = Feedback(date = date, content_rate = content_rate, present_rate = present_rate, every_id = every_id)
+        f.save()
     return HttpResponseRedirect('/')
 
 def feedback_details(request):
@@ -64,8 +82,7 @@ def feedback_details(request):
 	    print e.course_id, c, p 
 	    tot.append([e.course_id, c['avg_content_rat__avg'], p['avg_present_rat__avg']])
     return render_to_response('feedback_details.html',locals())
-   
-    
+       
 
 def submit_extension_leave(request):
     if (request.POST):
@@ -154,7 +171,7 @@ def submit_leave(request):
 	Buffer_days = Buffer.days
 	if Buffer_days < 15 and LeaveType == 1:
 	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
-	if Buffer_days < 0 and LeaveType == 2:
+	if Buffer_days < 0:
 	    return HttpResponse("<html>You have entered invalid start date. <br>Try a date after today's date as start date.</html>")
 	if leave:
 	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")
