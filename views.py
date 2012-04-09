@@ -169,7 +169,10 @@ def submit_leave(request):
 	leave = Leave_Info.objects.filter(user_id=u.id, start_date=StartDate)
 	Buffer= Start - Today
 	Buffer_days = Buffer.days
-	if Buffer_days < 15 and LeaveType == 1:
+	print "No. of days: ", Buffer_days
+	if Buffer_days < 15 and LeaveType=='1':
+	    print 'Not happening!!'
+	    print LeaveType 
 	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
 	if Buffer_days < 0:
 	    return HttpResponse("<html>You have entered invalid start date. <br>Try a date after today's date as start date.</html>")
