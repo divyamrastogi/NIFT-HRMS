@@ -175,8 +175,8 @@ def submit_leave(request):
 	#ld.days_left = ld.days_left - No_of_days
 	#ld.save()
 	return HttpResponseRedirect('/')
-    else:
-        return render_to_response('error.html')
+    #else:
+        #return render_to_response('error.html')
 
 
 #divyam's changes ......................
