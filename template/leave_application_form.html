@@ -10,13 +10,9 @@
   <title>APPLICATION FOR LEAVE</title>
   <meta name="description" content="" />
   <meta name="shailja shukla" content="application_for_leave_page" />
-
-<link href="/static/css/homestyle.css" rel="stylesheet" type="text/css">
-<link href="/static/css/leaveformstyle.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="/static/js/webforms2.js"></script>
-  
-
-
+  <script src='/static/js/libs/jquery-1.7.1.min.js'></script> 
+<script type="text/javascript" src="/static/js/webforms2-0.5.4/webforms2.js"></script>
+<link href="/static/css/leaveapplicationstyle.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 .ds_box {
@@ -65,6 +61,7 @@
 } /* This hover code won't work for IE */
 
 </style>
+
 
 
 <table class="ds_box" cellpadding="0" cellspacing="0" id="ds_conclass" style="display: none;">
@@ -327,44 +324,90 @@ function ds_onclick(d, m, y) {
 
 // ]]> -->
 </script>
+
+
+<script language = "Javascript">
+function checkForm(thisform)
+{
+		if(!(thisform.start_date.value.charAt(4)=='-' && thisform.end_date.value.charAt(4)=='-'))
+		{
+			alert('invalid date')
+		}
+		
+}
+</script>
    
 </head>
 
 <body>
-	
+  <div id="wrapper">
+  
+  <div id="toptitles">
+  </div>
+  <div id="maincontent">
+  <header>
+    <h1 class="nifttitletext">National Institute of Fashion Technology</h1>
+  </header>
+  <p class="addresstext">(Ministry of Textiles,Govt. Of India)<span class="addresstext"><br/>
+  </span></p>
+  
   <div>
     <header>
-      <h1>APPLICATION FORM FOR LEAVE</h1>
+      <h1 class="headingtext">Application For Leave</h1>
     </header>
    
-    
-    <form action="/submit_leave/" method="post">
-<p><label>Nature of leave</label><select name="leave_type" required />
-       <option value=1>EL
-       <option value=2>CL
-       <option value=3>RH</select></p>
-<br/>	
-<p>Period of Leave Applied:</p> 
-<p><label>Start Date :</label><input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required=""/></p> 
-</br>
-<p><label>End Date:</label> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="required"/></p>
+    <div id="formoptions">
+    <form action="/submit_leave/" method="post" class="subheadingtext">
+<p class="subheadingtext"><label>Nature of leave</label>
+     <select name="leave_type" required />
+          <option value=1>EL
+          <option value=2>CL
+          <option value=3>RH
+     </select></p>	
+
+<p class="subheadingtext">Period of Leave Applied:</p> 
+<table border="0">
+<tr>
+<td> <label>Start Date</label> </td> 
+<td> <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" type="date" required/> </td>
+</tr>
+<tr>
+<td> <label>End Date</label> </td> 
+<td> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" type="date" required/> </td>
+</tr>
+<tr>
+<td> <label>Purpose(reason)</label> </td> 
+<td> <input name="reason" type="text" required /> </td>
+</tr>
+</table>
+
+<p class="subheadingtext"><label>Address during Leave period :<label/>
+  <table border = "0">
+            <tr>
+              <td> <label> Street </label> </td>
+              <td> <input name = "street" type="text" required/> </td>
+            </tr>
+              <tr>
+              <td> <label> City </label> </td>
+              <td> <input name = "city" type="text" required/> </td>
+             </tr>
+             <tr>
+              <td> <label> Zip </label> </td>
+              <td> <input name = "zip" type="text" required/> </td>
+             </tr>
+             <tr>
+              <td> <label> State </label> </td>
+              <td> <input name = "state" type="text" required/> </td>
+             </tr>
+             <tr>
+              <td> <label> Country </label> </td>
+              <td> <input name = "country" type="text" required/> </td>
+             </tr>
+          </table>
+
+
 <br />
-<p><label>Purpose(reason)</label><input name="reason" type="text" required /></p>
-<br/>
-<p><label>Address during Leave period :<label/>
-</br> 
-<label>Street</label><input name="street" type="text" required />
-</br>
-<label>City</label><input name="city" type="text" required />
-</br>
-<label>Zip</label><input name="zip" type="zip" required />
-</br>
-<label>State</label><input name="state" type="text" required />
-</br>
-<label>Country</label><input name="country" type="text" required />
-</p>
-<br />
-<p> I certify that during the leave period I have not been assigned any exam duty/institute duty 
+<p class="subheadingtext"> I certify that during the leave period I have not been assigned any exam duty/institute duty 
 and I have also completed all the tasks assigned to me or handed over and explained the tasks
 to be completed in my absence to my link official.
 I also hereby give undertaking that I will resume my duty immediately, If I am informed about 
@@ -373,8 +416,16 @@ cancellation of my sanctioned leave.</p>
 <br/>
 <label>I Accept:</label><input name="agree" type="checkbox" required />
 <br/>
-<p><input name="Submit" type="submit" class="submitbutton" value="submit"  /></p>
+ <p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
 </form>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+</div>
 </div>
   
 </body>

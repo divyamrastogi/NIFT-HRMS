@@ -15,144 +15,332 @@
   <link href="/static/css/feedbackstyle.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="/static/js/webforms2-0.5.4/webforms2.js"></script>
   
-      <SCRIPT language="javascript">
-        
-        function randomString() {
-	    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-	    var string_length = 8;
-	    var randomstring = '';
-	    for (var i=0; i<string_length; i++) {
-		var rnum = Math.floor(Math.random() * chars.length);
-		randomstring += chars.substring(rnum,rnum+1);
-	                     }
-	    return randomstring;
-        }
-        
-        function randomString1() {
-	    var chars1 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-	    var string_length1 = 8;
-	    var randomstring1 = '';
-	    for (var i=0; i<string_length1; i++) {
-		var rnum = Math.floor(Math.random() * chars1.length);
-		randomstring1 += chars1.substring(rnum,rnum+1);
-	                     }
-	    return randomstring1;
-        }
-        
-        
-        function addRow(tableID) {
- 
-            var table = document.getElementById(tableID);
-                        
-            var randomfield = randomString();
-            var randomfield1 = randomString1();
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-            
-            var cell1 = row.insertCell(0);
-            var element1 = document.createElement("input");
-            element1.type = "checkbox";
-            cell1.appendChild(element1);
- 			
- 
-            var cell2 = row.insertCell(1);
-            var element2 = document.createElement("input");
-            element2.type = "text";
-            cell2.appendChild(element2);
- 
-            var cell3 = row.insertCell(2);
-            var element3 = document.createElement("input");
-            element3.type = "text";
-            cell3.appendChild(element3);
- 
- 			var cell4 = row.insertCell(3);  
-            var element4 = document.createElement("input");
-            element4.type = "radio";
-            element4.id = "1";
-            element4.name = randomfield;
-            cell4.appendChild(element4);
-            
-            var element5 = document.createElement("input");
-            element5.type = "radio";
-            element5.name = randomfield;
-            element5.id = "2";
-            cell4.appendChild(element5);
-            
-            var element6 = document.createElement("input");
-            element6.type = "radio";
-            element6.name = randomfield;
-            element6.id = "3";
-            cell4.appendChild(element6);
-            
-            var element7 = document.createElement("input");
-            element7.type = "radio";
-            element7.name = randomfield;
-            element7.id = "4";
-            cell4.appendChild(element7);
-             
-            var element8 = document.createElement("input");
-            element8.type = "radio";
-            element8.name = randomfield;
-            element8.id = "5";
-            cell4.appendChild(element8);
-            
-            var cell5 = row.insertCell(4);
-            
-            var element9 = document.createElement("input");
-            element9.type = "radio";
-            element9.name = randomfield1;
-            element9.id = "6";
-            cell5.appendChild(element9);
-            
-            var element10 = document.createElement("input");
-            element10.type = "radio";
-            element10.name = randomfield1;
-            element10.id = "7";
-            cell5.appendChild(element10);
-            
-            var element11 = document.createElement("input");
-            element11.type = "radio";
-            element11.name = randomfield1;
-            element11.id = "8";
-            cell5.appendChild(element11);
-            
-            var element12 = document.createElement("input");
-            element12.type = "radio";
-            element12.name = randomfield1;
-            element12.id = "9";
-            cell5.appendChild(element12);
-            
-            var element13 = document.createElement("input");
-            element13.type = "radio";
-            element13.name = randomfield1;
-            element13.id = "10";
-            cell5.appendChild(element13);
-            
-           
+     
+    
+    
+    <script language = "Javascript">
+function checkForm(thisform)
+{
+		if(!(thisform.start_date.value.charAt(4)=='-' && thisform.end_date.value.charAt(4)=='-'))
+		{
+			alert('invalid date')
+		}
+		
+}
+</script>
 
-        }
- 
-        function deleteRow(tableID) {
-            try {
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
- 
-            for(var i=0; i<rowCount; i++) {
-                var row = table.rows[i];
-                var chkbox = row.cells[0].childNodes[0];
-                if(null != chkbox && true == chkbox.checked) {
-                    table.deleteRow(i);
-                    rowCount--;
-                    i--;
-                }
- 
-            }
-            }catch(e) {
-                alert(e);
-            }
-        }
- 
-    </SCRIPT>
+
+<style type="text/css">
+
+.ds_box {
+	background-color: #FFF;
+	border: 1px solid #000;
+	position: absolute;
+	z-index: 32767;
+}
+
+.ds_tbl {
+	background-color: #FFF;
+}
+
+.ds_head {
+	background-color: #333;
+	color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+.ds_subhead {
+	background-color: #CCC;
+	color: #000;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	width: 32px;
+}
+
+.ds_cell {
+	background-color: #EEE;
+	color: #000;
+	font-size: 13px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.ds_cell:hover {
+	background-color: #F3F3F3;
+} /* This hover code won't work for IE */
+
+</style>
+
+
+
+<table class="ds_box" cellpadding="0" cellspacing="0" id="ds_conclass" style="display: none;">
+<tr><td id="ds_calclass">
+</td></tr>
+</table>
+
+<script type="text/javascript">
+
+var ds_i_date = new Date();
+ds_c_month = ds_i_date.getMonth() + 1;
+ds_c_year = ds_i_date.getFullYear();
+
+// Get Element By Id
+function ds_getel(id) {
+	return document.getElementById(id);
+}
+
+// Get the left and the top of the element.
+function ds_getleft(el) {
+	var tmp = el.offsetLeft;
+	el = el.offsetParent
+	while(el) {
+		tmp += el.offsetLeft;
+		el = el.offsetParent;
+	}
+	return tmp;
+}
+function ds_gettop(el) {
+	var tmp = el.offsetTop;
+	el = el.offsetParent
+	while(el) {
+		tmp += el.offsetTop;
+		el = el.offsetParent;
+	}
+	return tmp;
+}
+
+// Output Element
+var ds_oe = ds_getel('ds_calclass');
+// Container
+var ds_ce = ds_getel('ds_conclass');
+
+// Output Buffering
+var ds_ob = ''; 
+function ds_ob_clean() {
+	ds_ob = '';
+}
+function ds_ob_flush() {
+	ds_oe.innerHTML = ds_ob;
+	ds_ob_clean();
+}
+function ds_echo(t) {
+	ds_ob += t;
+}
+
+var ds_element; // Text Element...
+
+var ds_monthnames = [
+'January', 'February', 'March', 'April', 'May', 'June',
+'July', 'August', 'September', 'October', 'November', 'December'
+]; // You can translate it for your language.
+
+var ds_daynames = [
+'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+]; // You can translate it for your language.
+
+// Calendar template
+function ds_template_main_above(t) {
+	return '<table cellpadding="3" cellspacing="1" class="ds_tbl">'
+	     + '<tr>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_py();"><<</td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_pm();"><</td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_hi();" colspan="3">[Close]</td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_nm();">></td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_ny();">>></td>'
+		 + '</tr>'
+	     + '<tr>'
+		 + '<td colspan="7" class="ds_head">' + t + '</td>'
+		 + '</tr>'
+		 + '<tr>';
+}
+
+function ds_template_day_row(t) {
+	return '<td class="ds_subhead">' + t + '</td>';
+	// Define width in CSS, XHTML 1.0 Strict doesn't have width property for it.
+}
+
+function ds_template_new_week() {
+	return '</tr><tr>';
+}
+
+function ds_template_blank_cell(colspan) {
+	return '<td colspan="' + colspan + '"></td>'
+}
+
+function ds_template_day(d, m, y) {
+	return '<td class="ds_cell" onclick="ds_onclick(' + d + ',' + m + ',' + y + ')">' + d + '</td>';
+	// Define width the day row.
+}
+
+function ds_template_main_below() {
+	return '</tr>'
+	     + '</table>';
+}
+
+// This one draws calendar...
+function ds_draw_calendar(m, y) {
+	// First clean the output buffer.
+	ds_ob_clean();
+	// Here we go, do the header
+	ds_echo (ds_template_main_above(ds_monthnames[m - 1] + ' ' + y));
+	for (i = 0; i < 7; i ++) {
+		ds_echo (ds_template_day_row(ds_daynames[i]));
+	}
+	// Make a date object.
+	var ds_dc_date = new Date();
+	ds_dc_date.setMonth(m - 1);
+	ds_dc_date.setFullYear(y);
+	ds_dc_date.setDate(1);
+	if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) {
+		days = 31;
+	} else if (m == 4 || m == 6 || m == 9 || m == 11) {
+		days = 30;
+	} else {
+		days = (y % 4 == 0) ? 29 : 28;
+	}
+	var first_day = ds_dc_date.getDay();
+	var first_loop = 1;
+	// Start the first week
+	ds_echo (ds_template_new_week());
+	// If sunday is not the first day of the month, make a blank cell...
+	if (first_day != 0) {
+		ds_echo (ds_template_blank_cell(first_day));
+	}
+	var j = first_day;
+	for (i = 0; i < days; i ++) {
+		// Today is sunday, make a new week.
+		// If this sunday is the first day of the month,
+		// we've made a new row for you already.
+		if (j == 0 && !first_loop) {
+			// New week!!
+			ds_echo (ds_template_new_week());
+		}
+		// Make a row of that day!
+		ds_echo (ds_template_day(i + 1, m, y));
+		// This is not first loop anymore...
+		first_loop = 0;
+		// What is the next day?
+		j ++;
+		j %= 7;
+	}
+	// Do the footer
+	ds_echo (ds_template_main_below());
+	// And let's display..
+	ds_ob_flush();
+	// Scroll it into view.
+	ds_ce.scrollIntoView();
+}
+
+// A function to show the calendar.
+// When user click on the date, it will set the content of t.
+function ds_sh(t) {
+	// Set the element to set...
+	ds_element = t;
+	// Make a new date, and set the current month and year.
+	var ds_sh_date = new Date();
+	ds_c_month = ds_sh_date.getMonth() + 1;
+	ds_c_year = ds_sh_date.getFullYear();
+	// Draw the calendar
+	ds_draw_calendar(ds_c_month, ds_c_year);
+	// To change the position properly, we must show it first.
+	ds_ce.style.display = '';
+	// Move the calendar container!
+	the_left = ds_getleft(t);
+	the_top = ds_gettop(t) + t.offsetHeight;
+	ds_ce.style.left = the_left + 'px';
+	ds_ce.style.top = the_top + 'px';
+	// Scroll it into view.
+	ds_ce.scrollIntoView();
+}
+
+// Hide the calendar.
+function ds_hi() {
+	ds_ce.style.display = 'none';
+}
+
+// Moves to the next month...
+function ds_nm() {
+	// Increase the current month.
+	ds_c_month ++;
+	// We have passed December, let's go to the next year.
+	// Increase the current year, and set the current month to January.
+	if (ds_c_month > 12) {
+		ds_c_month = 1; 
+		ds_c_year++;
+	}
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Moves to the previous month...
+function ds_pm() {
+	ds_c_month = ds_c_month - 1; // Can't use dash-dash here, it will make the page invalid.
+	// We have passed January, let's go back to the previous year.
+	// Decrease the current year, and set the current month to December.
+	if (ds_c_month < 1) {
+		ds_c_month = 12; 
+		ds_c_year = ds_c_year - 1; // Can't use dash-dash here, it will make the page invalid.
+	}
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Moves to the next year...
+function ds_ny() {
+	// Increase the current year.
+	ds_c_year++;
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Moves to the previous year...
+function ds_py() {
+	// Decrease the current year.
+	ds_c_year = ds_c_year - 1; // Can't use dash-dash here, it will make the page invalid.
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Format the date to output.
+function ds_format_date(d, m, y) {
+	// 2 digits month.
+	m2 = '00' + m;
+	m2 = m2.substr(m2.length - 2);
+	// 2 digits day.
+	d2 = '00' + d;
+	d2 = d2.substr(d2.length - 2);
+	// YYYY-MM-DD
+	return y + '-' + m2 + '-' + d2;
+}
+
+// When the user clicks the day.
+function ds_onclick(d, m, y) {
+	// Hide the calendar.
+	ds_hi();
+	// Set the value of it, if we can.
+	if (typeof(ds_element.value) != 'undefined') {
+		ds_element.value = ds_format_date(d, m, y);
+	// Maybe we want to set the HTML in it.
+	} else if (typeof(ds_element.innerHTML) != 'undefined') {
+		ds_element.innerHTML = ds_format_date(d, m, y);
+	// I don't know how should we display it, just alert it to user.
+	} else {
+		alert (ds_format_date(d, m, y));
+	}
+}
+
+// And here is the end.
+
+// ]]> -->
+</script>
 
 </head>
 
@@ -162,10 +350,7 @@
   </div>
   <div id="navbar">
   <div id="page-wrap">	
-        <div id="logoutbutton" align = right>Logout</a> </div> 
-		
-      <div id="example-one"><a href="#home" class="navigationtitles"> Home </a><a href="#attendance" class="navigationtitles"> Attendance </a><a href="#leave" class="navigationtitles"> Leave </a><a href="#feedback" class="navigationtitles"> Feedback </a> </div>
-      </div>
+
   </div>
   <div id="maincontent">
   <div>
@@ -178,56 +363,36 @@
     	<h2 class="subheadtext"> Fashion Technology</h2>
     </header>
    
-    <form action="" method="get">
+    <form action="/submit_feedback/" method="POST">
     
-    
-<table id="dataTable" border = "1">
-<tbody>
+    <p class="subheadingtext">Period of Feedback Taken:</p> 
+<table border="0">
 <tr>
-<td>Check Box             </td>	
-<td>Name of the faculty   </td>
-<td>Subject               </td>
-<td>Content               
-	<br/>
-	<pre> 1 2 3 4 5</pre> </td>
-<td>Presentation         
-	<br/>
-	<pre> 1 2 3 4 5</pre> </td>
-
+<td> <label>Start Date</label> </td> 
+<td> <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" type="date" required/> </td>
 </tr>
 <tr>
-<TD><INPUT type="checkbox" name="chk" /></TD>
-<td><input name="username" type="text" required/></td>
-<td><input name="course_id" type="text" required/></td>
-<td>
-<input name="content_rate" type="radio" required class="checkbuttons"  id="1"/><input type="radio" name="content_rate" id="2" required/><input type="radio" name="content_rate"  id="3" required/><input type="radio" name="content_rate"  id="4" required/><input type="radio" name="content_rate"  id="5" required/>
-</td>
-<td>
-<input type="radio" name="present_rate"  id="1" required/><input type="radio" name="present_rate" id="2" required/><input type="radio" name="present_rate"  id="3" required/><input type="radio" name="present_rate"  id="4" required/><input type="radio" name="present_rate"  id="5" required/>
-</td>
-
-
-
-</tbody>
+<td> <label>End Date</label> </td> 
+<td> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" type="date" required/> </td>
+</tr>
 </table>
 
-<p><br/>
-  <INPUT type="button" class="addbuttons" onclick="addRow('dataTable')" value="Add Row"/>
-  <INPUT type="button" class="addbuttons" onclick="deleteRow('dataTable')" value="Delete Row" />
-</p>
-<p><input name="submit" type="submit" class="submitbutton" value="submit" ></p>
+<table id="dataTable" border = "1">
+<tr>
+<td>Course Id</td><td>Content</td><td>Presentation</td>
+</tr>
+{% for c in courses %}
+<tr>
+<td>{{c.course_id_id}}</td><td><input name=content_rate[{{c.every_id}}] type="number" required /></td><td><input name=presentation_rate[{{c.every_id}}] type="number" required /></td>
+</tr>
+{% endfor %}
+</table>
 
-	<p class="subheadingtext"> Instructions:<br/>
-	</p>
-	<p class="subheadingtext">
-	  1)Please circle the appropriate grade against each subject/faculty in the rating column individually
-	  for content and presentation column on a sliding scale of 1-5 where 5 is excellent and 1 is very poor.
-	  </p>
-	<p class="subheadingtext">
-		2)Please mention the name of the substitute faculty, if any, who actually conducted the classes in 
-		case of non-presence of the concerned faculty.</p>
-		 
- 	
+
+</p>
+<p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
+
+	
 </form>
 </div>
 </div>

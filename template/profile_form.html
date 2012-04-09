@@ -12,8 +12,9 @@
   <meta name="Shailja Shukla" content="sen" />
 
   <meta name="viewport" content="width=device-width; initial-scale=1.0" />
-
- <script type="text/javascript" src="C:/Users/vaio/Documents/Aptana Studio 3 Workspace/sen/webforms2-0.5.4/webforms2.js"></script>
+<script type="text/javascript" src="/static/js/webforms2-0.5.4/webforms2.js"></script>
+ <link href="/static/css/profileformstyle.css" rel="stylesheet" type="text/css">
+ 
 
 <style type="text/css">
 
@@ -325,24 +326,45 @@ function ds_onclick(d, m, y) {
 
 // ]]> -->
 </script> 
-</head>
+
+<script language = "Javascript">
+function checkForm(thisform)
+{
+		if(!(thisform.dob.value.charAt(4)=='-'))
+		{
+			alert('invalid date')
+		}
+		
+}
+</script>
+
 
 <body>
+  <div id="wrapper">
+<div id="toptitles">
+</div>
+<div id="maincontent">
+
   <div>
     <header>
-      <h1>Profile Form</h1>
+      <h1>&nbsp;</h1>
+      <h1 class="nifttitletext">National Institute of Fashion Technology</h1>
+      <h1 class="secondheading">Profile Form</h1>
     </header>
-    <form action="/edit_profile/" enctype='multipart/form-data' method="post">
+    
+    <div id="formoptions">
+
+    <form action="/edit_profile/" enctype='multipart/form-data' method="post" class="regulartext">
 {% if error %} 
 <p style="color: red;"> Check your values. </br> please, try again</p>
     {% endif %} 
-    	<header>
+    	
     		
     		<p><label>IMAGE:</label></p>
                 <img src="/media/{{p.image}}" width = "10%" height = "10%">
 		<input name="image" type="file" value = '{{p.image}}'  /> 
-    		
-      <h2>INSTITUTIONAL DETAILS</h2>
+     <header>
+      <h2 class="submenus">INSTITUTIONAL DETAILS</h2>
     </header>
 <p><label>DESIGNATION:</label>
 <select name="designation">
@@ -372,7 +394,7 @@ function ds_onclick(d, m, y) {
 </select></p>
 <br />
 <header>
-      <h2>PERSONAL DETAILS</h2>
+      <h2 class="submenus">PERSONAL DETAILS</h2>
 </header>
 <br/> 
 <label>Marital Status: </label>
@@ -389,7 +411,7 @@ function ds_onclick(d, m, y) {
 	
 <br/>
 <header>
-      <h2>CONTACT DETAILS</h2>
+      <h2 class="submenus">CONTACT DETAILS</h2>
 </header>
 <br />
 	<p><label>Email Address:</label><input name="email" type="email" autocomplete = "on" value = '{{u.email}}' required=""/></p>
@@ -397,7 +419,7 @@ function ds_onclick(d, m, y) {
 	<p><label>Phone no.:</label><input name="phone_no" type="tel" autocomplete = "on" value = '{{t.phone_no}}' required=""/></p>
 <br/>
 <header>
-      <h3>ADDRESS</h3>
+      <h2 class="submenus">ADDRESS</h2>
 </header>
 <br/>
 	<p><label>STREET ADDRESS :</label><input name="street" type="text" value = '{{t.street}}' required=""/></p>    
@@ -407,7 +429,7 @@ function ds_onclick(d, m, y) {
 	<p><label>STATE:</label><input name="state" type="text" value = '{{t.state}}' required=""/>
 <br/> </p>
 <header>
-	<h4>EMPLOYMENT and EXPERIENCE DETAILS</h4>
+	<h2 class="submenus">EMPLOYMENT AND EXPERIENCE DETAILS</h2>
 </header>
 <br/>
     <p><label>EXPERTISE</label><input name="expertise" type="text" value = '{{p.expertise}}' required=""/></p>    
@@ -416,7 +438,8 @@ function ds_onclick(d, m, y) {
 <br/>
     <p><label>PAST POSITIONS</label><input name="past_positions" type="text" value = '{{p.past_positions}}' required=""/></p>
 <br/>
-		<input name="Save" type="submit" value="save" /></a></p> 
+		<p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
+
 
   </form>
 
