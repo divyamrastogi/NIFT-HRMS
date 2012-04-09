@@ -51,7 +51,7 @@ body {
 	padding: 1px;
 }
 #toptitles {
-	background-image: url(../_images/Border%202.png);
+	background-image: url(/static/image/Border2.png);
 	height: 220px;
 }
 .navigationtitles {
@@ -142,11 +142,11 @@ td {
 	margin-left: 20px;
 	background-color: #933;
 	color: #FFF;
-	border: thin solid #666;
+	border: thin solid #66/static/css/static/image/FooterBorder.png6;
 }
 #footer {
 	height: 180px;
-	background-image: url(../_images/Footer%20Border.png);
+	background-image: url(/static/image/FooterBorder.png);
 	background-position: bottom;
 	background-color: #FFF;
 }

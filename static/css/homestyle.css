@@ -37,7 +37,7 @@ body {
 	padding: 1px;
 }
 #toptitles {
-	background-image: url(Border%202.png);
+	background-image: url(/static/image/Border2.png);
 	height: 220px;
 }
 .navigationtitles {
@@ -145,7 +145,7 @@ td {
 }
 #footer {
 	height: 180px;
-	background-image: url(Footer%20Border.png);
+	background-image: url(/static/image/FooterBorder.png);
 	background-position: bottom;
 	background-color: #FFF;
 }

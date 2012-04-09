@@ -5,12 +5,32 @@ from django.core.context_processors import csrf
 from django.db.models import Avg
 from django.contrib.auth import authenticate, models
 from nift.models import User, Profile, Leave_Info, Feedback, Attendance, Leave_Details, Leave_Extension_Info, Cen_Dep_Info, Offered
+#from nift.models import *
 from datetime import date
 import datetime
 import math
 import unicodedata
 
+
 # divyam's methods..............
+
+def edirectory_courses(request):
+    try:
+	u = models.User.objects.get(username = request.session.get('user'))
+	t = User.objects.get(user_id = u.id)
+	p = Profile.objects.get(user_id = u.id)
+	return render_to_response('edirectory_faculty.html')
+    except:
+	return render_to_response('error.html')
+
+def edirectory_faculty(request):
+    try:
+        u = models.User.objects.get(username = request.session.get('user'))
+        t = User.objects.get(user_id = u.id)
+        p = Profile.objects.get(user_id = u.id)
+        return render_to_response('edirectory_faculty.html')
+    except:
+        return render_to_response('error.html')
 
 def leave_application(request):
     try:
@@ -60,8 +80,7 @@ def feedback_details(request):
         p4 = Feedback.objects.filter(every_id = e).filter(date = date).filter(present_rate = 4).count()
         p5 = Feedback.objects.filter(every_id = e).filter(date = date).filter(present_rate = 5).count()
     return render_to_response('feedback_details.html',locals())
-   
-    
+       
 
 def submit_extension_leave(request):
     if (request.POST):
@@ -150,7 +169,7 @@ def submit_leave(request):
 	Buffer_days = Buffer.days
 	if Buffer_days < 15 and LeaveType == 1:
 	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
-	if Buffer_days < 0 and LeaveType == 2:
+	if Buffer_days < 0:
 	    return HttpResponse("<html>You have entered invalid start date. <br>Try a date after today's date as start date.</html>")
 	if leave:
 	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")

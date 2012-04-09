@@ -47,7 +47,7 @@ input {
 }
 header {
 	background-color: #FFF;
-	background-image: url(logo.gif);
+	background-image: url(/static/image/logo.gif);
 	height: 200px;
 	width: 400px;
 	background-repeat: no-repeat;
