@@ -13,24 +13,12 @@
   
   <script src='/static/js/libs/jquery-1.7.1.min.js'></script>
   <link href="/static/css/feedbackstyle.css" rel="stylesheet" type="text/css">
+  
   <script type="text/javascript" src="/static/js/webforms2-0.5.4/webforms2.js"></script>
   
-     
+      
     
-    
-    <script language = "Javascript">
-function checkForm(thisform)
-{
-		if(!(thisform.start_date.value.charAt(4)=='-' && thisform.end_date.value.charAt(4)=='-'))
-		{
-			alert('invalid date')
-		}
-		
-}
-</script>
-
-
-<style type="text/css">
+    <style type="text/css">
 
 .ds_box {
 	background-color: #FFF;
@@ -80,14 +68,18 @@ function checkForm(thisform)
 </style>
 
 
-
 <table class="ds_box" cellpadding="0" cellspacing="0" id="ds_conclass" style="display: none;">
 <tr><td id="ds_calclass">
 </td></tr>
 </table>
 
 <script type="text/javascript">
+// <!-- <![CDATA[
 
+// Project: Dynamic Date Selector (DtTvB) - 2006-03-16
+// Script featured on JavaScript Kit- http://www.javascriptkit.com
+// Code begin...
+// Set the initial date.
 var ds_i_date = new Date();
 ds_c_month = ds_i_date.getMonth() + 1;
 ds_c_year = ds_i_date.getFullYear();
@@ -342,12 +334,26 @@ function ds_onclick(d, m, y) {
 // ]]> -->
 </script>
 
+
+<script language = "Javascript">
+function checkForm(thisform)
+{
+		if(!(thisform.date_1.value.charAt(4)=='-' && thisform.date_3.value.charAt(4)=='-' && thisform.date_1.value.charAt(4)=='-' && thisform.date_4.value.charAt(4)=='-' && thisform.date_5.value.charAt(4)=='-'))
+		{
+			alert('invalid date')
+                        return false;
+		}
+		
+}
+</script>
+
+
 </head>
 
 <body>
   <div id="wrapper">
   <div id="toptitles">
-    </div>
+  </div>
   <div id="maincontent">
   <div>
     <header>
@@ -356,19 +362,22 @@ function ds_onclick(d, m, y) {
 <h1 class="secondheading">WEEKLY ACADEMIC FEEDBACK FORM</h1>
     </header>
     <header>
-    	<h2 class="subheadtext"> Fashion Technology</h2>
+    	<h2 class="subheadtext"> Fashion Technology    </h2>
     </header>
    
-    <form action="/submit_feedback/" method="POST">
+    <form action="/submit_feedback/" method="post">
     
-    <p class="subheadingtext">Period of Feedback Taken:</p> 
+   {% if Error %}
+            <p style="color: red;">    SOME COURSE OR FACULTY ID IS INCORRECT, <br> PLS TRY AGAIN
+   {% endif %}
 
 <table id="dataTable" border = "1">
 <tbody>
 <tr>
 <td>Date             </td>	
-<td>Name of the faculty   </td>
-<td>Subject               </td>
+<td>faculty ID   </td>
+<td>Subject ID              </td>
+<td>Sem ID  </td>
 <td>Content               
 	<br/>
 	<pre> 1 2 3 4 5</pre> </td>
@@ -378,9 +387,10 @@ function ds_onclick(d, m, y) {
 
 </tr>
 <tr>
-<td> <input onclick="ds_sh(this);" name="date[1]"  style="cursor: text" type="date" required/> </td>
+<td> <input onclick="ds_sh(this);" name="date_1"  style="cursor: text" type="date" required/> </td>
 <td><input name="faculty[1]" type="text" required/></td>
 <td><input name="course_id[1]" type="text" required/></td>
+<td><input name="sem_id[1]" type="text" required/></td>
 <td>
 <input type="radio" name="content_rate[1]"  value=1 required  />
 <input type="radio" name="content_rate[1]"  value=2 required/>
@@ -397,9 +407,10 @@ function ds_onclick(d, m, y) {
 </td>
 </tr>
 <tr>
-<td> <input onclick="ds_sh(this);" name="date[2]"  style="cursor: text" type="date" required/> </td>
+<td> <input onclick="ds_sh(this);" name="date_2"  style="cursor: text" required/> </td>
 <td><input name="faculty[2]" type="text" required/></td>
 <td><input name="course_id[2]" type="text" required/></td>
+<td><input name="sem_id[2]" type="text" required/></td>
 <td>
 <input type="radio" name="content_rate[2]"  value=1 required />
 <input type="radio" name="content_rate[2]"  value=2 required/>
@@ -416,9 +427,10 @@ function ds_onclick(d, m, y) {
 </td>
 </tr>
 <tr>
-<td> <input onclick="ds_sh(this);" name="date[3]"  style="cursor: text" type="date" required/> </td>
+<td> <input onclick="ds_sh(this);" name="date_3"  style="cursor: text" required/> </td>
 <td><input name="faculty[3]" type="text" required/></td>
 <td><input name="course_id[3]" type="text" required/></td>
+<td><input name="sem_id[3]" type="text" required/></td>
 <td>
 <input type="radio" name="content_rate[3]"  value=1 required />
 <input type="radio" name="content_rate[3]"  value=2 required/>
@@ -435,9 +447,10 @@ function ds_onclick(d, m, y) {
 </td>
 </tr>
 <tr>
-<td> <input onclick="ds_sh(this);" name="date[4]"  style="cursor: text" type="date" required/> </td>
+<td> <input onclick="ds_sh(this);" name="date_4"  style="cursor: text" required/> </td>
 <td><input name="faculty[4]" type="text" required/></td>
 <td><input name="course_id[4]" type="text" required/></td>
+<td><input name="sem_id[4]" type="text" required/></td>
 <td>
 <input type="radio" name="content_rate[4]"  value=1 required />
 <input type="radio" name="content_rate[4]"  value=2 required/>
@@ -454,9 +467,10 @@ function ds_onclick(d, m, y) {
 </td>
 </tr>
 <tr>
-<td> <input onclick="ds_sh(this);" name="date[5]"  style="cursor: text" type="date" required/> </td>
+<td> <input onclick="ds_sh(this);" name="date_5"  style="cursor: text" required/> </td>
 <td><input name="faculty[5]" type="text" required/></td>
 <td><input name="course_id[5]" type="text" required/></td>
+<td><input name="sem_id[5]" type="text" required/></td>
 <td>
 <input type="radio" name="content_rate[5]"  value=1 required />
 <input type="radio" name="content_rate[5]"  value=2 required/>
@@ -476,9 +490,8 @@ function ds_onclick(d, m, y) {
 </tbody>
 </table>
 
-
-</p>
-<p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
+<p></p>
+ <p><input name="submit" type="submit" onClick="this.value='Saving...'; return checkForm(this.form);"  value="submit"></p>
 
 	<p class="subheadingtext"> Instructions:<br/>
 	</p>

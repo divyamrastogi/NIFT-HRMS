@@ -78,7 +78,7 @@ def leave_application(request):
         return render_to_response('error.html',)
 
 def weekly_feedback(request):
-    return render_to_response('weekly_feedback.html',)
+    return render_to_response('weekly_feedback.html',{'Error': False})
     
 def teaching_hours(request):
     return render_to_response('teaching_hours.html',)
@@ -131,17 +131,25 @@ def submit_teaching_hours(request):
  
 def submit_feedback(request):
     if (request.POST):
-      for i in [1,2]:
-        date = request.POST.get('date['+str(i)+']')
-        faculty_id = request.POST.get('faculty['+str(i)+']')
-        course_id  = request.POST.get('course_id['+str(i)+']')
-        every_id = Offered.objects.get(user_id = faculty_id , course_id = course_id )
-        content_rate = request.POST.get('content_rate['+str(i)+']')
-        present_rate = request.POST.get('content_rate['+str(i)+']')
-        print date, faculty_id, course_id, every_id, content_rate, present_rate, "_________"
-        f = Feedback(date = date, content_rate = content_rate, present_rate = present_rate, every_id = every_id)
-        f.save()
-    return HttpResponseRedirect('/')
+        print "enter try      "
+        try:  
+            for i in [1,2,3,4,5]:
+	        print "entered for"
+                date = request.POST.get('date_'+str(i))
+                faculty_id = request.POST.get('faculty['+str(i)+']')
+                course_id  = request.POST.get('course_id['+str(i)+']')
+                sem_id  = request.POST.get('sem_id['+str(i)+']')
+                every_id = Offered.objects.filter(user_id = faculty_id ).filter(course_id = course_id).filter(sem_id = sem_id)
+                content_rate = request.POST.get('content_rate['+str(i)+']')
+                present_rate = request.POST.get('content_rate['+str(i)+']')
+                print date, faculty_id, course_id, every_id, content_rate, present_rate, "_________"
+                f = Feedback(date = date, content_rate = content_rate, present_rate = present_rate, every_id = every_id[0])
+                f.save()
+            return HttpResponseRedirect('/')
+        except:
+	    print 'RRRRRRRRRRR'
+	    return render_to_response('weekly_feedback.html', {'Error': True})
+    
 
 def feedback_details(request):
     if (request.POST):
