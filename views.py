@@ -40,8 +40,8 @@ def course_info(request):
     if(request.POST):
 	courseid = request.POST.get('course_id')
 	c = Offered.objects.filter(course_id=courseid)
-	course = Course.objects.filter(course_id=courseid)
-	print c, course
+	course = Course.objects.get(course_id=courseid)
+	print c, course.course_name
     return render_to_response('course_info.html', locals())	
 
 def edirectory_faculty(request):
@@ -52,6 +52,21 @@ def edirectory_faculty(request):
         return render_to_response('edirectory_faculty.html')
     except:
         return render_to_response('error.html')
+
+def faculty_info(request):
+        if(request.POST):
+            fid = request.POST.get('user_id')
+            print fid
+            if 'Courses' in request.POST:
+                c = Offered.objects.filter(user_id = fid)
+                print 'c'
+            elif 'Expertise' in request.POST:
+                e = Profile.objects.filter(user_id = fid)
+                print 'e'
+            elif 'Teaching' in request.POST:
+                t = Teaching.objects.filter(user_id = fid)
+                print 't'
+	    return render_to_response('faculty_info.html', locals())
 
 def leave_application(request):
     try:
