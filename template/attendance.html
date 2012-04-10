@@ -9,9 +9,14 @@
 <p class="nifttitletext">National Institute of Fashion Technology</p>
 <p class="secondheading">Attendance</p>
 <table border >
+<tr>
+<td>Date</td>
+<td>Attendance</td>
+</tr>
 {% for d in dates %}
 <tr>
 <td>{{d.date}}</td>
+
 <td>
   {% if d.present%}
     p

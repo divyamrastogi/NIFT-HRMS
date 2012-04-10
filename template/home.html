@@ -363,6 +363,9 @@ function checkForm1(thisform)
 <div id="wrapper">
   <div id="toptitles">
   </div>
+{% if ERROR%}
+     Something is wrong
+{% endif%}
   
   <div align = right id="logoutbutton"> <a ALIGN = LEFT href="/logout/">Logout</a> </div> 
   
@@ -374,8 +377,8 @@ function checkForm1(thisform)
                 <li class="nav-two"><a href="#attendance">Attendance</a></li>
                 <li class="nav-three"><a href="#leave">Leave</a></li>
                 <li class="nav-four"><a href="#directory">E-Directory</a></li>
-                <li class="nav-five last"><a href="#feedback">Feedback</a></li>
-                <li class="nav-six last"><a href="#workload">Workload</a></li>
+{% if p.designation != 7 %}  {% if p.designation != 6 %}              <li class="nav-five last"><a href="#feedback">Feedback</a></li> {% endif %} {% endif %}
+{% if p.designation != 5 %}                <li class="nav-six last"><a href="#workload">Workload</a></li> {% endif %}
             </ul>
             </div>
         	
@@ -627,7 +630,8 @@ function checkForm1(thisform)
 <br>
 <br>
 
-{% if p.designation >= 6 and p.designation != 8 %}
+{% if p.designation >= 6  %}
+  
 
 	 	<header>
        <h2>Leave Applications recieved</h2>
@@ -728,6 +732,8 @@ function checkForm1(thisform)
                  </br>
                  </br>
                  </ul>
+{% if p.designation != 7%}
+{% if p.designation != 6%}
         		 
         		 <ul id="feedback" class="hide">
 {% ifequal p.designation 9%}
@@ -735,26 +741,47 @@ function checkForm1(thisform)
    <A HREF="/weekly_feedback/">fill weekly feedback </A> </br>
 
 {% endifequal %}
+{%ifequal p.designation 5%}
+      <A HREF="/weeklyfeedbacklink/">fill weekly feedback </A> </br>
+{% endifequal %}
+
+{% if p.designation <= 4   %}
 <br>
 <form name="feedback" action="/feedback_details/" method="post">
- Enter the start date and end date of the week you want</p>
-    <p><label>date: </label><input onclick="ds_sh(this);" name="date"  style="cursor: text" required/></p>
-    <p><label>Course ID: </label><input name="course_id"  type = "text" required/></p>
-    <input name="submit" type="submit" value="submit" />
-  <br>   </form>
 
+    <p><label>Date: </label><input onclick="ds_sh(this);" name="date"  style="cursor: text" required/></p>
+    <p><label>Course ID: </label><input name="course_id"  type = "text" required/></p>
+    <p><label>Sem ID: </label><input name="sem_id"  type = "text" required/></p>
+    <input name="submit" type="submit" value="submit" />
+  <br>   
+
+</form>
+{%endif%}
+{% endif %}
+
+{% if p.designation != 5 %}
          </ul>
              <ul id="workload" class="hide">
-   <br>
+  {% if p.designation <= 4 %}
+ <br>
        <A HREF="/teaching_hours/">fill teaching hours form </A> </br>
 
 <br>
+{%endif%}
 <br>
-
+{%endif%}
 <form name="workload" action="/workload_details/" method="post">
- <p class="datatext">Enter the start date and end date of the week you want</p>
+
  
  <table border="0">
+ <tr>
+ <td>
+ <label>Faculty ID: </label>
+ </td>
+ <td>
+ <input name="user_id"  type = "text" required/>
+ </td>
+ <tr>
  <tr>
  <td>
  <label>Course ID: </label>
@@ -774,8 +801,9 @@ function checkForm1(thisform)
     <input name="submit" type="submit" class="submitbutton" value="submit" />
   <br>   </form>
 
+
  	     </ul>       		 
-        		 
+       {% endif %} 		 
        	  </div> <!-- END List Wrap -->
          
   </div> <!-- END Organic Tabs (Example One) -->
