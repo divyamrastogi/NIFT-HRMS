@@ -333,6 +333,7 @@ function checkForm(thisform)
 		if(!(thisform.dob.value.charAt(4)=='-'))
 		{
 			alert('invalid date')
+                        return false;
 		}
 		
 }
@@ -410,7 +411,7 @@ function checkForm(thisform)
 <br/>
     <p><label>PAST POSITIONS</label><input name="past_positions" type="text" value = '{{p.past_positions}}' required=""/></p>
 <br/>
-		<p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
+		<p><input name="submit" type="submit" onClick="this.value='Saving...'; return checkForm(this.form);"  value="submit"></p>
 
 
   </form>
