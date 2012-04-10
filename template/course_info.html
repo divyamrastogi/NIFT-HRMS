@@ -1,0 +1,33 @@
+<html>
+<link href="/static/css/courseinfostyle.css" rel="stylesheet" type="text/css">
+
+<div id="wrapper">
+<div id="toptitles">
+</div>
+<div id="maincontent">
+ <p>&nbsp;</p>
+ <p class="nifttitletext">National Institute of Fashion Technology</p>
+<p class="secondheading">Course Information</p>
+ <table border = "1">
+<body>
+<tr>
+<td>{{course}}</td>
+<td>{{course.course_id}}</td>
+<tr>
+{% for d in c %}
+<tr>
+<td>{{d.user_id}}</td>
+<td>{{d.sem_id.year}}</td>
+</tr>
+{% endfor %}
+</table>
+</br>
+ <div align = left> <a href="/" class="subheadtext">back</a> </div> 
+ 
+</div>
+<div id="footer">
+</div>
+
+</div>
+</body>
+</html>

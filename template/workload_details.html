@@ -1,0 +1,32 @@
+<html>
+<link href="/static/css/worloadstyle.css" rel="stylesheet" type="text/css">
+<body>
+<div id="wrapper">
+<div id="toptitles">
+</div>
+<div id="maincontent">
+<p>&nbsp;</p>
+<p class="nifttitletext">National Institute of Fashion Technology</p>
+<p class="secondheading">Workload Details</p>
+<table border = "1">
+<tr>
+<td>course_ID</td>
+<td>Direct Working hours</td>
+<td>InDirect Working hours</td>
+<td>Audit Working hours</td>
+<tr>
+<td>{{course_id}}</td>
+<td>{{direct.hours__sum}}</td>
+<td>{{indirect.hours__sum}}</td>
+<td>{{audit.hours__sum}}</td>
+</tr>
+</table>
+</br>
+</br>
+ <div align = left> <a href="/" class="subheadtext">back</a> </div> 
+ </div>
+ <div id="footer">
+ </div>
+</div>
+</body>
+</html>

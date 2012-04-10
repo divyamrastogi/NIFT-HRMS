@@ -1,0 +1,31 @@
+<html>
+<link href="/static/css/feedbackdetailsstyle.css" rel="stylesheet" type="text/css">
+<body>
+<div id="wrapper">
+<div id="toptitles">
+</div>
+<div id="maincontent">
+<p>&nbsp;</p>
+<p class="nifttitletext">National Institute of Fashion Technology</p>
+<p class="addresstext">(Ministry of Textiles, Gov. of India)</p>
+<p class="secondheading">Feedback Details</p>
+<table border = "1">
+<tr>
+<td>course</td>
+<td>content_rate</td>
+<td>presentation_rate</td>
+</tr>
+{% for t in tot %}
+<tr>
+<td>{{t.0}}</td>
+<td>{{t.1}}</td>
+<td>{{t.2}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+<div id="footer">
+</div>
+</div>
+</body>
+</html>

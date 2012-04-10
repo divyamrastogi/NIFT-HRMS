@@ -1,0 +1,36 @@
+<html>
+<link href="/static/css/attebdancepagestyle.css" rel="stylesheet" type="text/css">
+<body>
+<div id="wrapper">
+<div id="toptitles">
+</div>
+<div id="maincontent">
+<p>&nbsp;</p>
+<p class="nifttitletext">National Institute of Fashion Technology</p>
+<p class="secondheading">Attendance</p>
+<table border >
+{% for d in dates %}
+<tr>
+<td>{{d.date}}</td>
+<td>
+  {% if d.present%}
+    p
+ {%else%}
+    {% if d.on_duty%}
+        on_duty
+    {%else%}
+         a
+     {% endif %}
+{% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+</br>
+ <div align = left> <a href="/" class="subheadtext">back</a> </div> 
+ </div>
+ <div id="footer">
+ </div>
+</div>
+</body>
+</html>

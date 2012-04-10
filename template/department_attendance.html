@@ -1,0 +1,44 @@
+<html>
+<link href="/static/css/attendancestyle.css" rel="stylesheet" type="text/css">
+<body>
+<div id="wrapper">
+<div id="toptitles">
+</div>
+<div id="maincontent">
+  <p>&nbsp;</p>
+  <p class="nifttitletext">National Institute of Fashion Technology  </p>
+  <p class="secondheading">Department Attendance</p>
+  <table border >
+<tr> <td>username </td>
+{% for u in dates.0 %}
+<td>
+ {{ u.date }}
+</td>
+{% endfor %}
+</tr>
+{% for d in dates %}
+<tr>
+<td>
+ {{ d.0.user_id.user_id.username }}
+</td>
+
+{% for s in d %}
+<td>
+  {% if s.present%}
+    p
+ {%else%}
+    a
+{% endif %}
+</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</br>
+ <div align = left> <a  href="/" class="datatext">back</a> </div> 
+ </div>
+ <div id="footer">
+ </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>TEACHING HOURS</title>
+  <meta name="description" content="" />
+  <meta name="shailja shukla" content="teaching hours page" />
+<script src="C:/Users/vaio/Documents/Aptana Studio 3 Workspace/sen/js/libs/jquery-1.7.1.min.js"></script>
+  
+  <script type="text/javascript" src="C:/Users/vaio/Documents/Aptana Studio 3 Workspace/sen/webforms2-0.5.4/webforms2.js"></script>
+  <link href="C:/Users/vaio/Documents/Aptana Studio 3 Workspace/sen/django_templates/reteachinghourstable/cssfiles/teachinghoursstyle.css" rel="stylesheet" type="text/css">
+  
+    <SCRIPT language="javascript">
+        function addRow(tableID) {
+ 
+            var table = document.getElementById(tableID);
+ 
+ 			var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+ 			var cell1 = row.insertCell(0);
+            var element1 = document.createElement("input");
+            element1.type = "checkbox";
+            cell1.appendChild(element1);
+ 
+            var cell2 = row.insertCell(1);
+            var element2 = document.createElement("input");
+            element2.type = "text";
+            cell2.appendChild(element2);
+ 
+            var cell3 = row.insertCell(2);
+            var element3 = document.createElement("input");
+            element3.type = "text";
+            cell3.appendChild(element3);
+ 
+            var cell4 = row.insertCell(3);
+            var element4 = document.createElement("input");
+            element4.type = "number";
+            cell4.appendChild(element4);
+ 
+ 			var cell5 = row.insertCell(4);
+            var element5 = document.createElement("input");
+            element5.type = "number";
+            cell5.appendChild(element5);
+            
+            var cell6 = row.insertCell(5);
+            var element6 = document.createElement("input");
+            element6.type = "number";
+            cell6.appendChild(element6);
+ 
+ 			var cell7 = row.insertCell(6);
+            var element7 = document.createElement("input");
+            element7.type = "number";
+            cell7.appendChild(element7);
+            
+                    }
+ 
+        function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+ 
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+ 
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+ 
+ 
+   
+        function addRow1(tableID) {
+ 
+            var table = document.getElementById(tableID);
+ 
+ 			var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+ 			var cell1 = row.insertCell(0);
+            var element1 = document.createElement("input");
+            element1.type = "checkbox";
+            cell1.appendChild(element1);
+ 
+            var cell2 = row.insertCell(1);
+            var element2 = document.createElement("input");
+            element2.type = "text";
+            cell2.appendChild(element2);
+ 
+            var cell3 = row.insertCell(2);
+            var element3 = document.createElement("input");
+            element3.type = "text";
+            cell3.appendChild(element3);
+ 
+            var cell4 = row.insertCell(3);
+            var element4 = document.createElement("input");
+            element4.type = "number";
+            cell4.appendChild(element4);
+ 
+ 			var cell5 = row.insertCell(4);
+            var element5 = document.createElement("input");
+            element5.type = "number";
+            cell5.appendChild(element5);
+            
+            var cell6 = row.insertCell(5);
+            var element6 = document.createElement("input");
+            element6.type = "number";
+            cell6.appendChild(element6);
+ 
+ 			var cell7 = row.insertCell(6);
+            var element7 = document.createElement("input");
+            element7.type = "number";
+            cell7.appendChild(element7);
+            
+            var cell8 = row.insertCell(7);
+            var element8 = document.createElement("input");
+            element8.type = "number";
+            cell8.appendChild(element8);
+            
+            }
+ 
+        function deleteRow1(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+ 
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+ 
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+ 
+ 
+ 
+    </SCRIPT>
+  
+  
+  
+
+<link href="_css/teachinghoursstyle.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div id="wrapper">
+  <div id="toptitles">
+  </div>
+  <div id="maincontent">
+  <div>
+    <header>
+      <h1>&nbsp;</h1>
+      <h1 class="nifttitletext">National Institute of Fashion Technology</h1>
+    </header>
+    <header>
+    	<h2> Calculation of Teaching Hours</h2>
+    </header>
+   
+    <form action="" method="post">
+
+<table id = "dataTable" border = "1" >
+<tbody>
+<tr>
+<th rowspan=2>Checkbox</th>
+<th rowspan=2>Course</th>
+<th rowspan=2>Sem</th>
+<th colspan=2 >Direct teaching hrs</th>
+<th colspan=2>Other Centres</th>
+</tr>
+
+<tr>
+<td >Individual teaching</td>
+<td >Co-teaching</td>
+<td >Direct</td>
+<td >Indirect</td>
+</tr>
+
+	
+
+<tr>
+<td><input name="checkbox" type="checkbox" /></td>	
+<td><input name="course_id" type="text" required/></td>
+<td><input name="sem_id" type="text" required/></td>
+<td><input name="D_2" type="number" required/></td>
+<td><input name="D_1" type="number" required/></td>
+<td><input name="D_3" type="number" required/></td>
+<td><input name="I_3" type="number" required/></td>
+</tr>
+
+</tbody>
+</table>
+
+</br>
+<INPUT type="button" class="addbuttons" onclick="addRow('dataTable')" value="Add Row" /> 
+<INPUT type="button" class="addbuttons" onclick="deleteRow('dataTable')" value="Delete Row" />
+<br>
+
+<table id="datatable2" border="1">
+<tbody>
+<tr>
+<th rowspan=2>Checkbox</th>
+<th rowspan=2>Course</th>
+<th rowspan=2>Sem</th>
+<th colspan=4>Indirect teaching hrs</th>
+<th rowspan=2>Audit hours</th>
+</tr>
+
+<tr>
+<td >Research/Project</br>Colloquim Paper</td>
+<td >ITP</td>
+<td >Craft cluster</td>
+<td >GP/DC</td>
+</tr>
+
+<tr>
+<td><input name="checkbox" type="checkbox" /></td>	
+<td><input name="course_id" type="text" required/></td>
+<td><input name="sem_id" type="text" required/></td>
+<td><input name="I_6" type="number" required/></td>
+<td><input name="I_7" type="number" required/></td>
+<td><input name="I_8" type="number" required/></td>
+<td><input name="I_4_5" type="number" required/></td>
+<td><input name="A" type="number" required/></td>
+</tr>
+
+</tbody>
+</table>
+
+</br>
+<INPUT type="button" class="addbuttons" onclick="addRow1('datatable2')" value="Add Row" /> 
+<INPUT type="button" class="addbuttons" onclick="deleteRow1('datatable2')" value="Delete Row" />
+
+<br>
+
+
+	
+	<p class="subheadingtext">
+		I certify that above workload is in accordance to the policy mentioned in the HO Circular</br>
+		 No.NIFT/Dean(A)/2008/Policy/90-11 dated 7th June 2011
+	</p>
+	
+	<p><input name="submit" type="submit" class="submitbutton" value="submit" ></p>
+		 
+ 	
+</form>
+</div>
+</div>
+
+<div id="footer">
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>Faculty</title>
+  <meta name="description" content="" />
+  <meta name="sachin" content="compaq" />
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link href="/static/css/facultystyle.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div id="wrapper">
+  <div id="toptitles">
+  </div>
+  <div id="maincontent">
+  <div>
+    <header>
+      <h1 class="nifttitletext">National Institute of Fashion Technology</h1>
+      <h1 class="subheadtext">Welcome!</h1>
+    </header>
+  <form action="/faculty_info/" method="post">
+  	<p class="datatext"><label>Faculty ID</label> 
+	    <input name="user_id" type="text" autocomplete = "on" autofocus /></p>
+		
+  <p><input name="Courses" type="submit" class="submitbutton" value="Show all the courses taken till now" /></p>
+  <p><input name="Expertise" type="submit" class="submitbutton" value=" Show expertise and experience" /></p>
+  <p><input name="Feedback" type="submit" class="submitbutton" value="Show feedback by week for a particular sem and year for a given course" /></p>
+  <p><input name="TeachingHours" type="submit" class="submitbutton" value="Show teaching hours by year" /></p>
+  </form>  
+   </div>
+   </div>
+   <div id="footer">
+   </div>
+   </div>
+</body>
+</html>
