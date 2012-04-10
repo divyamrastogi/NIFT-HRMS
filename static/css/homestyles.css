@@ -58,7 +58,7 @@ h1 {
 #example-one .nav li a:hover { background-color: #111; }
 #wrapper #example-one #navbar {
 	margin-right: auto;
-	margin-left: 500px;
+	margin-left: auto;
 	text-align: left;
 	float: none;
 	clear: both;
@@ -83,6 +83,10 @@ h1 {
 #example-one ul li.nav-four a.current, #example-one ul.feedback li a:hover { background-color: #FE4902; color: white; }
 #example-one ul li.nav-five a.current, #example-one ul.feedback li a:hover {
 	background-color: #006699;
+	color: white;
+}
+#example-one ul li.nav-six a.current, #example-one ul.feedback li a:hover {
+	background-color: #FF6666;
 	color: white;
 }
 
