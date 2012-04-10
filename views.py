@@ -428,15 +428,12 @@ def mark_attendance(request):
                 a = Attendance(date=datetime.datetime.now().date(), present = True,user_id_id = i.user_id.user_id.id, on_duty = False, status = 1)        
             else:
 	        if i.user_id.user_id.username in on_duty:
-                    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = True, status = 1)                      
-                else:
+                    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = True, status = 1)
+		else:
 		    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = False, status = 1)                      
-
             a.save()
     return HttpResponseRedirect("/")        
 
-            a.save()
-    return HttpResponseRedirect("/")
 
 def leave_approval(request):
     u = models.User.objects.get(username = request.session.get('user'))
