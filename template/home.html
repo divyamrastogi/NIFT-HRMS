@@ -596,7 +596,6 @@ function checkForm1(thisform)
     <A HREF="/leave_extension/" class="hyperl">Leave Extension Form </A>
     <br>
     <br>
-    <br>
     
 <header><h2>Leave Status</h2>
     </header>
@@ -625,6 +624,9 @@ function checkForm1(thisform)
 {% endfor %}
 </table>
 <br>    
+<br>
+<br>
+
 {% if p.designation >= 6 and p.designation != 8 %}
 
 	 	<header>
@@ -728,40 +730,23 @@ function checkForm1(thisform)
                  </ul>
         		 
         		 <ul id="feedback" class="hide">
-{% ifequal p.designation 5%}
+{% ifequal p.designation 9%}
  <br>
    <A HREF="/weekly_feedback/">fill weekly feedback </A> </br>
 
 {% endifequal %}
 <br>
 <form name="feedback" action="/feedback_details/" method="post">
- <p class="subheadtext">Enter the start date and end date of the week you want</p>
-    <table border="0">
-    <tr>
-    <td>
-    <label>Date: </label>
-    </td>
-    <td>
-    <input onClick="ds_sh(this);" name="date"  style="cursor: text" required/>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <label>Course ID: </label>
-    </td>
-    <td>
-    <input name="course_id"  type = "text" required/>
-    </td>
-    </tr>
-    </table>
-    
-    <input name="submit" class="submitbutton" type="submit" value="submit" />
+ Enter the start date and end date of the week you want</p>
+    <p><label>date: </label><input onclick="ds_sh(this);" name="date"  style="cursor: text" required/></p>
+    <p><label>Course ID: </label><input name="course_id"  type = "text" required/></p>
+    <input name="submit" type="submit" value="submit" />
   <br>   </form>
 
          </ul>
              <ul id="workload" class="hide">
    <br>
-       <A HREF="/teaching_hours/" class="subheadtext">fill teaching hours form </A> </br>
+       <A HREF="/teaching_hours/">fill teaching hours form </A> </br>
 
 <br>
 <br>

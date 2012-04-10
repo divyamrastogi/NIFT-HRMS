@@ -78,7 +78,6 @@ def leave_application(request):
         return render_to_response('error.html',)
 
 def weekly_feedback(request):
-
     return render_to_response('weekly_feedback.html',)
     
 def teaching_hours(request):
@@ -234,11 +233,15 @@ def leave_details(request):
     t = User.objects.get(user_id = u.id)
     p = Profile.objects.get(user_id = u.id)
     if (request.POST):
-        leave_type = request.POST.get('leave_type')    
-        start_date = request.POST.get('start_date')    
-        print start_date
-        details = Leave_Info.objects.filter(user_id = u.id).filter( start_date__gte= start_date).filter( leave_type= leave_type)
-    return render_to_response('leave_details.html', locals() )
+        try:
+            leave_type = request.POST.get('leave')    
+            start_date = request.POST.get('date')    
+            print start_date, leave_type
+            details = Leave_Info.objects.filter(user_id = u.id).filter( leave_type= leave_type).filter( start_date__gte= start_date)
+            return render_to_response('leave_details.html', locals() )
+        except Exception:
+            return HttpResponse("<html>no such leave has been approved</html>")
+    return HttpResponseRedirect('/')
 
 
 def leave_extend(request):
@@ -428,6 +431,9 @@ def mark_attendance(request):
                     a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = True, status = 1)                      
                 else:
 		    a = Attendance(date=datetime.datetime.now().date(), present = False,user_id_id = i.user_id.user_id.id,on_duty = False, status = 1)                      
+
+            a.save()
+    return HttpResponseRedirect("/")        
 
             a.save()
     return HttpResponseRedirect("/")
