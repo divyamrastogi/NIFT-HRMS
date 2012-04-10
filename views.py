@@ -133,8 +133,9 @@ def feedback_details(request):
         course_id  = request.POST.get('course_id')
         date  = request.POST.get('date')
         print u.user_id, course_id
-        e  = Offered.objects.get(user_id = u.user_id, course_id = course_id)
-        print e.every_id
+        a  = Offered.objects.filter(user_id = u.user_id, course_id = course_id)
+      	e=a[0]
+	print e.every_id
         t  = Feedback.objects.filter(every_id = e).filter(date = date).count()
         c1 = Feedback.objects.filter(every_id = e).filter(date = date).filter(content_rate = 1).count()
         c2 = Feedback.objects.filter(every_id = e).filter(date = date).filter(content_rate = 2).count()

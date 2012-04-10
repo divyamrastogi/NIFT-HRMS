@@ -1,51 +1,31 @@
 <html>
+<link href="/static/css/feedbackdetailsstyle.css" rel="stylesheet" type="text/css">
 <body>
+<div id="wrapper">
+<div id="toptitles">
+</div>
+<div id="maincontent">
+<p>&nbsp;</p>
+<p class="nifttitletext">National Institute of Fashion Technology</p>
+<p class="addresstext">(Ministry of Textiles, Gov. of India)</p>
+<p class="secondheading">Feedback Details</p>
 <table border = "1">
 <tr>
-<td>course_ID</td>
-<td>Total Feedbacks</td>
-<tr>
-<td>{{course_id}}</td>
-<td>{{t}}</td><tr>
-</table>
-<br>
-<br>
-<header> <h2>Content Rate</h2> </header>
-<table border = "1">
-<td>#1</td>
-<td>#2</td>
-<td>#3</td>
-<td>#4</td>
-<td>#5</td>
+<td>course</td>
+<td>content_rate</td>
+<td>presentation_rate</td>
 </tr>
+{% for t in tot %}
 <tr>
-<td>{{c1}}</td>
-<td>{{c2}}</td>
-<td>{{c3}}</td>
-<td>{{c4}}</td>
-<td>{{c5}}</td><tr>
-</table>
-<br>
-<br>
-<header> <h2>Presentation Rate</h2> </header>
-<table border = "1">
-<tr>
-<td>#1</td>
-<td>#2</td>
-<td>#3</td>
-<td>#4</td>
-<td>#5</td>
+<td>{{t.0}}</td>
+<td>{{t.1}}</td>
+<td>{{t.2}}</td>
 </tr>
-<tr>
-<td>{{p1}}</td>
-<td>{{p2}}</td>
-<td>{{p3}}</td>
-<td>{{p4}}</td>
-<td>{{p5}}</td>
-</tr>
-
+{% endfor %}
 </table>
-</br>
- <div align = left> <a href="/">back</a> </div> 
+</div>
+<div id="footer">
+</div>
+</div>
 </body>
 </html>
