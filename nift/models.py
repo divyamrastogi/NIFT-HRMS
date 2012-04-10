@@ -91,7 +91,7 @@ class Attendance(models.Model):
 	user_id 	= models.ForeignKey(User)
 	attendance_id 	= models.AutoField(primary_key=True)
 	on_duty 	= models.BooleanField()
-	status  	= models.CharField(max_length=1)
+	status  	= models.IntegerField(max_length=1)
 
         def __unicode__(self):
 		return u'%s %s' % (self.user_id.user_id.username, self.date)

@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.db.models import Avg, Sum
 from django.contrib.auth import authenticate, models
-from nift.models import User, Profile, Teaching, Leave_Info, Feedback, Attendance, Leave_Details, Leave_Extension_Info, Cen_Dep_Info, Offered
+from nift.models import User, Profile, Teaching, Leave_Info, Feedback, Attendance, Leave_Details, Leave_Extension_Info, Cen_Dep_Info, Offered, Course
 #from nift.models import *
 from datetime import date
 import datetime
@@ -21,7 +21,7 @@ def edirectory_info(request):
         p = Profile.objects.get(user_id = u.id)
 	if(request.POST):
 	    id = request.POST.get('user_id')
-	    
+	    return HttpResponse("<html><header>This page is under construction</header></html>") 
 	else:
 	    render_to_response('error.html')
     except:
@@ -40,7 +40,8 @@ def course_info(request):
     if(request.POST):
 	courseid = request.POST.get('course_id')
 	c = Offered.objects.filter(course_id=courseid)
-	print c
+	course = Course.objects.filter(course_id=courseid)
+	print c, course
     return render_to_response('course_info.html', locals())	
 
 def edirectory_faculty(request):
@@ -153,11 +154,11 @@ def workload_details(request):
         u = User.objects.get(user_id = t.id)
         course_id  = request.POST.get('course_id')
         print u.user_id, course_id
-        e  = Offered.objects.get(user_id = u.user_id, course_id = course_id)
-        print e.every_id
-        direct = Teaching.objects.filter(every_id = e).filter(study_type = 'D').aggregate(Sum('hours'))
-        indirect = Teaching.objects.filter(every_id = e).filter(study_type = 'I').aggregate(Sum('hours'))
-        audit = Teaching.objects.filter(every_id = e).filter(study_type = 'A').aggregate(Sum('hours'))
+        e  = Offered.objects.filter(user_id = u.user_id, course_id = course_id)
+        print e[0].every_id
+        direct = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'D').aggregate(Sum('hours'))
+        indirect = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'I').aggregate(Sum('hours'))
+        audit = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'A').aggregate(Sum('hours'))
         print direct , indirect, audit
     return render_to_response('workload_details.html',locals())
        

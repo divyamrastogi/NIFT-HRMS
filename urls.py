@@ -2,9 +2,7 @@ from django.views.static import *
 from django.views.generic.simple import redirect_to
 from django.conf import settings
 
-from views import profile, home,workload_details, leave_application, logout, edit_profile, teaching_hours, submit_teaching_hours, feedback_details, submit_leave, leave_extend, 
-submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval,  leave_details, weekly_feedback, submit_feedback, edirectory_courses, 
-edirectory_faculty,  getedirectory_info
+from views import profile, home,workload_details, leave_application, logout, edit_profile, teaching_hours, submit_teaching_hours, feedback_details, submit_leave, leave_extend, submit_extension_leave, mark_attendance, check_attendance, department_attendance, leave_approval,  leave_details, weekly_feedback, submit_feedback, edirectory_courses, edirectory_faculty, edirectory_info, course_info
 
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
@@ -38,7 +36,8 @@ urlpatterns = patterns('views',
      (r'^leave_extend/$', submit_extension_leave),
      (r'^course/$', edirectory_courses),
      (r'^faculty/$', edirectory_faculty),
-     (r'edirectory_info/$', getedirectory_info),
+     (r'^edirectory_info/$', edirectory_info),
+     (r'^course_info', course_info),
 #divyam's changes .....................
 
      
