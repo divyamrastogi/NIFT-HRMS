@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'NIFT_DB',                      # Or path to database file if using sqlite3.
+        'NAME': 'Final_DBMS',                      # Or path to database file if using sqlite3.
         'USER': 'divyam',                      # Not used with sqlite3.
         'PASSWORD': '1',                  # Not used with sqlite3.
     #    'HOST': '',  #90.28 , 54.81 to empty string for localhost. Not used with sqlite3.
