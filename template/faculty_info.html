@@ -1,0 +1,40 @@
+<html>
+ <table border = "1">
+<body>
+<tr>
+<td>{{user_id}}</td>
+<td>{{user_id}}</td>
+<tr>
+{% for d in c %}
+<tr>
+<td>{{d.user_id}}</td>
+<td>{{d.sem_id.year}}</td>
+<td>{{d.cen_dep_id.department_name}}</td>
+<td>{{d.cen_dep_id.centre_name}}</td>
+</tr>
+{% endfor %}
+{% for d in e %}
+<tr>
+<td>{{d.user_id}}</td>
+<td>{{d.expertise}}</td>
+<td>{{d.experience}}</td>
+</tr>
+{% endfor %}
+{% for d in t %}
+<tr>
+<td>{{d.user_id}}</td>
+<td>{{d.study_type}}</td>
+<td>{{d.hours}}</td>
+</tr>
+{% endfor %}
+{% for d in f %}
+<tr>
+<td>{{d.user_id}}</td>
+<td>{{d.sem_id.year}}</td>
+</tr>
+{% endfor %}
+</table>
+</br>
+ <div align = left> <a href="/">back</a> </div> 
+</body>
+</html>
