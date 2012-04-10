@@ -496,7 +496,11 @@ def check_attendance(request):
         dates = Attendance.objects.filter( date__gte= start_date).filter( date__lte= end_date).filter(user_id = u.id)
         check_attendance = True
     return render_to_response('attendance.html', locals() )
-
+'''        try:
+            start = datetime.strptime( start_date,'%Y-%m-%d')
+            end = datetime.strptime( end_date,'%Y-%m-%d')
+        except:
+	    return HttpResponseRedirect("/")    '''
 def department_attendance(request):
     if (request.POST):
         dept = request.POST.get('department')

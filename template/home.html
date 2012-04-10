@@ -339,11 +339,15 @@ function checkForm(thisform)
 {
 		if(!(thisform.start_date.value.charAt(4)=='-' && thisform.end_date.value.charAt(4)=='-'))
 		{
+			
 			alert('invalid date')
+                        return false;
 		}
 		
 }
 </script>
+
+
 
 <script language = "Javascript">
 function checkForm1(thisform)
@@ -492,7 +496,7 @@ function checkForm1(thisform)
         		 
         		 <ul id="attendance" class="hide">
                      <p> <h2>CHECK YOUR ATTENDANCE!</h2>
- <form name="input" action="/check_attendance/" method="post">
+ <form name="input"  action="/check_attendance/" method="post">
  <table border="0">
  <tr>
  <td>
@@ -512,7 +516,7 @@ function checkForm1(thisform)
  </tr>
  </table>
  <p>
- <p><input name="submit" type="submit" class="submitbutton" onClick="checkForm(this.form)"  value="check"></p>
+ <p><input name="submit" type="submit" class="submitbutton" onClick="this.value='Saving...'; return checkForm(this.form);"  value="check"></p>
  </p>
  </form>
 
@@ -552,7 +556,7 @@ function checkForm1(thisform)
   </td>
   </tr>
   </table>
- <p><input name="submit" type="submit" class="submitbutton" onClick="checkForm(this.form)"  value="submit"></p>
+ <p><input name="submit" type="submit" class="submitbutton" onClick="this.value='Saving...'; return checkForm(this.form);"  value="submit"></p>
 </form>
 </p>   
 {% endif %}
