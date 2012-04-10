@@ -1,5 +1,5 @@
 <html>
-<link href="/static/css/worloadstyle.css" rel="stylesheet" type="text/css">
+<link href="/static/css/feedbackdetailsstyle.css" rel="stylesheet" type="text/css">
 <body>
 <div id="wrapper">
 <div id="toptitles">
@@ -8,6 +8,9 @@
 <p>&nbsp;</p>
 <p class="nifttitletext">National Institute of Fashion Technology</p>
 <p class="secondheading">Workload Details</p>
+{% if Error %}
+      <p style="color: red;"> Faculty Id , Course Id or sem Id is incorrect. OR Faculty has not yet filled up the workload </br> please, try again</p>
+{% else %}
 <table border = "1">
 <tr>
 <td>course_ID</td>
@@ -21,6 +24,7 @@
 <td>{{audit.hours__sum}}</td>
 </tr>
 </table>
+{% endif %}
 </br>
 </br>
  <div align = left> <a href="/" class="subheadtext">back</a> </div> 

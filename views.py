@@ -125,7 +125,7 @@ def submit_teaching_hours(request):
 		h.save()
 		i.save()
         except Exception:
-	        print "null"  
+	        return render_to_response('teaching_hours.html', {'Error': True})   
     return HttpResponseRedirect('/')
  
  
@@ -153,14 +153,15 @@ def submit_feedback(request):
 
 def feedback_details(request):
     if (request.POST):
+      try:
         t = models.User.objects.get(username = request.session.get('user'))
         u = User.objects.get(user_id = t.id)
         course_id  = request.POST.get('course_id')
+        sem_id  = request.POST.get('sem_id')
         date  = request.POST.get('date')
         print u.user_id, course_id
-        a  = Offered.objects.filter(user_id = u.user_id, course_id = course_id)
-      	e=a[0]
-	print e.every_id
+        e  = Offered.objects.get(sem_id = sem_id, course_id = course_id)
+      	print e.every_id
         t  = Feedback.objects.filter(every_id = e).filter(date = date).count()
         c1 = Feedback.objects.filter(every_id = e).filter(date = date).filter(content_rate = 1).count()
         c2 = Feedback.objects.filter(every_id = e).filter(date = date).filter(content_rate = 2).count()
@@ -172,22 +173,32 @@ def feedback_details(request):
         p3 = Feedback.objects.filter(every_id = e).filter(date = date).filter(present_rate = 3).count()
         p4 = Feedback.objects.filter(every_id = e).filter(date = date).filter(present_rate = 4).count()
         p5 = Feedback.objects.filter(every_id = e).filter(date = date).filter(present_rate = 5).count()
-    return render_to_response('feedback_details.html',locals())
+        print t
+        return render_to_response('feedback_details.html',locals())
+      except:
+	return render_to_response('feedback_details.html', {'Error': True})
+    return HttpResponseRedirect('/')
+     
 
 def workload_details(request):
     if (request.POST):
-        t = models.User.objects.get(username = request.session.get('user'))
-        u = User.objects.get(user_id = t.id)
-        course_id  = request.POST.get('course_id')
-        sem_id  = request.POST.get('sem_id')
-        print u.user_id, course_id
-        e  = Offered.objects.filter(user_id = u.user_id, course_id = course_id, sem_id = sem_id)
-        print e[0].every_id
-        direct = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'D').aggregate(Sum('hours'))
-        indirect = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'I').aggregate(Sum('hours'))
-        audit = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'A').aggregate(Sum('hours'))
-        print direct , indirect, audit
-    return render_to_response('workload_details.html',locals())
+        try:
+	  t = models.User.objects.get(username = request.session.get('user'))
+	  u = User.objects.get(user_id = t.id)
+	  course_id  = request.POST.get('course_id')
+	  sem_id  = request.POST.get('sem_id')
+	  print u.user_id, course_id
+	  e  = Offered.objects.filter(user_id = u.user_id, course_id = course_id, sem_id = sem_id)
+	  print e[0].every_id
+	  direct = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'D').aggregate(Sum('hours'))
+	  indirect = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'I').aggregate(Sum('hours'))
+	  audit = Teaching.objects.filter(every_id = e[0]).filter(study_type = 'A').aggregate(Sum('hours'))
+	  print direct , indirect, audit
+          return render_to_response('workload_details.html',locals())
+        except:
+	  return render_to_response('workload_details.html', {'Error': True})
+    return HttpResponseRedirect('/')
+          
        
 
 def submit_extension_leave(request):

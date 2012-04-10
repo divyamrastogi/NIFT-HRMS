@@ -352,7 +352,7 @@ function checkForm(thisform)
 <script language = "Javascript">
 function checkForm1(thisform)
 {
-		if(!(thisform.date_of_interest.value.charAt(4)=='-'))
+		if(!(thisform.date.value.charAt(4)=='-'))
 		{
 			alert('invalid date')
                         return false;
@@ -360,6 +360,8 @@ function checkForm1(thisform)
 		
 }
 </script>
+
+
 
 
 </head>
@@ -750,18 +752,20 @@ function checkForm1(thisform)
       <A HREF="/weeklyfeedbacklink/">fill weekly feedback </A> </br>
 {% endifequal %}
 
-{% if p.designation <= 4   %}
+{% if p.designation <= 4  or p.designation >= 9  %}
 <br>
 <form name="feedback" action="/feedback_details/" method="post">
 
     <p><label>Date: </label><input onclick="ds_sh(this);" name="date"  style="cursor: text" required/></p>
     <p><label>Course ID: </label><input name="course_id"  type = "text" required/></p>
     <p><label>Sem ID: </label><input name="sem_id"  type = "text" required/></p>
-    <input name="submit" type="submit" value="submit" />
+ <p><input name="submit" type="submit" class="submitbutton" onClick="this.value='Saving...'; return checkForm1(this.form);"  value="submit"></p>
   <br>   
 
 </form>
 {%endif%}
+
+
 {% endif %}
 
 {% if p.designation != 5 %}
