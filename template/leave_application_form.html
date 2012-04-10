@@ -332,6 +332,7 @@ function checkForm(thisform)
 		if(!(thisform.start_date.value.charAt(4)=='-' && thisform.end_date.value.charAt(4)=='-'))
 		{
 			alert('invalid date')
+                        return false;
 		}
 		
 }
@@ -416,7 +417,7 @@ cancellation of my sanctioned leave.</p>
 <br/>
 <label>I Accept:</label><input name="agree" type="checkbox" required />
 <br/>
- <p><input name="submit" type="submit" onclick="checkForm(this.form)"  value="submit"></p>
+ <p><input name="submit" type="submit" class="submitbutton" onClick="this.value='Saving...'; return checkForm(this.form);"  value="submit"></p>
 </form>
 </div>
 

@@ -29,6 +29,9 @@
       <h1 class="nifttitletext">National Institute of Fashion Technology</h1>
       <h1 class="subheadtext">Welcome!</h1>
     </header>
+ {% if Error%}
+<p style="color: red;"> PLEASE CHECK Faculty ID . </p>
+ {% endif %}
   <form action="/faculty_info/" method="post">
   	<p class="datatext"><label>Faculty ID</label> 
 	    <input name="user_id" type="text" autocomplete = "on" autofocus /></p>

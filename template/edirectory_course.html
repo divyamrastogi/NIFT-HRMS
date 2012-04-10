@@ -32,6 +32,10 @@
       <h1 class="subheadtext">Welcome!</h1>
     </header>
     <form action="/course_info/" method="post">
+{% if Error %} 
+<p style="color: red;"> PLEASE CHECK YOUR COURSE ID. </br> please, try again</p>
+    {% endif %}
+ 
     <tr>
 <td> <label>Enter Course ID</label> </td> 
 <td> <input name="course_id" type="text" required /> </td>

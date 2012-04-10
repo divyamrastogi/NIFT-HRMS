@@ -719,8 +719,8 @@ function checkForm1(thisform)
 		</br>
   	 <p>Enter the date starting from which you want the leave data : </p>
   	</br>
-  	<p><label>Date of interest<label/> <input onClick="ds_sh(this);" name="end_date"  style="cursor: text" required/>
-      <input name="submit" type="submit" class="submitbutton" value="submit" />
+  	<p><label>Date of interest<label/> <input onClick="ds_sh(this);" name="date"  style="cursor: text" required/>
+ <p><input name="submit" type="submit" class="submitbutton" onClick="this.value='Saving...'; return checkForm1(this.form);"  value="submit"></p>
 </form>
    </br>
 

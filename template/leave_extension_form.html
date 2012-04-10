@@ -13,7 +13,9 @@
 
 <link href="/static/css/homestyle.css" rel="stylesheet" type="text/css">
 <link href="/static/css/leaveformstyle.css" rel="stylesheet" type="text/css">
-
+<link href="/static/css/leaveapplicationstyle.css" rel="stylesheet" type="text/css">/leaveapplicationstyle.css" rel="stylesheet" type="text/css">
+<script src='/static/js/libs/jquery-1.7.1.min.js'></script> 
+<script type="text/javascript" src="/static/js/webforms2-0.5.4/webforms2.js"></script>
 
 
 <style type="text/css">
@@ -74,6 +76,8 @@
 <script type="text/javascript">
 // <!-- <![CDATA[
 
+// Project: Dynamic Date Selector (DtTvB) - 2006-03-16
+// Script featured on JavaScript Kit- http://www.javascriptkit.com
 // Code begin...
 // Set the initial date.
 var ds_i_date = new Date();
@@ -330,81 +334,162 @@ function ds_onclick(d, m, y) {
 // ]]> -->
 </script>
 
-
-
+<script language = "Javascript">
+function checkForm(thisform)
+{
+		if(!(thisform.start_date.value.charAt(4)=='-' && thisform.end_date.value.charAt(4)=='-'))
+		{
+			alert('invalid date')
+                        return false;
+		}
+		
+}
+</script>
 
 </head>
 
 <body>
   <div id="wrapper">
   <div id="toptitles"></div>
-  <div id="navbar"><div id="page-wrap">
-
-    
 <div id="maincontent">
     <header>
-      <h1>&nbsp;</h1>
       <h1 class="nifttitletext">National Institute of Fashion Technology</h1>
   </header>
   <p class="addresstext">(Ministry of Textiles,Govt. Of India)<span class="addresstext"><br/>
-    </span>    </p>
-    <p class="addresstext">NIFT Campus, GH-0 Road, B/h, Infocity, Gandhinagar</p>
-    <p class="addresstext">&nbsp; </p>
+  </span></p>
     
     <header>
-      <h2 class="secondheading">Application For Leave Or Extension of leave</h2>
+      <h2 class="secondheading">Extension of leave</h2>
     </header>
-    <div id="formoptions">
-    <form action="/leave_extend/" method="post">
-    <br />
-	<p><label>Nature of leave :<label/> <select name="leave_type" required />
-       <option value=1>EL
-       <option value=2>CL
-       <option value=3>RH</select></p>
-    <br/>
-    <p>Period of Leave Applied</p> 
-    <br />
-	<p><label>Start Date :<label/> <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required="" /></p>
-		</br>
-		 <p><label>End Date :<label/> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required="" /></p>
-   	<br />
-	<p><label>Purpose(reason):<label/> <input name="reason" type="text" required=""/></p>
-    <br />
-	<p><label>Address during Leave period :<label/></p>
-	</br> 
-		<p><label>Street</label><input name="street" type="text" required=""/></p>
-		</br>
-		<p><label>City</label><input name="city" type="text" required=""/></p>
-		</br>
-		<p><label>Zip</label><input name="zip" type="zip" required=""/></p>
-		</br>
-		<p><label>State</label><input name="state" type="text" required=""/></p>
-		</br>
-		<p><label>Country</label><input name="country" type="text" required=""/>
-		</p>
-	<br />
-	<p><label>Whether the faculty/staff has prior <br/> Commitments in NIFT during the period of leave :<label/> <select name="Yes/No"><option value=1>Yes<option value=2>No</select></p>
-	<br />
-	<p><label>If yes give details :<label/> <input name="commitment_details" type="text"/ ></p>
-	<br />
-	<p><label>Nature of last leave :<label/> <select name="last_leave_type" required /><option value="1">EL<option value="2">CL<option value="3">RH</select></p>
-	<br/>
-	<p>I certify that during the leave period I have not been assigned any exam duty/ Institue duty <br/> and I have also completed all the tasks assigned to me and<br/> handed over and explained the tasks to be completed in my absence to my link official</p>
-	<br/>
-	<p>I also hereby give undertaking that I will resume my duty immediately, <br/> if I am informed about cancellation of my sanctioned leave.</p>
-	<br/>
-    <label>I Accept:</label><input name="agree" type="checkbox" required />
-    <br/>
-		<p><input name="submit" type="submit" value="submit" /></a></p> 
-
-    <form/>
-
-    </div>
     
-    <div id="footer"></div>
-
+    <div class="subheadingtext" id="formoptions">
+    	<form action="/leave_extend/" method="post">
+      <p class="subheadingtext">Nature of leave :
+      <select name="leave_type" required />
+      <option value=1>EL
+      <option value=2>CL
+      <option value=3>RH
+      </select></p>
+    <br/>
+    <p class="subheadingtext">Period of Leave Applied :</p>
+    <table border="0">
+    <tr>
+    <td>
+      <label>
+      Start Date
+      </label>
+    </td> 
+    <td>  
+      <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required/>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <label>
+      End Date
+      </label>
+      </td>   
+      <td>
+      <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" required/>
+      </td>
+      </tr>
+      <tr>
+      <td>
+      <label>
+      Purpose(reason)
+      </label>
+      </td>
+      <td>    
+      <input name="reason" type="text" required/>
+      </td>
+      </tr>
+    </table>
+   
+      <p class="subheadingtext"> Address during Leave period : </p>
+      <table border="0">
+      <tr>
+      <td>
+      <label>Street</label>
+      </td>
+      <td>
+      <input name="street" type="text" required/>
+      </td>
+      </tr>
+      <tr>
+      <td>
+      <label>City</label>
+      </td>
+      <td>
+      <input name="city" type="text" required/>
+      </td>
+      <tr>
+      <td>
+      <label>Zip</label>
+      </td>
+      <td>
+      <input name="zip" type="zip" required/>
+      </td>
+      </tr>
+      <tr>
+      <td>
+      <label>State</label>
+      </td>
+      <td>
+      <input name="state" type="text" required/>
+      </td>
+      </tr>
+      <tr>
+      <td>
+      <label>Country</label>
+      </td>
+      <td>
+      <input name="country" type="text" required/>
+      </td>
+      </tr>
+      </table>
+      
+    <p>&nbsp;</p>
+    <p class="subheadingtext">Whether the faculty/staff has prior <br/>
+      Commitments in NIFT during the period of leave :
+                
+      <select name="Yes/No">
+        <option value="Yes">Yes
+        <option value="No">No
+      </select>
+    </p>
+    <p>
+      <label>
+      If yes give details :
+      </label>    
+      <input name="Text1" type="text"/ >
+    </p>
+    <br />
+    <p>
+      <label>
+      Nature of last leave :
+      </label>    
+      <select name="leave_type" required />
+      <option value=1>EL
+      <option value=2>CL
+      <option value=3>RH
+              </select>
+      </p>
+    <br/>
+    <p class="subheadingtext">I certify that during the leave period I have not been assigned any exam duty/ Institue duty <br/>
+      and I have also completed all the tasks assigned to me or<br/>
+      handed over and explained the tasks to be completed in my absence to my link official</p>
+    <br/>
+    <p class="subheadingtext">I also hereby give undertaking that I will resume my duty immediately, <br/>
+      if I am informed about cancellation of my sanctioned leave.</p>
+    <br/>
+    <label class="subheadingtext">I Accept:</label>
+    <input name="agree" type="checkbox" required />
+    <br/>
+    <p>
+    <p><input name="submit" type="submit" class="submitbutton" onClick="this.value='Saving...'; return checkForm(this.form);"  value="submit"></p>
+      </p>
+    </form>   
     
   </div>
 </body>
 </html>
-
