@@ -417,7 +417,8 @@ def mark_attendance(request):
     p = Profile.objects.get(user_id = u.id)
     if (request.POST):
         present = []
-        present = request.POST.getlist('Present')    
+        present = request.POST.getlist('Present')
+        on_duty = request.POST.getlist('on_duty')    
         ids = Profile.objects.filter(department = p.department)
         for i in ids:
             if i.user_id.user_id.username in present:
