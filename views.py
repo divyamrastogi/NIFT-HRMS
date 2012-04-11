@@ -89,7 +89,10 @@ def leave_application(request):
 
 def weekly_feedback(request):
     return render_to_response('weekly_feedback.html',{'Error': False})
-    
+
+def weeklyfeedbacklink(request):
+    return render_to_response('weeklyfeedbacklink.html',)    
+
 def teaching_hours(request):
     return render_to_response('teaching_hours.html',)
 #except Exception:
