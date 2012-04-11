@@ -358,7 +358,9 @@ function checkForm(thisform)
     </header>
    
     <div id="formoptions">
+
     <form action="/submit_leave/" method="post" class="subheadingtext">
+
 <p class="subheadingtext"><label>Nature of leave</label>
      <select name="leave_type" required />
           <option value=1>EL
@@ -368,10 +370,27 @@ function checkForm(thisform)
 
 <p class="subheadingtext">Period of Leave Applied:</p> 
 <table border="0">
+{% if Error1 %}
+<p style="color: red;"> The start date of your earned leave should be at least 15 days after today. </br>Please, try again.</p>
+{% endif %}
+
+{% if Error2 %}
+<p style="color: red;"> You have entered invalid start date. <br>Try a date after today's date as start date. </br>Please, try again.</p>
+{% endif %}
+
+{% if Error3 %}
+<p style="color: red;"> Sorry, you already have applied for the same date before. <br></p>
+{% endif %}
+
 <tr>
 <td> <label>Start Date</label> </td> 
 <td> <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" type="date" required/> </td>
 </tr>
+
+{% if Error4 %}
+<p style="color: red;"> You have entered an invalid end date.<br> Please try again. <br></p>
+{% endif %}
+
 <tr>
 <td> <label>End Date</label> </td> 
 <td> <input onclick="ds_sh(this);" name="end_date"  style="cursor: text" type="date" required/> </td>

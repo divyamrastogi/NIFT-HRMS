@@ -373,6 +373,22 @@ function checkForm(thisform)
     <br/>
     <p class="subheadingtext">Period of Leave Applied :</p>
     <table border="0">
+{% if Error1 %}
+<p style="color: red;"> Your End Date has already passed. You cannot extend any such leave. </br>Please, try again.</p>
+{% endif %}
+
+{% if Error2 %}
+<p style="color: red;"> You have to enter a date which is after your previously sanctioned leave end date. </br>Please, try again.</p>
+{% endif %}
+
+{% if Error3 %}
+<p style="color: red;"> Your start date should be at least today's date. <br></p>
+{% endif %}
+
+{% if Error %}
+<p style="color: red;"> A leave with a start date that you have entered does not already exist. <br>Enter the date from which your leave starts to extend your leave. <br></p>
+{% endif %}
+
     <tr>
     <td>
       <label>
@@ -383,6 +399,9 @@ function checkForm(thisform)
       <input onclick="ds_sh(this);" name="start_date"  style="cursor: text" required/>
     </td>
     </tr>
+{% if Error4 %}
+<p style="color: red;"> You have entered invalid end date. <br>The end date cannot be before the start date.<br> Please try again. <br></p>
+{% endif %}
     <tr>
     <td>
       <label>

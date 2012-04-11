@@ -224,7 +224,8 @@ def submit_extension_leave(request):
         Start = datetime.datetime.strptime(StartDate,'%Y-%m-%d')
         End = datetime.datetime.strptime(EndDate, '%Y-%m-%d')
 	if not lid:
-            return HttpResponse("<html>Sorry. A leave with a start date that you have entered does not already exist. <br>Enter the date from which your leave starts to extend your leave.</html>")
+            return render_to_response('leave_extension_form.html', {'Error': True})
+            #return HttpResponse("<html>Sorry. A leave with a start date that you have entered does not already exist. <br>Enter the date from which your leave starts to extend your leave.</html>")
         Diff = End - Start
         No_of_days = Diff.days+1
         Buffer= Start - Today
@@ -234,13 +235,17 @@ def submit_extension_leave(request):
 	To_end = End - Today
 	Days_to_end = To_end.days
 	if Days_to_end < 0:
-	    return HttpResponse("<html>Your End Date has already passed. You cannot extend any such leave.</html>")
+	    return render_to_response('leave_extension_form.html', {'Error1': True})
+	    #return HttpResponse("<html>Your End Date has already passed. You cannot extend any such leave.</html>")
 	if Extend_by < 1:
-	    return HttpResponse("<html>You have to enter a date which is after your previously sanctioned leave end date.</html>")
+            return render_to_response('leave_extension_form.html', {'Error2': True})
+	    #return HttpResponse("<html>You have to enter a date which is after your previously sanctioned leave end date.</html>")
 	if Buffer_days < 0:
-	    return HttpResponse("<html>Your start date should be at least today's date.</html>")
+            return render_to_response('leave_extension_form.html', {'Error3': True})
+	    #return HttpResponse("<html>Your start date should be at least today's date.</html>")
 	if(No_of_days < 1):
-	    return HttpResponse("<html>You have entered invalid end date. <br>The end date cannot be before the start date.<br> You can go back by clicking the back button on your browser. </html>")
+            return render_to_response('leave_extension_form.html', {'Error4': True})
+	    #return HttpResponse("<html>You have entered invalid end date. <br>The end date cannot be before the start date.<br> You can go back by clicking the back button on your browser. </html>")
 	elif No_of_days > 6:
 	    Extra = math.floor(No_of_days/7)
 	    No_of_days -= 2*Extra
@@ -302,15 +307,13 @@ def submit_leave(request):
 	Buffer_days = Buffer.days
 	print "No. of days: ", Buffer_days
 	if Buffer_days < 15 and LeaveType=='1':
-	    print 'Not happening!!'
-	    print LeaveType 
-	    return HttpResponse("<html>The start date of your earned leave should be at least 15 days after today</html>")
+	    return render_to_response('leave_application_form.html', {'Error1': True})
 	if Buffer_days < 0:
-	    return HttpResponse("<html>You have entered invalid start date. <br>Try a date after today's date as start date.</html>")
+            return render_to_response('leave_application_form.html', {'Error2': True})
 	if leave:
-	    return HttpResponse("<html>Sorry, you already have applied for the same date before. <br>You can click the back button and change the start date of your leave application.</html>")
+            return render_to_response('leave_application_form.html', {'Error3': True})
 	if(No_of_days < 1):
-	    return HttpResponse("<html> You have entered an invalid end date.<br> Please try again by clicking the back button</html>")
+            return render_to_response('leave_application_form.html', {'Error4': True})
 	elif(No_of_days > 7):
 	    Extra = math.floor(No_of_days/7)
 	    No_of_days = No_of_days - 2*Extra
